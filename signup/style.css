@@ -1,6 +1,9 @@
 body{
-    background-color: rgb(193, 187, 191);
+    background-color: #f6efef;
     overflow: hidden;
+    background-image: url("D:\xampp\htdocs\Szakdolgozat\pictures\registrationpic.jpg");
+    background-size: cover;
+    background-position: center;
 }
 
 #form{
@@ -31,5 +34,7 @@ input{
     font-size: large;
     border-radius: 10px;
 }
+
+
 
 

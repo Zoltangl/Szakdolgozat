@@ -2,12 +2,12 @@
 <?php
     include('connection.php');
     if(isset($POST['submit'])){
-        $firstUsername = $_POST['firstUser'];
-        $secondUsername = $_POST['seconduser'];
-        $email = $_POST['email'];
-        $phone = $_POST['number'];
-        $password = $_POST['password'];
-        $password = $_POST['cpass'];
+        $firstUsername = mysqli_real_escape_string($conn, $_POST['firstUser']);
+        $secondUsername = mysqli_real_escape_string($conn, $_POST['seconduser']);
+        $email = mysqli_real_escape_string($conn, $_POST['email']);
+        $phone = mysqli_real_escape_string($conn, $_POST['number']);
+        $password = mysqli_real_escape_string($conn, $_POST['password']);
+        $password = mysqli_real_escape_string($conn, $_POST['cpass']);
 
         $sql="select * from signup where firstuser= '$fisrtUsername'";
         $result = mysqli_query($conn, $sql);
@@ -25,13 +25,19 @@
         $result = mysqli_query($conn, $sql);
         $count_phone = mysqli_num_rows($result);
     
-        if($count_user == 0 & $count_email==0 ) {
+        if($count_user == 0  & $count_email==0) {
             if($password == $cpassword){
                 $hash = password_hash($password, PASSWORD_DEFAULT);
                 $result = "INSERT INTO signup (firstUsername, secondUsername, email, phone, password) VALUES ('$firstUsername', '$secondUsername', '$email', '$hash')";
                 $result = mysqli_query($conn, $sql);
                 if($result){
                     header("Location: welcome.php");
+                }
+                else{
+                    echo '<script>
+                        alert("A jelszavak nem egyeznek");
+                        window.location.href = "index.php";
+                    </script>';
                 }
             }
         }
