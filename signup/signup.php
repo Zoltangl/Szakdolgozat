@@ -2,18 +2,18 @@
 <?php
     include('connection.php');
     if(isset($POST['submit'])){
-        $firstUsername = mysqli_real_escape_string($conn, $_POST['firstUser']);
-        $secondUsername = mysqli_real_escape_string($conn, $_POST['seconduser']);
+        $firstUsername = mysqli_real_escape_string($conn, $_POST['firstusername']);
+        $secondUsername = mysqli_real_escape_string($conn, $_POST['secondusername']);
         $email = mysqli_real_escape_string($conn, $_POST['email']);
         $phone = mysqli_real_escape_string($conn, $_POST['number']);
         $password = mysqli_real_escape_string($conn, $_POST['password']);
         $password = mysqli_real_escape_string($conn, $_POST['cpass']);
 
-        $sql="select * from signup where firstuser= '$fisrtUsername'";
+        $sql="select * from signup where firstusername= '$fisrtUsername'";
         $result = mysqli_query($conn, $sql);
         $count_user = mysqli_num_rows($result);
 
-        $sql="select * from signup where seconduser= '$secondUsername'";
+        $sql="select * from signup where secondusername= '$secondUsername'";
         $result = mysqli_query($conn, $sql);
         $count_user = mysqli_num_rows($result);
         
@@ -28,7 +28,7 @@
         if($count_user == 0  & $count_email==0) {
             if($password == $cpassword){
                 $hash = password_hash($password, PASSWORD_DEFAULT);
-                $result = "INSERT INTO signup (firstUsername, secondUsername, email, phone, password) VALUES ('$firstUsername', '$secondUsername', '$email', '$hash')";
+                $result = "INSERT INTO signup (firstusername, secondusername, email, phone, password) VALUES ('$firstUsername', '$secondUsername', '$email', '$hash')";
                 $result = mysqli_query($conn, $sql);
                 if($result){
                     header("Location: welcome.php");

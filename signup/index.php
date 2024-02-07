@@ -16,10 +16,10 @@ include ('connection.php');
         <h1 id="heading">Regisztráció<h1>
             <form name= "form" action="signup.php" method="POST">
                 <i class="fa-solid fa-user"></i>
-                <input type ="text" id="firstuser" name="user" placeholder="Add meg a Vezetékneved..." required><br><br>
+                <input type ="text" id="firstusername" name="firstusername" placeholder="Add meg a Vezetékneved..." required><br><br>
 
                 <i class="fa-solid fa-user"></i>
-                <input type ="text" id="seconduser" name="user" placeholder="Add meg a Keresztneved..." required><br><br>
+                <input type ="text" id="secondusername" name="secondusername" placeholder="Add meg a Keresztneved..." required><br><br>
 
                 <i class="fa-solid fa-envelope"></i> 
                 <input type ="email" id="email" name="email" placeholder="Add meg az email címed..." required><br><br>
