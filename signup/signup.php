@@ -11,11 +11,11 @@
 
         $sql="select * from signup where firstusername= '$fisrtUsername'";
         $result = mysqli_query($conn, $sql);
-        $count_user = mysqli_num_rows($result);
+        $count_firstUsername = mysqli_num_rows($result);
 
         $sql="select * from signup where secondusername= '$secondUsername'";
         $result = mysqli_query($conn, $sql);
-        $count_user = mysqli_num_rows($result);
+        $count_secondUsername = mysqli_num_rows($result);
         
         $sql="select * from signup where email= '$email'";
         $result = mysqli_query($conn, $sql);
