@@ -1,0 +1,101 @@
+body{
+    background-image: url("../pictures/background.jpg");
+    background-size: cover;
+    background-position: center;
+}
+
+#form{
+    justify-content:center;
+    background-image: url("../pictures/regisztracio.jpg");
+    width: 35%;
+    border-radius: 10px;
+    border: 5px solid black;
+    margin: 30px auto;
+    padding: 50px;
+}
+
+#heading{
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  color: rgba(184, 196, 227, 0.895);
+}
+
+i{
+color: #f6efef;
+}
+
+.signup{
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  color: rgb(107, 108, 108);
+}
+
+
+.signup-link {
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font-size: 20px; 
+  color: rgb(184, 196, 227, 0.895); 
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+
+.signup-link a {
+  color: #003694;
+  text-decoration: none; 
+  font-weight: bold;
+  margin-left: 5px;
+}
+
+
+.signup-link a:hover {
+  text-decoration: underline;
+}
+
+
+#loginForm {
+  justify-content: center;
+  background-image: url("../pictures/bejelentkez.jpg");
+  width: 35%;
+  border-radius: 10px;
+  border: 5px solid black;
+  margin: 30px auto;
+  padding: 50px;
+}
+
+
+/* Az "Már van fiókod?" link stílusa */
+#loginForm .signup-link {
+  text-align: center;
+  margin-top: 15px;
+}
+
+#loginForm .signup-link a {
+  color: #007bff;
+  text-decoration: none;
+}
+
+#loginForm .signup-link a:hover {
+  text-decoration: underline;
+}
+
+h1{
+    text-align: center;
+}
+
+input{
+    width: 60%;
+    border-radius: 10px;
+    border: 3px solid #000000;
+    padding: 5px;
+}
+
+#btn{
+    width: 60%;
+    background-color: rgb(108, 22, 189);
+    padding: 10px;
+    font-size: large;
+    border-color: black;
+    border-radius: 10px;
+}
+
+
+  
