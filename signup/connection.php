@@ -4,9 +4,9 @@ class DataBase
 {
 
   private $servername = "localhost";
-  private $username = "admin";
-  private $password = "-Y3NUceruQG!YTAf";
-  private $db = "Szakdolgozat";
+  private $username = "zoli";
+  private $password = "oT(3ha]70*QODxWZ";
+  private $db = "szakdolgozat";
   public static $conn;
 
   function __construct()

@@ -1,7 +1,7 @@
 body{
     background-color: #f6efef;
     overflow: hidden;
-    background-image: url("D:\xampp\htdocs\Szakdolgozat\pictures\registrationpic.jpg");
+    background-image: url("../pictures/registrationpic.jpg");
     background-size: cover;
     background-position: center;
 }
@@ -34,7 +34,3 @@ input{
     font-size: large;
     border-radius: 10px;
 }
-
-
-
-
