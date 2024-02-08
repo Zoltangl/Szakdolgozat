@@ -8,8 +8,8 @@ $db = new DataBase;
 <meta charset="utf-8">
 <meta name="viewport" content="width-device-width, initial-scale=1">
     <title>Szállásfoglalás</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha384-9ndCyUaIbzAi2FU">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"  integrity="sha384-9ndCyUaIbzAi2FU">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -33,8 +33,15 @@ $db = new DataBase;
                 
                 <i class ="fa-solid fa-lock"></i>
                 <input type ="password" id="cpass" name="cpass" placeholder="Jelszó megerősítése..." required><br><br>
-                <input type ="submit" id="btn" value="SignUp" name="submit" required><br><br>
+                <div id="atvalt" class="signup-link" >Már van fiókod? <a href="belepes.php">Belépés</a>
+            </div>
+                <input type ="submit" id="btn" value="Regisztráció" name="submit" required><br><br>
     </div>
+    <script>
+        function isvalid(){
+            var email = document.from.email.value;
+            var pass = document.from.pass.value;
+        }
 <?php
         $msg = "";
         if(!isset($_POST["firstusername"])&& !isset($_POST["secondusername"]) && !isset($_POST["email"]) && !isset($_POST["number"]) && !isset($_POST["pass"])&& !isset($_POST["cpass"])){
@@ -73,5 +80,6 @@ $db = new DataBase;
             
 ?>
      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3"><><>
+
 </body>
 </html> 
