@@ -1,0 +1,35 @@
+.navbar {
+    background-color: #ffffff; /* Háttérszín */
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1); /* Árnyék */
+}
+
+.navbar-brand {
+    font-weight: bold; /* Betűstílus */
+    color: #333333; /* Szín */
+}
+
+.navbar-nav .nav-item {
+    margin-right: 10px; /* Jobb margó a menüpontok között */
+}
+
+.nav-link {
+    color: #333333; /* Szín */
+}
+
+.nav-link:hover {
+    color: #007bff; /* Szín hover állapotban */
+}
+
+.dropdown-menu {
+    background-color: #ffffff; /* Háttérszín */
+    border: none; /* Keret eltávolítása */
+}
+
+.dropdown-item {
+    color: #333333; /* Szín */
+}
+
+.dropdown-item:hover {
+    background-color: #f8f9fa; /* Háttérszín hover állapotban */
+}
+ 
