@@ -31,7 +31,7 @@
 <link rel="shortcut icon" href="images/favicon.png" type="image/x-icon">
 <link rel="icon" href="images/favicon.png" type="image/x-icon">
 
-<link rel="stylesheet" href="assets/style.css">
+<link rel="stylesheet" href="../assets/style.css">
 
 </head>
 
@@ -69,6 +69,7 @@
         <li><a href="rooms-tariff.php">Rooms & Tariff</a></li>        
         <li><a href="introduction.php">Introduction</a></li>
         <li><a href="gallery.php">Gallery</a></li>
+        <li><a href="contact.php">Contact</a></li>
         <li><a href="contact.php">Contact</a></li>
       </ul>
     </div><!-- Wnavbar-collapse -->
