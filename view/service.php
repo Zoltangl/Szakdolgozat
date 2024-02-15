@@ -170,15 +170,14 @@
                         <div class="col-md-6">
                             <h6 class="section-title text-start text-primary text-uppercase mb-4">Company</h6>
                             <a class="btn btn-link" href="about.php">About Us</a>
-                            <a class="btn btn-link" href="">Contact Us</a>
-                            <a class="btn btn-link" href="">Privacy Policy</a>
-                            <a class="btn btn-link" href="">Terms & Condition</a>
-                            <a class="btn btn-link" href="">Support</a>
+                            <a class="btn btn-link" href="privacypolicy.php">Privacy Policy</a>
+                            <a class="btn btn-link" href="termsandcondition.php">Terms & Condition</a>
+                            <a class="btn btn-link" href="support.php">Support</a>
                         </div>
                         <div class="col-md-6">
                             <h6 class="section-title text-start text-primary text-uppercase mb-4">Services</h6>
-                            <a class="btn btn-link" href="">Food & Restaurant</a>
-                            <a class="btn btn-link" href="">Event & Party</a>
+                            <a class="btn btn-link" href="foordres.php">Food & Restaurant</a>
+                            <a class="btn btn-link" href="eventparty.php">Event & Party</a>
                         </div>
                     </div>
                 </div>
