@@ -142,8 +142,8 @@ Kérjük, vegye figyelembe, hogy ezek a Felhasználási feltételek csak tájék
                             </div>
                             <div class="col-md-6">
                                 <h6 class="section-title text-start text-primary text-uppercase mb-4">Services</h6>
-                                <a class="btn btn-link" href="">Food & Restaurant</a>
-                                <a class="btn btn-link" href="">Event & Party</a>
+                                <a class="btn btn-link" href="../services/fooddres.php">Food & Restaurant</a>
+                                <a class="btn btn-link" href="../services/eventparty">Event & Party</a>
                             </div>
                         </div>
                     </div>

@@ -135,7 +135,7 @@
                         </a>
                     </div>
                     <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.2s">
-                        <a class="service-item rounded" href="">
+                        <a class="service-item rounded" href="../services/foodres.php">
                             <div class="service-icon bg-transparent border rounded p-1">
                                 <div class="w-100 h-100 border rounded d-flex align-items-center justify-content-center">
                                     <i class="fa fa-utensils fa-2x text-primary"></i>
@@ -146,7 +146,7 @@
                         </a>
                     </div>
                     <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
-                        <a class="service-item rounded" href="">
+                        <a class="service-item rounded" href="../services/eventparty.php">
                             <div class="service-icon bg-transparent border rounded p-1">
                                 <div class="w-100 h-100 border rounded d-flex align-items-center justify-content-center">
                                     <i class="fa fa-glass-cheers fa-2x text-primary"></i>
@@ -176,8 +176,8 @@
                         </div>
                         <div class="col-md-6">
                             <h6 class="section-title text-start text-primary text-uppercase mb-4">Services</h6>
-                            <a class="btn btn-link" href="foordres.php">Food & Restaurant</a>
-                            <a class="btn btn-link" href="eventparty.php">Event & Party</a>
+                            <a class="btn btn-link" href="../services/foodres.php">Food & Restaurant</a>
+                            <a class="btn btn-link" href="../services/eventparty.php">Event & Party</a>
                         </div>
                     </div>
                 </div>
