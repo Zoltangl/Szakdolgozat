@@ -127,7 +127,7 @@
                                 <div class="border rounded p-1">
                                     <div class="border rounded text-center p-4">
                                         <i class="fa fa-bed fa-2x text-primary mb-2"></i>
-                                        <h2 class="mb-1" data-toggle="counter-up">3</h2>
+                                        <h2 class="mb-1" data-toggle="counter-up">2</h2>
                                         <p class="mb-0">bed</p>
                                     </div>
                                 </div>
@@ -187,8 +187,8 @@
                         </div>
                         <div class="col-md-6">
                             <h6 class="section-title text-start text-primary text-uppercase mb-4">Services</h6>
-                            <a class="btn btn-link" href="../view/foordres.php">Food & Restaurant</a>
-                            <a class="btn btn-link" href="../view/eventparty.php">Event & Party</a>
+                            <a class="btn btn-link" href="../services/foodres.php">Food & Restaurant</a>
+                            <a class="btn btn-link" href="../services/eventparty.php">Event & Party</a>
                         </div>
                         </div>
                     </div>
