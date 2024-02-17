@@ -105,29 +105,6 @@
         }
     });
 
-    var kepIndex = 0;
-    var kepek = ["../img/egyagyas.jpg", "../img/csaladi.jpg", "kep3.jpg", "kep4.jpg"]; // Feltételezzük, hogy ezek a képek a projekt könyvtárában találhatók
-    
-    function kovetkezoKep() {
-      kepIndex++;
-      if (kepIndex >= kepek.length) {
-        kepIndex = 0;
-      }
-      megjelenitKep();
-    }
-    
-    function elozoKep() {
-      kepIndex--;
-      if (kepIndex < 0) {
-        kepIndex = kepek.length - 1;
-      }
-      megjelenitKep();
-    }
-    
-    function megjelenitKep() {
-      var imageContainer = document.getElementById("imageContainer");
-      imageContainer.innerHTML = "<img src='" + kepek[kepIndex] + "' alt='Kép " + (kepIndex + 1) + "'>";
-    }
     
 })(jQuery);
 
