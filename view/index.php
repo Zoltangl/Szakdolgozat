@@ -20,7 +20,6 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
 
     <!-- Libraries Stylesheet -->
-    <link href="../lib/animate/animate.min.css" rel="stylesheet">
     <link href="../lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
     <link href="../lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
 
@@ -54,11 +53,11 @@
                         <div class="col-lg-7 px-5 text-start">
                             <div class="h-100 d-inline-flex align-items-center py-2 me-4">
                                 <i class="fa fa-envelope text-primary me-2"></i>
-                                <p class="mb-0">info@example.com</p>
+                                <p class="mb-0">HappyHotel@gmail.com</p>
                             </div>
                             <div class="h-100 d-inline-flex align-items-center py-2">
                                 <i class="fa fa-phone-alt text-primary me-2"></i>
-                                <p class="mb-0">+012 345 6789</p>
+                                <p class="mb-0">+36 30 542 6782</p>
                             </div>
                         </div>
                         <div class="col-lg-5 px-5 text-end">
@@ -101,23 +100,23 @@
             <div id="header-carousel" class="carousel slide" data-bs-ride="carousel">
                 <div class="carousel-inner">
                     <div class="carousel-item active">
-                        <img class="w-100" src="../img/carousel-1.jpg" alt="Image">
+                        <img class="w-100" src="../img/hoteleloter.jpg" alt="Image">
                         <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
                             <div class="p-3" style="max-width: 700px;">
                                 <h6 class="section-title text-white text-uppercase mb-3 animated slideInDown">Luxury Living</h6>
                                 <h1 class="display-3 text-white mb-4 animated slideInDown">Discover A Brand Luxurious Hotel</h1>
-                                <a href="" class="btn btn-primary py-md-3 px-md-5 me-3 animated slideInLeft">Our Rooms</a>
+                                <a href="room.php" class="btn btn-primary py-md-3 px-md-5 me-3 animated slideInLeft">Our Rooms</a>
                                 <a href="booking.php" class="btn btn-light py-md-3 px-md-5 animated slideInRight">Book A Room</a>
                             </div>
                         </div>
                     </div>
                     <div class="carousel-item">
-                        <img class="w-100" src="../img/carousel-2.jpg" alt="Image">
+                        <img class="w-100" src="../img/hotelfolyoso.jpg" alt="Image">
                         <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
                             <div class="p-3" style="max-width: 700px;">
                                 <h6 class="section-title text-white text-uppercase mb-3 animated slideInDown">Luxury Living</h6>
                                 <h1 class="display-3 text-white mb-4 animated slideInDown">Discover A Brand Luxurious Hotel</h1>
-                                <a href="" class="btn btn-primary py-md-3 px-md-5 me-3 animated slideInLeft">Our Rooms</a>
+                                <a href="room.php" class="btn btn-primary py-md-3 px-md-5 me-3 animated slideInLeft">Our Rooms</a>
                                 <a href="booking.php" class="btn btn-light py-md-3 px-md-5 animated slideInRight">Book A Room</a>
                             </div>
                         </div>
@@ -147,13 +146,13 @@
                         <h6 class="section-title text-start text-primary text-uppercase">About Us</h6>
                         <h1 class="mb-4">Welcome to <span class="text-primary text-uppercase">HappyHotel</span></h1>
                         <p class="mb-4">
-                            Üdvözöljük "Rólunk" oldalán! Büszkén mutatjuk be luxus szolgáltatásainkat, melyekkel vendégeinknek emlékezetes élményt nyújtunk. [Hotel neve] egyedi hangulatával és kifinomult kényelmével tökéletes választás mindazok számára, akik kikapcsolódásra és pihenésre vágynak. Legyen szó üzleti útról, romantikus hétvégéről vagy családi nyaralásról, szállodánk kivételes szolgáltatásokkal és barátságos kiszolgálással várja Önt. A kifinomult design és a legmagasabb színvonalú kényelem mellett a helyi kultúra és gasztronómia is kiemelt figyelmet kap nálunk. Fedezze fel városunkat kényelmes és stílusos szállodánkból, és hagyja, hogy élményeink örökre a memóriájában maradjanak!</p>
+                            Üdvözöljük "Rólunk" oldalán! Büszkén mutatjuk be luxus szolgáltatásainkat, melyekkel vendégeinknek emlékezetes élményt nyújtunk. HappyHotel egyedi hangulatával és kifinomult kényelmével tökéletes választás mindazok számára, akik kikapcsolódásra és pihenésre vágynak. Legyen szó üzleti útról, romantikus hétvégéről vagy családi nyaralásról, szállodánk kivételes szolgáltatásokkal és barátságos kiszolgálással várja Önt. A kifinomult design és a legmagasabb színvonalú kényelem mellett a helyi kultúra és gasztronómia is kiemelt figyelmet kap nálunk. Fedezze fel városunkat kényelmes és stílusos szállodánkból, és hagyja, hogy élményeink örökre a memóriájában maradjanak!</p>
                         <div class="row g-3 pb-4">
                             <div class="col-sm-4 wow fadeIn" data-wow-delay="0.1s">
                                 <div class="border rounded p-1">
                                     <div class="border rounded text-center p-4">
                                         <i class="fa fa-hotel fa-2x text-primary mb-2"></i>
-                                        <h2 class="mb-1" data-toggle="counter-up">1234</h2>
+                                        <h2 class="mb-1" data-toggle="counter-up">12</h2>
                                         <p class="mb-0">Rooms</p>
                                     </div>
                                 </div>
@@ -162,7 +161,7 @@
                                 <div class="border rounded p-1">
                                     <div class="border rounded text-center p-4">
                                         <i class="fa fa-users-cog fa-2x text-primary mb-2"></i>
-                                        <h2 class="mb-1" data-toggle="counter-up">67</h2>
+                                        <h2 class="mb-1" data-toggle="counter-up">40</h2>
                                         <p class="mb-0">Staffs</p>
                                     </div>
                                 </div>
@@ -171,7 +170,7 @@
                                 <div class="border rounded p-1">
                                     <div class="border rounded text-center p-4">
                                         <i class="fa fa-users fa-2x text-primary mb-2"></i>
-                                        <h2 class="mb-1" data-toggle="counter-up">1532</h2>
+                                        <h2 class="mb-1" data-toggle="counter-up">231</h2>
                                         <p class="mb-0">Clients</p>
                                     </div>
                                 </div>
@@ -180,18 +179,19 @@
                         <a class="btn btn-primary py-3 px-5 mt-2" href="">Explore More</a>
                     </div>
                     <div class="col-lg-6">
-                        <div class="row g-3">
+                        <div class="row g-2">
                             <div class="col-6 text-end">
-                                <img class="img-fluid rounded w-75 wow zoomIn" data-wow-delay="0.1s" src="../img/about-1.jpg" style="margin-top: 25%;">
+                                <img class="img-fluid rounded w-75 wow zoomIn" data-wow-delay="0.1s" src="../img/aboutbar.jpg" style="margin-top: 25%;">
                             </div>
                             <div class="col-6 text-start">
-                                <img class="img-fluid rounded w-100 wow zoomIn" data-wow-delay="0.3s" src="../img/about-2.jpg">
+                                <img class="img-fluid rounded w-100 wow zoomIn" data-wow-delay="0.3s" src="../img/aboutmedence.jpg">
                             </div>
-                            <div class="col-6 text-end">
-                                <img class="img-fluid rounded w-50 wow zoomIn" data-wow-delay="0.5s" src="../img/about-3.jpg">
-                            </div>
+                          
                             <div class="col-6 text-start">
                                 <img class="img-fluid rounded w-75 wow zoomIn" data-wow-delay="0.7s" src="../img/about-4.jpg">
+                            </div>
+                            <div class="col-7 text-start">
+                                <img class="img-fluid rounded w-75 wow zoomIn" data-wow-delay="0.7s" src="../img/abouthotel.jpg">
                             </div>
                         </div>
                     </div>
@@ -212,12 +212,12 @@
                     <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
                         <div class="room-item shadow rounded overflow-hidden">
                             <div class="position-relative">
-                                <img class="img-fluid" src="../img/room-1.jpg" alt="">
-                                <small class="position-absolute start-0 top-100 translate-middle-y bg-primary text-white rounded py-1 px-3 ms-4">$100/Night</small>
+                                <img class="img-fluid" src="../img/csaladi.jpg" alt="">
+                                <small class="position-absolute start-0 top-100 translate-middle-y bg-primary text-white rounded py-1 px-3 ms-4">21.000 Ft/Night</small>
                             </div>
                             <div class="p-4 mt-2">
                                 <div class="d-flex justify-content-between mb-3">
-                                    <h5 class="mb-0">Junior Suite</h5>
+                                    <h5 class="mb-0">Családi szoba</h5>
                                     <div class="ps-2">
                                         <small class="fa fa-star text-primary"></small>
                                         <small class="fa fa-star text-primary"></small>
@@ -231,9 +231,9 @@
                                     <small class="border-end me-3 pe-3"><i class="fa fa-bath text-primary me-2"></i>2 Bath</small>
                                     <small><i class="fa fa-wifi text-primary me-2"></i>Wifi</small>
                                 </div>
-                                <p class="text-body mb-3">Erat ipsum justo amet duo et elitr dolor, est duo duo eos lorem sed diam stet diam sed stet lorem.</p>
+                                <p class="text-body mb-3">Fedezze fel kényelmes és praktikus családi szobáinkat! Ideális választás családok számára, akik együtt szeretnék élvezni a kényelmet és a kikapcsolódást. A családi szoba tágas teret kínál a szülőknek és a gyerekeknek egyaránt.</p>
                                 <div class="d-flex justify-content-between">
-                                    <a class="btn btn-sm btn-primary rounded py-2 px-4" href="">View Detail</a>
+                                    <a class="btn btn-sm btn-primary rounded py-2 px-4" href="../roomdetails/csaladi.php">View Detail</a>
                                     <a class="btn btn-sm btn-dark rounded py-2 px-4" href="">Book Now</a>
                                 </div>
                             </div>
@@ -242,12 +242,12 @@
                     <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
                         <div class="room-item shadow rounded overflow-hidden">
                             <div class="position-relative">
-                                <img class="img-fluid" src="../img/room-2.jpg" alt="">
-                                <small class="position-absolute start-0 top-100 translate-middle-y bg-primary text-white rounded py-1 px-3 ms-4">$100/Night</small>
+                                <img class="img-fluid" src="../img/lakosztaly.jpg" alt="">
+                                <small class="position-absolute start-0 top-100 translate-middle-y bg-primary text-white rounded py-1 px-3 ms-4">52.000 Ft/Night</small>
                             </div>
                             <div class="p-4 mt-2">
                                 <div class="d-flex justify-content-between mb-3">
-                                    <h5 class="mb-0">Executive Suite</h5>
+                                    <h5 class="mb-0">Lakosztály</h5>
                                     <div class="ps-2">
                                         <small class="fa fa-star text-primary"></small>
                                         <small class="fa fa-star text-primary"></small>
@@ -261,9 +261,9 @@
                                     <small class="border-end me-3 pe-3"><i class="fa fa-bath text-primary me-2"></i>2 Bath</small>
                                     <small><i class="fa fa-wifi text-primary me-2"></i>Wifi</small>
                                 </div>
-                                <p class="text-body mb-3">Erat ipsum justo amet duo et elitr dolor, est duo duo eos lorem sed diam stet diam sed stet lorem.</p>
+                                <p class="text-body mb-3">Fedezze fel luxus és kényelem csúcsát a hotel lakosztályában! Ez a kifinomult és tágas szállásegység tökéletes választás azoknak, akik különleges élményre vágynak. A lakosztály kényelmes hálószobát, tágas nappalit és exkluzív fürdőszobát kínál, amely minden igényt kielégít.</p>
                                 <div class="d-flex justify-content-between">
-                                    <a class="btn btn-sm btn-primary rounded py-2 px-4" href="">View Detail</a>
+                                    <a class="btn btn-sm btn-primary rounded py-2 px-4" href="../roomdetails/lakosztaly.php">View Detail</a>
                                     <a class="btn btn-sm btn-dark rounded py-2 px-4" href="">Book Now</a>
                                 </div>
                             </div>
@@ -272,15 +272,13 @@
                     <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.6s">
                         <div class="room-item shadow rounded overflow-hidden">
                             <div class="position-relative">
-                                <img class="img-fluid" src="../img/room-3.jpg" alt="">
-                                <small class="position-absolute start-0 top-100 translate-middle-y bg-primary text-white rounded py-1 px-3 ms-4">$100/Night</small>
+                                <img class="img-fluid" src="../img/fapados.jpg" alt="">
+                                <small class="position-absolute start-0 top-100 translate-middle-y bg-primary text-white rounded py-1 px-3 ms-4">6.500 Ft/Night</small>
                             </div>
                             <div class="p-4 mt-2">
                                 <div class="d-flex justify-content-between mb-3">
-                                    <h5 class="mb-0">Super Deluxe</h5>
+                                    <h5 class="mb-0">Fapados szoba</h5>
                                     <div class="ps-2">
-                                        <small class="fa fa-star text-primary"></small>
-                                        <small class="fa fa-star text-primary"></small>
                                         <small class="fa fa-star text-primary"></small>
                                         <small class="fa fa-star text-primary"></small>
                                         <small class="fa fa-star text-primary"></small>
@@ -291,15 +289,16 @@
                                     <small class="border-end me-3 pe-3"><i class="fa fa-bath text-primary me-2"></i>2 Bath</small>
                                     <small><i class="fa fa-wifi text-primary me-2"></i>Wifi</small>
                                 </div>
-                                <p class="text-body mb-3">Erat ipsum justo amet duo et elitr dolor, est duo duo eos lorem sed diam stet diam sed stet lorem.</p>
+                                <p class="text-body mb-3">Fedezze fel a kényelmes és megfizethető fapados hotelszobát! Ez a praktikus szállásegység ideális választás azoknak, akik egy egyszerű és kényelmes tartózkodást keresnek megfizethető áron.</p>
                                 <div class="d-flex justify-content-between">
-                                    <a class="btn btn-sm btn-primary rounded py-2 px-4" href="">View Detail</a>
+                                    <a class="btn btn-sm btn-primary rounded py-2 px-4" href="../roomdetails/fapados.php">View Detail</a>
                                     <a class="btn btn-sm btn-dark rounded py-2 px-4" href="">Book Now</a>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
+                <a class="btn btn-primary py-3 px-5 mt-2" href="room.php">Explore More</a>
             </div>
         </div>
         <!-- Room End -->
@@ -320,8 +319,8 @@
                         </div>
                         <div class="col-md-6">
                             <h6 class="section-title text-start text-primary text-uppercase mb-4">Services</h6>
-                            <a class="btn btn-link" href="foordres.php">Food & Restaurant</a>
-                            <a class="btn btn-link" href="eventparty.php">Event & Party</a>
+                            <a class="btn btn-link" href="../services/foodres.php">Food & Restaurant</a>
+                            <a class="btn btn-link" href="../services/eventparty.php">Event & Party</a>
                         </div>
                         </div>
                     </div>
