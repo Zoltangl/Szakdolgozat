@@ -124,14 +124,14 @@
                 </div>
                 <div class="row g-4">
                     <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
-                        <a class="service-item rounded" href="">
+                        <a class="service-item rounded" href="room.php">
                             <div class="service-icon bg-transparent border rounded p-1">
                                 <div class="w-100 h-100 border rounded d-flex align-items-center justify-content-center">
                                     <i class="fa fa-hotel fa-2x text-primary"></i>
                                 </div>
                             </div>
-                            <h5 class="mb-3">Rooms & Appartment</h5>
-                            <p class="text-body mb-0">Erat ipsum justo amet duo et elitr dolor, est duo duo eos lorem sed diam stet diam sed stet lorem.</p>
+                            <h5 class="mb-3">Rooms</h5>
+                            <p class="text-body mb-0">Fedezze fel a hotelünk szobáit, ahol a kényelem és a stílus találkozik, hogy egyedülálló pihenési élményt nyújtson minden vendégünknek!</p>
                         </a>
                     </div>
                     <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.2s">
@@ -142,18 +142,19 @@
                                 </div>
                             </div>
                             <h5 class="mb-3">Food & Restaurant</h5>
-                            <p class="text-body mb-0">Erat ipsum justo amet duo et elitr dolor, est duo duo eos lorem sed diam stet diam sed stet lorem.</p>
+                            <p class="text-body mb-0">
+                                Fedezze fel a hotelünk éttermét, ahol az ízletes ételek és a kényelmes környezet egyedülálló gasztronómiai élményt nyújtanak!</p>
                         </a>
                     </div>
                     <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
-                        <a class="service-item rounded" href="../services/eventparty.php">
+                        <a class="service-item rounded" href="../services/sport.php">
                             <div class="service-icon bg-transparent border rounded p-1">
                                 <div class="w-100 h-100 border rounded d-flex align-items-center justify-content-center">
-                                    <i class="fa fa-glass-cheers fa-2x text-primary"></i>
+                                    <i class="fa fa-dumbbell fa-2x text-primary"></i>
                                 </div>
                             </div>
-                            <h5 class="mb-3">Event & Party</h5>
-                            <p class="text-body mb-0">Erat ipsum justo amet duo et elitr dolor, est duo duo eos lorem sed diam stet diam sed stet lorem.</p>
+                            <h5 class="mb-3">Sport & Gym</h5>
+                            <p class="text-body mb-0">Fedezze fel a hotelünk sportrészlegét, ahol a fitnesz és a szórakozás találkozik! Legyen szó edzésről, kosárlabdáról vagy egyszerűen csak aktív pihenésről.</p>
                         </a>
                     </div>
                 </div>
@@ -177,7 +178,7 @@
                         <div class="col-md-6">
                             <h6 class="section-title text-start text-primary text-uppercase mb-4">Services</h6>
                             <a class="btn btn-link" href="../services/foodres.php">Food & Restaurant</a>
-                            <a class="btn btn-link" href="../services/eventparty.php">Event & Party</a>
+                            <a class="btn btn-link" href="../services/sport.php">Sport & Gym</a>
                         </div>
                     </div>
                 </div>
