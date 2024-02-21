@@ -26,7 +26,7 @@ $db = new DataBase;
 
     <div id="form">
         <h1 id="heading">Regisztráció<h1>
-        <form name="form" method="post">
+        <form name="form" method="post" action="index.php">
             <i class="fa-solid fa-user"></i>
             <input type="text" id="firstusername" name="firstusername" placeholder="Add meg a Vezetékneved..." required><br><br>
 
