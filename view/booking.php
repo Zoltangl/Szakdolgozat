@@ -22,8 +22,6 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
 
 <!-- Libraries Stylesheet -->
-<link href="../lib/animate/animate.min.css" rel="stylesheet">
-<link href="../lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
 <link href="../lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
 
 <!-- Customized Bootstrap Stylesheet -->
@@ -97,22 +95,7 @@
         <!-- Header End -->
 
 
-        <!-- Page Header Start -->
-        <div class="container-fluid page-header mb-5 p-0" style="background-image: url(img/carousel-1.jpg);">
-            <div class="container-fluid page-header-inner py-5">
-                <div class="container text-center pb-5">
-                    <h1 class="display-3 text-white mb-3 animated slideInDown">Booking</h1>
-                    <nav aria-label="breadcrumb">
-                        <ol class="breadcrumb justify-content-center text-uppercase">
-                            <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item text-white active" aria-current="page">Booking</li>
-                        </ol>
-                    </nav>
-                </div>
-            </div>
-        </div>
-        <!-- Page Header End -->
-
+      
 
        
 
@@ -156,16 +139,31 @@
                                             <label for="checkout">Check Out</label>
                                         </div>
                                     </div>
-                                    <div class="col-12">
-                                        <div class="form-floating">
-                                            <select class="form-select" id="select3">
-                                              <option value="1">Room 1</option>
-                                              <option value="2">Room 2</option>
-                                              <option value="3">Room 3</option>
-                                            </select>
-                                            <label for="select3">Select A Room</label>
-                                          </div>
-                                    </div>
+<?php                                    
+   // Adatok lekérdezése az adatbázisból
+   $sql = "SELECT * FROM sszoba_tipusok";
+   $result = $conn->query($sql);
+
+   // Ellenőrizze, hogy van-e eredmény
+   if ($result->num_rows > 0) {
+       // Kiírja a szoba opciókat
+       echo '<div class="col-12">';
+       echo '<div class="form-floating">';
+       echo '<select class="form-select" id="select3">';
+       while($row = $result->fetch_assoc()) {
+           echo '<option value="' . $row["szobatipus_id"] . '">' . $row["nev"] . '</option>';
+       }
+       echo '</select>';
+       echo '<label for="select3">Select A Room</label>';
+       echo '</div>';
+       echo '</div>';
+   } else {
+       echo "Nincs találat az adatbázisban.";
+   }
+
+   // Adatbázis kapcsolat bezárása
+   $conn->close();
+?>
                                     <div class="col-12">
                                         <button class="btn btn-primary w-100 py-3" type="submit">Book Now</button>
                                     </div>
@@ -194,7 +192,7 @@
                         <div class="col-md-6">
                             <h6 class="section-title text-start text-primary text-uppercase mb-4">Services</h6>
                             <a class="btn btn-link" href="../services/foodres.php">Food & Restaurant</a>
-                            <a class="btn btn-link" href="../services/eventparty.php">Event & Party</a>
+                            <a class="btn btn-link" href="../services/sport.php">Sport & Gym</a>
                         </div>
                         </div>
                     </div>
@@ -226,7 +224,6 @@
     <script src="../lib/easing/easing.min.js"></script>
     <script src="../lib/waypoints/waypoints.min.js"></script>
     <script src="../lib/counterup/counterup.min.js"></script>
-    <script src="../lib/owlcarousel/owl.carousel.min.js"></script>
     <script src="../lib/tempusdominus/js/moment.min.js"></script>
     <script src="../lib/tempusdominus/js/moment-timezone.min.js"></script>
     <script src="../lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>

@@ -186,7 +186,7 @@
                         <div class="col-md-6">
                             <h6 class="section-title text-start text-primary text-uppercase mb-4">Services</h6>
                             <a class="btn btn-link" href="../services/foodres.php">Food & Restaurant</a>
-                            <a class="btn btn-link" href="../services/eventparty.php">Event & Party</a>
+                            <a class="btn btn-link" href="../services/sport.php">Sport & Gym</a>
                         </div>
                         </div>
                     </div>
