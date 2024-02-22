@@ -113,7 +113,7 @@
             <div class="container">
                 <div class="row g-5 align-items-center">
                     <div class="col-lg-6">
-                        <h6 class="section-title text-start text-primary text-uppercase">About Us</h6>
+                        <h6 class="section-title text-start text-primary text-uppercase">rooms</h6>
                         <h1 class="mb-4">Üdvözöljük a <span class="text-primary text-uppercase">HappyHotel</span> családi szobájában!</h1>
                         <p class="mb-4">
                        <p> Engedje meg, hogy bemutassuk ezt a varázslatos és kényelmes szállásegységet, amely tökéletes választás családok számára, akik pihentető és emlékezetes időtöltésre vágynak.

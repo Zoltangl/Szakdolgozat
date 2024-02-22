@@ -113,7 +113,7 @@
             <div class="container">
                 <div class="row g-5 align-items-center">
                     <div class="col-lg-6">
-                        <h6 class="section-title text-start text-primary text-uppercase">Akadálymentesített szoba</h6>
+                        <h6 class="section-title text-start text-primary text-uppercase">rooms</h6>
                         <h1 class="mb-4">Üdvözöljük a <span class="text-primary text-uppercase">HappyHotel</span> akadálymentesített szobájában!</h1>
                         <p class="mb-4">
                        <p> Üdvözöljük a HappyHotel Akadálymentesített Szobájában! Ez a szoba azoknak szól, akiknek fontos a könnyű hozzáférés és a kényelmes tartózkodás, függetlenül a mozgáskorlátozottságuktól vagy speciális igényeiktől. A szoba tervezésénél és kialakításánál elsődleges szempont volt, hogy minden vendégünk számára megfelelő legyen, és lehetővé tegye számukra a teljes önállóságot és kényelmet.

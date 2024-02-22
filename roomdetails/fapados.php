@@ -113,7 +113,7 @@
             <div class="container">
                 <div class="row g-5 align-items-center">
                     <div class="col-lg-6">
-                        <h6 class="section-title text-start text-primary text-uppercase">About Us</h6>
+                        <h6 class="section-title text-start text-primary text-uppercase">rooms</h6>
                         <h1 class="mb-4">Üdvözöljük a <span class="text-primary text-uppercase">HappyHotel</span> fapados szobájában!</h1>
                         <p class="mb-4">
                        <p> Engedje meg, hogy bemutassuk Önnek ezt a kényelmes és praktikus szállásegységet, amely tökéletes választás az egyedül utazó üzletembereknek vagy a pihenni vágyó egyéni utazóknak.
