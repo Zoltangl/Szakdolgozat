@@ -44,48 +44,22 @@ $db = new DataBase;
 
             <i class="fa-solid fa-lock"></i>
             <input type="password" id="cpass" name="cpass" placeholder="Jelszó megerősítése..." required><br><br>
-            <div id="atvalt" class="signup-link">Már van fiókod? <a href="#" id="showLoginForm">Belépés</a>
-            </div>
+
+            <div style="text-align: center;">
             <input type="submit" id="btn" value="Regisztráció" name="submit" required><br><br>
-        </form>
+        </div>
+    </form>
+
+    <!-- A "Belépés" link -->
+    <div style="text-align: center;">
+        <div id="atvalt" class="signup-link">Már van fiókod? <a href="login.php">Belépés</a></div>
     </div>
+</div>
 
 
-    <div id="loginForm" style="display: none;">
-        <h1 id="heading">Bejelentkezés<h1>
-        <form name="loginform" method="post" action="belepes.php">
 
-            <i class="fa-solid fa-envelope"></i>
-            <input type="email" id="email" name="email" placeholder="Add meg az email címed..." required><br><br>
 
-            <i class="fa-solid fa-lock"></i>
-            <input type="password" id="pass" name="pass" placeholder="Add meg a jelszavad..." required><br><br>
-            <div class="signup-link">Nincs még fiókod? <a href="#" id="showForm">Regisztráció</a></div>
-            <input type="submit" id="btn" value="Bejelentkezés" name="submit" required><br><br>
-        </form>
-    </div>
-    <script>
-    // Az eseménykezelő hozzáadása a "Belépés" linkhez
-    document.getElementById("showLoginForm").addEventListener("click", function(event) {
-        event.preventDefault(); // Az alapértelmezett link művelet megakadályozása
 
-        // A regisztrációs kártya elrejtése
-        document.getElementById("form").style.display = "none";
-        
-        // A belépési kártya megjelenítése
-        document.getElementById("loginForm").style.display = "block";
-    });
-</script>
-
-<script>
-    document.getElementById("showForm").addEventListener("click", function(event) {
-    event.preventDefault(); // Az alapértelmezett link művelet megakadályozása
-
-    // Az oldal újratöltése
-    location.reload();
-});
-
-</script>
     <script>
         function isvalid(){
             var email = document.from.email.value;
