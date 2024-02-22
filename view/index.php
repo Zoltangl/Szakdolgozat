@@ -257,8 +257,8 @@
                                     </div>
                                 </div>
                                 <div class="d-flex mb-3">
-                                    <small class="border-end me-3 pe-3"><i class="fa fa-bed text-primary me-2"></i>3 Bed</small>
-                                    <small class="border-end me-3 pe-3"><i class="fa fa-bath text-primary me-2"></i>2 Bath</small>
+                                    <small class="border-end me-3 pe-3"><i class="fa fa-bed text-primary me-2"></i>1 Bed</small>
+                                    <small class="border-end me-3 pe-3"><i class="fa fa-bath text-primary me-2"></i>1 Bath</small>
                                     <small><i class="fa fa-wifi text-primary me-2"></i>Wifi</small>
                                 </div>
                                 <p class="text-body mb-3">Fedezze fel luxus és kényelem csúcsát a hotel lakosztályában! Ez a kifinomult és tágas szállásegység tökéletes választás azoknak, akik különleges élményre vágynak. A lakosztály kényelmes hálószobát, tágas nappalit és exkluzív fürdőszobát kínál, amely minden igényt kielégít.</p>
@@ -285,8 +285,8 @@
                                     </div>
                                 </div>
                                 <div class="d-flex mb-3">
-                                    <small class="border-end me-3 pe-3"><i class="fa fa-bed text-primary me-2"></i>3 Bed</small>
-                                    <small class="border-end me-3 pe-3"><i class="fa fa-bath text-primary me-2"></i>2 Bath</small>
+                                    <small class="border-end me-3 pe-3"><i class="fa fa-bed text-primary me-2"></i>1 Bed</small>
+                                    <small class="border-end me-3 pe-3"><i class="fa fa-bath text-primary me-2"></i>1 Bath</small>
                                     <small><i class="fa fa-wifi text-primary me-2"></i>Wifi</small>
                                 </div>
                                 <p class="text-body mb-3">Fedezze fel a kényelmes és megfizethető fapados hotelszobát! Ez a praktikus szállásegység ideális választás azoknak, akik egy egyszerű és kényelmes tartózkodást keresnek megfizethető áron.</p>
