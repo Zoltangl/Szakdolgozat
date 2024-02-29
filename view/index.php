@@ -79,7 +79,7 @@
                         <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                             <div class="navbar-nav mr-auto py-0">
                                 <a href="index.php" class="nav-item nav-link active">Home</a>
-                                <a href="about.php" class="nav-item nav-link">About</a>
+                                <a href=""view/about.php" class="nav-item nav-link">About</a>
                                 <a href="service.php" class="nav-item nav-link">Services</a>
                                 <a href="room.php" class="nav-item nav-link">Rooms</a>
                                 <a href="kedvezmenyeink.php" class="nav-item nav-link">Kedvezményeink</a>
@@ -179,22 +179,30 @@
                         <a class="btn btn-primary py-3 px-5 mt-2" href="">Explore More</a>
                     </div>
                     <div class="col-lg-6">
-                        <div class="row g-2">
-                            <div class="col-6 text-end">
-                                <img class="img-fluid rounded w-75 wow zoomIn" data-wow-delay="0.1s" src="img/aboutbar.jpg" style="margin-top: 25%;">
-                            </div>
-                            <div class="col-6 text-start">
-                                <img class="img-fluid rounded w-100 wow zoomIn" data-wow-delay="0.3s" src="img/aboutmedence.jpg">
-                            </div>
-                          
-                            <div class="col-6 text-start">
-                                <img class="img-fluid rounded w-75 wow zoomIn" data-wow-delay="0.7s" src="img/about-4.jpg">
-                            </div>
-                            <div class="col-7 text-start">
-                                <img class="img-fluid rounded w-75 wow zoomIn" data-wow-delay="0.7s" src="img/abouthotel.jpg">
-                            </div>
-                        </div>
-                    </div>
+    <div class="row g-2">
+        <div class="col-6">
+            <div class="d-flex justify-content-start align-items-center h-100">
+                <img class="img-fluid rounded w-75 wow zoomIn" data-wow-delay="0.1s" src="img/aboutbar.jpg">
+            </div>
+        </div>
+        <div class="col-6">
+            <div class="d-flex justify-content-start align-items-center h-100">
+                <img class="img-fluid rounded w-75 wow zoomIn" data-wow-delay="0.3s" src="img/aboutmedence.jpg">
+            </div>
+        </div>
+        <div class="col-6">
+            <div class="d-flex justify-content-start align-items-center h-100">
+                <img class="img-fluid rounded w-75 wow zoomIn" data-wow-delay="0.7s" src="img/aboutswimmingpool.jpg">
+            </div>
+        </div>
+        <div class="col-6">
+            <div class="d-flex justify-content-start align-items-center h-100">
+                <img class="img-fluid rounded w-75 wow zoomIn" data-wow-delay="0.7s" src="img/abouthotel.jpg">
+            </div>
+        </div>
+    </div>
+</div>
+</div>
                 </div>
             </div>
         </div>

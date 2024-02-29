@@ -22,15 +22,13 @@
        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
    
        <!-- Libraries Stylesheet -->
-       <link href="lib/animate/animate.min.css" rel="stylesheet">
-       <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
-       <link href="lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
+       <link href="../lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
    
        <!-- Customized Bootstrap Stylesheet -->
-       <link href="css/bootstrap.min.css" rel="stylesheet">
+       <link href="../css/bootstrap.min.css" rel="stylesheet">
    
        <!-- Template Stylesheet -->
-       <link href="css/style.css" rel="stylesheet">
+       <link href="../css/style.css" rel="stylesheet">
 </head>
 
 <body>
@@ -81,13 +79,13 @@
                         </button>
                         <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                             <div class="navbar-nav mr-auto py-0">
-                                <a href="view/index.php" class="nav-item nav-link">Home</a>
-                                <a href="view/about.php" class="nav-item nav-link active">About</a>
-                                <a href="view/service.php" class="nav-item nav-link">Services</a>
-                                <a href="view/room.php" class="nav-item nav-link">Rooms</a>
-                                <a href="view/kedvezmenyeink.php" class="nav-item nav-link">Kedvezményeink</a>
-                                <a href="view/booking.php" class="nav-item nav-link">Booking</a>
-                                <a href="view/signup.php" class="nav-item nav-link">Registration/Login</a>
+                                <a href="../index.php" class="nav-item nav-link">Home</a>
+                                <a href="../about.php" class="nav-item nav-link active">About</a>
+                                <a href="../service.php" class="nav-item nav-link">Services</a>
+                                <a href="../room.php" class="nav-item nav-link">Rooms</a>
+                                <a href="../kedvezmenyeink.php" class="nav-item nav-link">Kedvezményeink</a>
+                                <a href="../booking.php" class="nav-item nav-link">Booking</a>
+                                <a href="../signup.php" class="nav-item nav-link">Registration/Login</a>
                             </div>
                         </div>
                     </nav>
@@ -167,13 +165,13 @@
                     <div class="col-lg-6">
                         <div class="row g-3">
                             <div class="col-6 text-end">
-                                <img class="img-fluid rounded w-75 wow zoomIn" data-wow-delay="0.1s" src="img/gym.jpg" style="margin-top: 25%;">
+                                <img class="img-fluid rounded w-75 wow zoomIn" data-wow-delay="0.1s" src="../img/gym.jpg" style="margin-top: 25%;">
                             </div>
                             <div class="col-6 text-start">
-                                <img class="img-fluid rounded w-100 wow zoomIn" data-wow-delay="0.3s" src="img/tenisz.jpg">
+                                <img class="img-fluid rounded w-100 wow zoomIn" data-wow-delay="0.3s" src="../img/tenisz.jpg">
                             </div>
                             <div class="col-6 text-end">
-                                <img class="img-fluid rounded w-50 wow zoomIn" data-wow-delay="0.5s" src="img/kosar.jpg">
+                                <img class="img-fluid rounded w-50 wow zoomIn" data-wow-delay="0.5s" src="../img/kosar.jpg">
                             </div>
                         </div>
                     </div>
@@ -191,10 +189,10 @@
                         <div class="row gy-5 g-4">
                             <div class="col-md-6">
                                 <h6 class="section-title text-start text-primary text-uppercase mb-4">Company</h6>
-                                <a class="btn btn-link" href="view/about.php">About Us</a>
-                                <a class="btn btn-link" href="view/privacypolicy.php">Privacy Policy</a>
-                                <a class="btn btn-link" href="view/termsandcondition.php">Terms & Condition</a>
-                            <a class="btn btn-link" href="view/support.php">Support</a>
+                                <a class="btn btn-link" href="../about.php">About Us</a>
+                                <a class="btn btn-link" href="../privacypolicy.php">Privacy Policy</a>
+                                <a class="btn btn-link" href="../termsandcondition.php">Terms & Condition</a>
+                            <a class="btn btn-link" href="../support.php">Support</a>
                         </div>
                         <div class="col-md-6">
                             <h6 class="section-title text-start text-primary text-uppercase mb-4">Services</h6>
@@ -210,8 +208,8 @@
                     <div class="row">
                         <div class="col-md-6 text-center text-md-end">
                             <div class="footer-menu">
-                                <a href="view/index.php">Home</a>
-                                <a href="view/privacypolicy.php">Cookies</a>
+                                <a href="../index.php">Home</a>
+                                <a href="../privacypolicy.php">Cookies</a>
                             </div>
                         </div>
                     </div>
@@ -227,17 +225,16 @@
     <!-- JavaScript Libraries -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="lib/wow/wow.min.js"></script>
-    <script src="lib/easing/easing.min.js"></script>
-    <script src="lib/waypoints/waypoints.min.js"></script>
-    <script src="lib/counterup/counterup.min.js"></script>
-    <script src="lib/owlcarousel/owl.carousel.min.js"></script>
-    <script src="lib/tempusdominus/js/moment.min.js"></script>
-    <script src="lib/tempusdominus/js/moment-timezone.min.js"></script>
-    <script src="lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
-
+    <script src="../lib/wow/wow.min.js"></script>
+    <script src="../lib/easing/easing.min.js"></script>
+    <script src="../lib/waypoints/waypoints.min.js"></script>
+    <script src="../lib/counterup/counterup.min.js"></script>
+    <script src="../lib/owlcarousel/owl.carousel.min.js"></script>
+    <script src="../lib/tempusdominus/js/moment.min.js"></script>
+    <script src="../lib/tempusdominus/js/moment-timezone.min.js"></script>
+    <script src="../lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
     <!-- Template Javascript -->
-    <script src="js/main.js"></script>
+    <script src="../js/main.js"></script>
 </body>
 
 </html>

@@ -8,7 +8,7 @@
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
     <!-- Favicon -->
-    <link href="img/favicon.ico" rel="icon">
+    <link href="../img/favicon.ico" rel="icon">
 
     <!-- Google Web Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -20,8 +20,6 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
 
     <!-- Libraries Stylesheet -->
-    <link href="../lib/animate/animate.min.css" rel="stylesheet">
-    <link href="../lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
     <link href="../lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
 
     <!-- Customized Bootstrap Stylesheet -->
@@ -79,14 +77,14 @@
                         </button>
                         <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                             <div class="navbar-nav mr-auto py-0">
-                                <a href="../view/index.php" class="nav-item nav-link active">Home</a>
-                                <a href="../view/about.php" class="nav-item nav-link">About</a>
-                                <a href="../view/service.php" class="nav-item nav-link">Services</a>
-                                <a href="../view/room.php" class="nav-item nav-link">Rooms</a>
-                                <a href="../view/kedvezmenyeink.php" class="nav-item nav-link">Kedvezményeink</a>
+                                <a href="../index.php" class="nav-item nav-link active">Home</a>
+                                <a href="../about.php" class="nav-item nav-link">About</a>
+                                <a href="../service.php" class="nav-item nav-link">Services</a>
+                                <a href="../room.php" class="nav-item nav-link">Rooms</a>
+                                <a href="../kedvezmenyeink.php" class="nav-item nav-link">Kedvezményeink</a>
 
-                                <a href="../view/booking.php" class="nav-item nav-link">Booking</a>
-                                <a href="../view/signup.php" class="nav-item nav-link">Registration/Login</a>
+                                <a href="../booking.php" class="nav-item nav-link">Booking</a>
+                                <a href="../signup.php" class="nav-item nav-link">Registration/Login</a>
                             </div>
                         </div>
                     </nav>
@@ -153,7 +151,7 @@
                                 </div>
                             </div>
                         </div>
-                        <a class="btn btn-primary py-3 px-5 mt-2" href="../view/room.php">Explore More</a>
+                        <a class="btn btn-primary py-3 px-5 mt-2" href="../room.php">Explore More</a>
                     </div>
                     <div class="col-lg-6">
                         <div class="row g-3">
@@ -176,10 +174,10 @@
                         <div class="row gy-5 g-4">
                             <div class="col-md-6">
                                 <h6 class="section-title text-start text-primary text-uppercase mb-4">Company</h6>
-                                <a class="btn btn-link" href="../view/about.php">About Us</a>
-                                <a class="btn btn-link" href="../view/privacypolicy.php">Privacy Policy</a>
-                                <a class="btn btn-link" href="../view/termsandcondition.php">Terms & Condition</a>
-                            <a class="btn btn-link" href="../view/support.php">Support</a>
+                                <a class="btn btn-link" href="../about.php">About Us</a>
+                                <a class="btn btn-link" href="../privacypolicy.php">Privacy Policy</a>
+                                <a class="btn btn-link" href="../termsandcondition.php">Terms & Condition</a>
+                            <a class="btn btn-link" href="../support.php">Support</a>
                         </div>
                         <div class="col-md-6">
                             <h6 class="section-title text-start text-primary text-uppercase mb-4">Services</h6>

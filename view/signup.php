@@ -48,7 +48,7 @@ $db = new DataBase;
             <div style="text-align: center;">
             <input type="submit" id="btn" value="Regisztráció" name="submit" required><br><br>
         </div>
-    </form>
+        </form>
 
     <!-- A "Belépés" link -->
     <div style="text-align: center;">
@@ -60,35 +60,46 @@ $db = new DataBase;
 
 
 
-    <script>
-        function isvalid(){
-            var email = document.from.email.value;
-            var pass = document.from.pass.value;
+<?php
+
+
+if(isset($_POST['submit'])) {
+    // Űrlapadatok ellenőrzése
+    $firstusername = $_POST['firstusername'];
+    $secondusername = $_POST['secondusername'];
+    $email = $_POST['email'];
+    $number = $_POST['number'];
+    $pass = $_POST['pass'];
+    $cpass = $_POST['cpass'];
+
+    // Adatbázis kapcsolat létrehozása
+    $db = new DataBase();
+
+    // Jelszó ellenőrzése
+    if($pass != $cpass) {
+        echo "A két jelszó nem egyezik!";
+    } else {
+        // Jelszó hashelése
+        $hashed_pass = password_hash($pass, PASSWORD_DEFAULT);
+
+        // SQL Injection elleni védelem
+        $firstusername = $db::$conn->real_escape_string($firstusername);
+        $secondusername = $db::$conn->real_escape_string($secondusername);
+        $email = $db::$conn->real_escape_string($email);
+        $number = $db::$conn->real_escape_string($number);
+
+        // SQL parancs előkészítése és végrehajtása
+        $sql = "INSERT INTO users (firstusername, secondusername, email, number, pass) VALUES ('$firstusername', '$secondusername', '$email', '$number', '$hashed_pass')";
+
+        if ($db::$conn->query($sql) === TRUE) {
+            echo "Sikeres regisztráció!";
+        } else {
+            echo "Hiba a regisztráció során: " . $db::$conn->error;
         }
-        <?php
-$msg = "";
-if (
-    !isset($_POST["firstusername"]) &&
-    !isset($_POST["secondusername"]) &&
-    !isset($_POST["email"]) &&
-    !isset($_POST["number"]) &&
-    !isset($_POST["pass"]) &&
-    !isset($_POST["cpass"]) &&
-    $_POST["pass"] !== $_POST["cpass"]
-) {
-    $msg = "A jelszavak nem egyeznek";
-} else {
-    $msg = "csatlakoztál";
-
-    $hashed_password = hash('sha256', $_POST["pass"]);
-    $sql = "INSERT INTO `felhasznalo`(`vezeteknev`, `keresztnev`, `email_cim`, `telefonszam`, `jelszo`) 
-            VALUES ('".$_POST["firstusername"]."','".$_POST["secondusername"]."','".$_POST["email"]."','".$_POST["number"]."','".$hashed_password."');";
-
-    $result = DataBase::$conn->query($sql);
-
-    if (!$result) {
-        $msg = "Hiba történt a regisztráció során";
     }
+
+    // Adatbázis kapcsolat lezárása
+    $db::$conn->close();
 }
 ?>
      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3"><><>
