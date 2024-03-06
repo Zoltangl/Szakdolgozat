@@ -63,7 +63,7 @@ $db = new DataBase;
 <?php
 
 
-if(isset($_POST['submit'])) {
+if (isset($_POST['submit'])) {
     // Űrlapadatok ellenőrzése
     $firstusername = $_POST['firstusername'];
     $secondusername = $_POST['secondusername'];
@@ -76,7 +76,7 @@ if(isset($_POST['submit'])) {
     $db = new DataBase();
 
     // Jelszó ellenőrzése
-    if($pass != $cpass) {
+    if ($pass != $cpass) {
         echo "A két jelszó nem egyezik!";
     } else {
         // Jelszó hashelése
@@ -91,16 +91,20 @@ if(isset($_POST['submit'])) {
         // SQL parancs előkészítése és végrehajtása
         $sql = "INSERT INTO users (firstusername, secondusername, email, number, pass) VALUES ('$firstusername', '$secondusername', '$email', '$number', '$hashed_pass')";
 
-        if ($db::$conn->query($sql) === TRUE) {
+        // Az adatbáziskapcsolatot a metódus segítségével kérjük le
+        $conn = DataBase::getConnection();
+
+        if ($conn->query($sql) === TRUE) {
             echo "Sikeres regisztráció!";
         } else {
-            echo "Hiba a regisztráció során: " . $db::$conn->error;
+            echo "Hiba a regisztráció során: " . $conn->error;
         }
     }
 
     // Adatbázis kapcsolat lezárása
     $db::$conn->close();
 }
+
 ?>
      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3"><><>
 
