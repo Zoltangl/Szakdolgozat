@@ -147,7 +147,7 @@
                                 </div>
                                 <p class="text-body mb-3">Az egyágyas szoba tágas és elegáns kialakítású, hogy vendégeink otthonosan érezzék magukat. Modern berendezésekkel és stílusos bútorokkal rendelkezik, amelyek magas szintű kényelmet biztosítanak.</p>
                                 <div class="d-flex justify-content-between">
-                                    <a class="btn btn-sm btn-primary rounded py-2 px-4" href="egyagyas.php">View Detail</a>
+                                    <a class="btn btn-sm btn-primary rounded py-2 px-4" href="roomdetails/egyagyas.php">View Detail</a>
                                     <a class="btn btn-sm btn-dark rounded py-2 px-4" href="">Book Now</a>
                                 </div>
                             </div>

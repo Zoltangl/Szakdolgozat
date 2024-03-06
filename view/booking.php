@@ -1,3 +1,7 @@
+<?php 
+include("connection.php")
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -139,31 +143,7 @@
                                             <label for="checkout">Check Out</label>
                                         </div>
                                     </div>
-<?php                                    
-   // Adatok lekérdezése az adatbázisból
-   $sql = "SELECT * FROM sszoba_tipusok";
-   $result = $conn->query($sql);
 
-   // Ellenőrizze, hogy van-e eredmény
-   if ($result->num_rows > 0) {
-       // Kiírja a szoba opciókat
-       echo '<div class="col-12">';
-       echo '<div class="form-floating">';
-       echo '<select class="form-select" id="select3">';
-       while($row = $result->fetch_assoc()) {
-           echo '<option value="' . $row["szobatipus_id"] . '">' . $row["nev"] . '</option>';
-       }
-       echo '</select>';
-       echo '<label for="select3">Select A Room</label>';
-       echo '</div>';
-       echo '</div>';
-   } else {
-       echo "Nincs találat az adatbázisban.";
-   }
-
-   // Adatbázis kapcsolat bezárása
-   $conn->close();
-?>
                                     <div class="col-12">
                                         <button class="btn btn-primary w-100 py-3" type="submit">Book Now</button>
                                     </div>

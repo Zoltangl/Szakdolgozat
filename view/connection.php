@@ -5,24 +5,35 @@ class DataBase
     private $servername = "localhost";
     private $username = "c31gulcsikZ";
     private $password = "zqd73iNH#Q";
-    private $db = "c31gulcsikZ_db";
+    private $dbname = "c31gulcsikZ_db";
     public static $conn;
 
-    function __construct()
-    {
-        // Create connection
-        self::$conn = new mysqli($this->servername, $this->username, $this->password, $this->db);
+    // Konstruktor létrehozása
+    public function __construct() {
+        // Adatbáziskapcsolat létrehozása
+        self::$conn = new mysqli($this->servername, $this->username, $this->password, $this->dbname);
 
-        // Check connection
+        // Kapcsolat ellenőrzése
         if (self::$conn->connect_error) {
-            die("Connection failed: " . self::$conn->connect_error); // Hibaüzenet javítása
+            die("Hiba az adatbázishoz való kapcsolódás közben: " . self::$conn->connect_error);
+        } else {
+            echo "Sikeresen csatlakozva az adatbázishoz.<br>";
         }
+    }
 
-        self::$conn->set_charset("utf8");
+    // Kapcsolat bezárása
+    public function closeConnection() {
+        if (self::$conn) {
+            self::$conn->close();
+            echo "Adatbáziskapcsolat lezárva.<br>";
+        }
     }
 }
 
 // Kapcsolódás az adatbázishoz
 $db = new DataBase();
+
+// Adatbáziskapcsolat bezárása (opcionális)
+// $db->closeConnection();
 
 ?>
