@@ -113,7 +113,7 @@ include('connection.php')
 
 
 <div class="container">
-    <form id="form" action="index.php" method="POST">
+    <form id="form"  method="POST">
         <h1 id="heading">Regisztráció</h1>
         <i class="fa-solid fa-user"></i>
         <input type="text" id="firstusername" name="firstusername" placeholder="Add meg a Vezetékneved..." required><br>
@@ -135,10 +135,12 @@ include('connection.php')
 </div>
 <?php
 
-// Adatbáziskapcsolat létrehozása
-$conn = new mysqli("localhost", "c31gulcsikZ", "zqd73iNH#Q", "c31gulcsikZ_db");
 
-// Ellenőrizze, hogy az űrlap elküldésekor POST-ot használnak-e
+
+
+    // Adatbáziskapcsolat létrehozása
+    $conn = new mysqli("localhost", "c31gulcsikZ", "zqd73iNH#Q", "c31gulcsikZ_db");
+ // Ellenőrizze, hogy az űrlap elküldésekor POST-ot használnak-e
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Ellenőrizze és mentse az űrlapból érkező adatokat
     $vezeteknev = $_POST["firstusername"];
@@ -146,23 +148,33 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = $_POST["email"];
     $telefonszam = $_POST["number"];
     $jelszo = $_POST["pass"];
+    $jelszo_megerositese = $_POST["cpass"];
 
-    // Adatok beszúrása az adatbázisba
-    $sql = "INSERT INTO felhasznalo (vezeteknev, keresztnev, email_cim, telefonszam, jelszo) 
-            VALUES ('$vezeteknev', '$keresztnev', '$email', '$telefonszam', '$jelszo')";
-
-    if ($conn->query($sql) === TRUE) {
-        // Sikeres beszúrás esetén
-        echo "<p>Az adatok sikeresen fel lettek véve az adatbázisba!</p>";
+    // Ellenőrizze a jelszó és a jelszó megerősítése egyezőségét
+    if ($jelszo !== $jelszo_megerositese) {
+        echo "<p style='color:red;'>A jelszó és a jelszó megerősítése nem egyezik!</p>";
+        $_POST['pass'] = ''; // Törli a jelszó mező tartalmát
+        $_POST['cpass'] = ''; // Törli a jelszó megerősítése mező tartalmát
     } else {
-        // Sikertelen beszúrás esetén
-        echo "<p>Hiba az adatok beszúrása közben: " . $conn->error . "</p>";
+        // Jelszó hashelése
+        $jelszo_hashelt = password_hash($jelszo, PASSWORD_DEFAULT);
+
+        // SQL lekérdezés előkészítése és végrehajtása
+        $sql = "INSERT INTO felhasznalo (vezeteknev, keresztnev, email_cim, telefonszam, jelszo) 
+        VALUES ('$vezeteknev', '$keresztnev', '$email', '$telefonszam', '$jelszo_hashelt')";
+
+        if ($conn->query($sql) === TRUE) {
+            // Sikeres adatbázisba való felvitel után átirányítás az index.php oldalra
+            header("Location: index.php");
+            exit(); // Fontos, hogy a header() függvény után azonnal leállítsuk a további kimenetet
+        } else {
+            echo "<p>Hiba az adatok felvétele közben: " . $conn->error . "</p>";
+        }
     }
 }
 
 // Adatbáziskapcsolat bezárása
 $conn->close();
-
 ?>
     <!-- JavaScript Libraries -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
