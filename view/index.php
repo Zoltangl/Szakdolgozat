@@ -1,3 +1,18 @@
+<?php
+session_start(); // Session indítása, ha még nem indult
+
+// Ellenőrizzük, hogy a felhasználó be van-e jelentkezve
+if(isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
+    // Ha be van jelentkezve, a főoldal menüjéből tüntesse el a registration/login fület és helyette jelenítse meg a profile fület
+    $profile_display = "<style>.profile-dropdown { display: block !important; }</style>";
+} else {
+    $profile_display = "";
+    // Hibaüzenet, ha a session nem lett elindítva
+    if (session_status() === PHP_SESSION_NONE) {
+        echo "<p>Hiba: A session nem lett elindítva.</p>";
+    }
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -20,7 +35,6 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
 
     <!-- Libraries Stylesheet -->
-    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
     <link href="lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
 
     <!-- Customized Bootstrap Stylesheet -->
@@ -77,21 +91,22 @@
                             <span class="navbar-toggler-icon"></span>
                         </button>
                         <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
-                            <div class="navbar-nav mr-auto py-0">
-                                <a href="index.php" class="nav-item nav-link active">Home</a>
-                                <a href="about.php" class="nav-item nav-link">About</a>
-                                <a href="service.php" class="nav-item nav-link">Services</a>
-                                <a href="room.php" class="nav-item nav-link">Rooms</a>
-                                <a href="kedvezmenyeink.php" class="nav-item nav-link">Kedvezményeink</a>
-
-                                <a href="booking.php" class="nav-item nav-link">Booking</a>
-                                <a href="signup.php" class="nav-item nav-link">Registration/Login</a>
-                            </div>
+                        <div class="navbar-nav mr-auto py-0">
+                            <a href="index.php" class="nav-item nav-link active">Home</a>
+                            <a href="about.php" class="nav-item nav-link">About</a>
+                            <a href="service.php" class="nav-item nav-link">Services</a>
+                            <a href="room.php" class="nav-item nav-link">Rooms</a>
+                            <a href="kedvezmenyeink.php" class="nav-item nav-link">Kedvezményeink</a>
+                            <a href="booking.php" class="nav-item nav-link">Booking</a>
+                            <a href="signup.php" class="nav-item nav-link">Registration/Login</a>
+                          
                         </div>
+                    </div>
+
                     </nav>
+                    </div>
                 </div>
             </div>
-        </div>
         <!-- Header End -->
 
 
@@ -361,7 +376,6 @@
     <script src="lib/easing/easing.min.js"></script>
     <script src="lib/waypoints/waypoints.min.js"></script>
     <script src="lib/counterup/counterup.min.js"></script>
-    <script src="lib/owlcarousel/owl.carousel.min.js"></script>
     <script src="lib/tempusdominus/js/moment.min.js"></script>
     <script src="lib/tempusdominus/js/moment-timezone.min.js"></script>
     <script src="lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>

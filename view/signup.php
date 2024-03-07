@@ -1,5 +1,47 @@
 <?php
-include('connection.php')
+include('connection.php');
+
+// Adatbáziskapcsolat létrehozása
+$conn = new mysqli("localhost", "c31gulcsikZ", "zqd73iNH#Q", "c31gulcsikZ_db");
+
+// Változók inicializálása
+$pass_error = '';
+
+// Ellenőrizze, hogy az űrlap elküldésekor POST-ot használnak-e
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Ellenőrizze és mentse az űrlapból érkező adatokat
+    $vezeteknev = $_POST["firstusername"];
+    $keresztnev = $_POST["secondusername"];
+    $email = $_POST["email"];
+    $telefonszam = $_POST["number"];
+    $jelszo = $_POST["pass"];
+    $jelszo_megerositese = $_POST["cpass"];
+
+    // Ellenőrizze a jelszó és a jelszó megerősítése egyezőségét
+    if ($jelszo !== $jelszo_megerositese) {
+        $pass_error = 'A jelszó és a jelszó megerősítése nem egyezik!';
+        $_POST['pass'] = ''; // Törli a jelszó mező tartalmát
+        $_POST['cpass'] = ''; // Törli a jelszó megerősítése mező tartalmát
+    } else {
+        // Jelszó hashelése
+        $jelszo_hashelt = password_hash($jelszo, PASSWORD_DEFAULT);
+
+        // SQL lekérdezés előkészítése és végrehajtása
+        $sql = "INSERT INTO felhasznalo (vezeteknev, keresztnev, email_cim, telefonszam, jelszo) 
+        VALUES ('$vezeteknev', '$keresztnev', '$email', '$telefonszam', '$jelszo_hashelt')";
+
+        if ($conn->query($sql) === TRUE) {
+            // Sikeres adatbázisba való felvitel után átirányítás az index.php oldalra
+            header("Location: login.php");
+            exit(); // Fontos, hogy a header() függvény után azonnal leállítsuk a további kimenetet
+        } else {
+            echo "<p>Hiba az adatok felvétele közben: " . $conn->error . "</p>";
+        }
+    }
+}
+
+// Adatbáziskapcsolat bezárása
+$conn->close();
 ?>
 
 <!DOCTYPE html>
@@ -111,7 +153,6 @@ include('connection.php')
 </head>
 <body>
 
-
 <div class="container">
     <form id="form"  method="POST">
         <h1 id="heading">Regisztráció</h1>
@@ -127,55 +168,13 @@ include('connection.php')
         <input type="password" id="pass" name="pass" placeholder="Add meg a jelszavad..." required><br>
         <i class="fa-solid fa-lock"></i>
         <input type="password" id="cpass" name="cpass" placeholder="Jelszó megerősítése..." required><br>
+        <span style="color:red;"><?php echo $pass_error; ?></span><br>
         <input type="submit" id="btn" value="Regisztráció" name="Submit" required><br>
 
         <!-- A "Belépés" link -->
         <div class="signup-link">Már van fiókod? <a href="login.php">Belépés</a></div>
     </form>
 </div>
-<?php
-
-
-
-
-    // Adatbáziskapcsolat létrehozása
-    $conn = new mysqli("localhost", "c31gulcsikZ", "zqd73iNH#Q", "c31gulcsikZ_db");
- // Ellenőrizze, hogy az űrlap elküldésekor POST-ot használnak-e
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Ellenőrizze és mentse az űrlapból érkező adatokat
-    $vezeteknev = $_POST["firstusername"];
-    $keresztnev = $_POST["secondusername"];
-    $email = $_POST["email"];
-    $telefonszam = $_POST["number"];
-    $jelszo = $_POST["pass"];
-    $jelszo_megerositese = $_POST["cpass"];
-
-    // Ellenőrizze a jelszó és a jelszó megerősítése egyezőségét
-    if ($jelszo !== $jelszo_megerositese) {
-        echo "<p style='color:red;'>A jelszó és a jelszó megerősítése nem egyezik!</p>";
-        $_POST['pass'] = ''; // Törli a jelszó mező tartalmát
-        $_POST['cpass'] = ''; // Törli a jelszó megerősítése mező tartalmát
-    } else {
-        // Jelszó hashelése
-        $jelszo_hashelt = password_hash($jelszo, PASSWORD_DEFAULT);
-
-        // SQL lekérdezés előkészítése és végrehajtása
-        $sql = "INSERT INTO felhasznalo (vezeteknev, keresztnev, email_cim, telefonszam, jelszo) 
-        VALUES ('$vezeteknev', '$keresztnev', '$email', '$telefonszam', '$jelszo_hashelt')";
-
-        if ($conn->query($sql) === TRUE) {
-            // Sikeres adatbázisba való felvitel után átirányítás az index.php oldalra
-            header("Location: index.php");
-            exit(); // Fontos, hogy a header() függvény után azonnal leállítsuk a további kimenetet
-        } else {
-            echo "<p>Hiba az adatok felvétele közben: " . $conn->error . "</p>";
-        }
-    }
-}
-
-// Adatbáziskapcsolat bezárása
-$conn->close();
-?>
     <!-- JavaScript Libraries -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>

@@ -1,3 +1,56 @@
+<?php
+
+include('connection.php'); // Adatbázis kapcsolódás
+
+// Session indítása, ha még nem indult
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
+// Ellenőrizzük, hogy a felhasználó be van-e jelentkezve
+if(isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
+    // Ha be van jelentkezve, a főoldal menüjéből tüntesse el a registration/login fület és helyette jelenítse meg a profile fület
+    $profile_display = "<style>.profile-dropdown { display: block !important; }</style>";
+} else {
+    $profile_display = "";
+    // Hibaüzenet, ha a session nem lett elindítva
+    if (session_status() === PHP_SESSION_NONE) {
+        echo "<p>Hiba: A session nem lett elindítva.</p>";
+    }
+}
+
+
+$db = new DataBase(); // Példányosítás
+
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
+    // Ellenőrizze és mentse az űrlapból érkező adatokat
+    $email = $_POST["email"];
+    $jelszo = $_POST["pass"];
+
+    // Ellenőrizze a bejelentkezési adatok helyességét az adatbázisban
+    $sql = "SELECT * FROM felhasznalo WHERE email_cim = '$email'";
+    $result = $db::$conn->query($sql);
+
+    if ($result->num_rows > 0) {
+        $row = $result->fetch_assoc();
+        if (password_verify($jelszo, $row['jelszo'])) {
+            // Sikeres bejelentkezés után átirányítás az index.php oldalra
+            header("Location: index.php");
+            echo "<p>Sikeres bejelentkezés!</p>"; // Üzenet kiírása
+            exit(); // Fontos, hogy a header() függvény után azonnal leállítsuk a további kimenetet
+        } else {
+            echo "<p>Hibás jelszó!</p>";
+        }
+    } else {
+        echo "<p>Nincs ilyen felhasználó!</p>";
+    }
+}
+
+// Adatbáziskapcsolat bezárása
+$db->closeConnection();
+echo $profile_display;
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -22,7 +75,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
     <!-- Libraries Stylesheet -->
-    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
     <link href="lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
 
     <!-- Customized Bootstrap Stylesheet -->
@@ -84,7 +136,7 @@
                         <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                             <div class="navbar-nav mr-auto py-0">
                                 <a href="index.php" class="nav-item nav-link active">Home</a>
-                                <a href="view/about.php" class="nav-item nav-link">About</a>
+                                <a href="about.php" class="nav-item nav-link">About</a>
                                 <a href="service.php" class="nav-item nav-link">Services</a>
                                 <a href="room.php" class="nav-item nav-link">Rooms</a>
                                 <a href="kedvezmenyeink.php" class="nav-item nav-link">Kedvezményeink</a>
@@ -104,7 +156,7 @@
 <body>
 
 <div class="container">
-    <div id="form">
+    <form id="form" method="POST">
         <h1 id="heading">Bejelentkezés</h1>
         <i class="fa-solid fa-envelope"></i>
         <input type="email" id="email" name="email" placeholder="Add meg az email címed..." required><br>
@@ -114,8 +166,9 @@
 
         <!-- A "Belépés" link -->
         <div class="signup-link">Még nincs fiókod? <a href="signup.php">Regisztráció</a></div>
-    </div>
+    </form>
 </div>
+
 
     <!-- JavaScript Libraries -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
@@ -124,7 +177,6 @@
     <script src="lib/easing/easing.min.js"></script>
     <script src="lib/waypoints/waypoints.min.js"></script>
     <script src="lib/counterup/counterup.min.js"></script>
-    <script src="lib/owlcarousel/owl.carousel.min.js"></script>
     <script src="lib/tempusdominus/js/moment.min.js"></script>
     <script src="lib/tempusdominus/js/moment-timezone.min.js"></script>
     <script src="lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
