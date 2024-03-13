@@ -1,6 +1,23 @@
 <?php 
-include("connection.php")
+include("connection.php");
+session_start(); // Session indítása, ha még nem indult
+
+// Ellenőrizzük, hogy a felhasználó be van-e jelentkezve
+if(isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
+    $profile_display = '<div class="dropdown">
+                            <button class="btn btn-secondary dropdown-toggle" type="button" id="profileDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                                Profile
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="profileDropdown">
+                                <li><a class="dropdown-item" href="edit_profile.php">Edit Profile</a></li>
+                                <li><a id="logout_link" class="dropdown-item" href="signup.php">Log Out</a></li>
+                            </ul>
+                        </div>';
+} else {
+    $profile_display = "<a href='signup.php' class='nav-item nav-link'>Register/Login</a>";
+}
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">

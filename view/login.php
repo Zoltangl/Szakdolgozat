@@ -1,43 +1,34 @@
 <?php
+include('connection.php');
 
-include('connection.php'); // Adatbázis kapcsolódás
 
-// Session indítása, ha még nem indult
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
-// Ellenőrizzük, hogy a felhasználó be van-e jelentkezve
 if(isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
-    // Ha be van jelentkezve, a főoldal menüjéből tüntesse el a registration/login fület és helyette jelenítse meg a profile fület
-    $profile_display = "<style>.profile-dropdown { display: block !important; }</style>";
+    $profile_display = "<a href='profile.php' class='nav-item nav-link'>Profile</a>";
 } else {
-    $profile_display = "";
-    // Hibaüzenet, ha a session nem lett elindítva
-    if (session_status() === PHP_SESSION_NONE) {
-        echo "<p>Hiba: A session nem lett elindítva.</p>";
-    }
+    $profile_display = "<a href='signup.php' class='nav-item nav-link'>Register/Login</a>";
 }
 
 
-$db = new DataBase(); // Példányosítás
+$db = new DataBase();
 
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
-    // Ellenőrizze és mentse az űrlapból érkező adatokat
     $email = $_POST["email"];
     $jelszo = $_POST["pass"];
 
-    // Ellenőrizze a bejelentkezési adatok helyességét az adatbázisban
     $sql = "SELECT * FROM felhasznalo WHERE email_cim = '$email'";
     $result = $db::$conn->query($sql);
 
     if ($result->num_rows > 0) {
         $row = $result->fetch_assoc();
         if (password_verify($jelszo, $row['jelszo'])) {
-            // Sikeres bejelentkezés után átirányítás az index.php oldalra
+            $_SESSION['loggedin'] = true;
             header("Location: index.php");
-            echo "<p>Sikeres bejelentkezés!</p>"; // Üzenet kiírása
-            exit(); // Fontos, hogy a header() függvény után azonnal leállítsuk a további kimenetet
+            echo "<p>Sikeres bejelentkezés!</p>"; 
+            exit(); 
         } else {
             echo "<p>Hibás jelszó!</p>";
         }
@@ -46,9 +37,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
     }
 }
 
-// Adatbáziskapcsolat bezárása
+
 $db->closeConnection();
-echo $profile_display;
 ?>
 
 <!DOCTYPE html>

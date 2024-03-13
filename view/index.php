@@ -1,15 +1,30 @@
 <?php
-session_start(); // Session indítása, ha még nem indult
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
+include 'functions.php';
 
 // Ellenőrizzük, hogy a felhasználó be van-e jelentkezve
 if(isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
-    // Ha be van jelentkezve, a főoldal menüjéből tüntesse el a registration/login fület és helyette jelenítse meg a profile fület
-    $profile_display = "<style>.profile-dropdown { display: block !important; }</style>";
+    $profile_display = '<div class="dropdown">
+                            <button class="btn btn-secondary dropdown-toggle" type="button" id="profileDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                                Profile
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="profileDropdown">
+                                <li><a class="dropdown-item" href="edit_profile.php">Edit Profile</a></li>
+                                <li><a id="logout_link" class="dropdown-item" href="#">Log Out</a></li>
+                            </ul>
+                        </div>';
 } else {
-    $profile_display = "";
-    // Hibaüzenet, ha a session nem lett elindítva
-    if (session_status() === PHP_SESSION_NONE) {
-        echo "<p>Hiba: A session nem lett elindítva.</p>";
+    $profile_display = "<a href='signup.php' class='nav-item nav-link'>Registration/Login</a>";
+}
+
+// Ha be van jelentkezve, adj hozzá egy query stringet az URL-hez
+if(isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
+    $current_url = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+    if(strpos($current_url, '?') === false) {
+        $current_url .= '?loggedin=true';
     }
 }
 ?>
@@ -98,7 +113,7 @@ if(isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
                             <a href="room.php" class="nav-item nav-link">Rooms</a>
                             <a href="kedvezmenyeink.php" class="nav-item nav-link">Kedvezményeink</a>
                             <a href="booking.php" class="nav-item nav-link">Booking</a>
-                            <a href="signup.php" class="nav-item nav-link">Registration/Login</a>
+                            <?php echo $profile_display; ?>
                           
                         </div>
                     </div>
@@ -109,49 +124,33 @@ if(isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
             </div>
         <!-- Header End -->
 
-
-        <!-- Carousel Start -->
-        <div class="container-fluid p-0 mb-5">
-            <div id="header-carousel" class="carousel slide" data-bs-ride="carousel">
-                <div class="carousel-inner">
-                    <div class="carousel-item active">
-                        <img class="w-100" src="img/hoteleloter.jpg" alt="Image">
-                        <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
-                            <div class="p-3" style="max-width: 700px;">
-                                <h6 class="section-title text-white text-uppercase mb-3 animated slideInDown">Luxury Living</h6>
-                                <h1 class="display-3 text-white mb-4 animated slideInDown">Discover A Brand Luxurious Hotel</h1>
-                                <a href="room.php" class="btn btn-primary py-md-3 px-md-5 me-3 animated slideInLeft">Our Rooms</a>
-                                <a href="booking.php" class="btn btn-light py-md-3 px-md-5 animated slideInRight">Book A Room</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="carousel-item">
-                        <img class="w-100" src="img/hotelfolyoso.jpg" alt="Image">
-                        <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
-                            <div class="p-3" style="max-width: 700px;">
-                                <h6 class="section-title text-white text-uppercase mb-3 animated slideInDown">Luxury Living</h6>
-                                <h1 class="display-3 text-white mb-4 animated slideInDown">Discover A Brand Luxurious Hotel</h1>
-                                <a href="room.php" class="btn btn-primary py-md-3 px-md-5 me-3 animated slideInLeft">Our Rooms</a>
-                                <a href="booking.php" class="btn btn-light py-md-3 px-md-5 animated slideInRight">Book A Room</a>
-                            </div>
-                        </div>
-                    </div>
+        <!-- Page Header Start -->
+        <div class="container-fluid page-header mb-5 p-0" style="background-image: url(img/fejlec2.jpg);">
+            <div class="container-fluid page-header-inner py-5">
+                <div class="container text-center pb-5">
+                    <h1 class="display-3 text-white mb-3 animated slideInDown">About Us</h1>
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb justify-content-center text-uppercase">
+                            <li class="breadcrumb-item"><a href="#">Home</a></li>
+                            <li class="breadcrumb-item text-white active" aria-current="page">About</li>
+                        </ol>
+                    </nav>
                 </div>
-                <button class="carousel-control-prev" type="button" data-bs-target="#header-carousel"
-                    data-bs-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Previous</span>
-                </button>
-                <button class="carousel-control-next" type="button" data-bs-target="#header-carousel"
-                    data-bs-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Next</span>
-                </button>
             </div>
         </div>
-        <!-- Carousel End -->
+        <!-- Page Header End -->
 
 
+      <script>
+    document.getElementById("logout_link").addEventListener("click", function() {
+        // Kijelentkezés: session változók törlése
+        <?php session_destroy(); ?> // PHP session törlése
+        // Visszatérés a regisztrációs oldalra
+        window.location.href = "signup.php";
+    });
+</script>
+
+        
         
         <!-- About Start -->
         <div class="container-xxl py-5">
