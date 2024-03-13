@@ -1,17 +1,23 @@
 <?php
-include('connection.php');
-
-
-if (session_status() === PHP_SESSION_NONE) {
-    session_start();
+// Ellenőrizzük, hogy van-e aktív munkamenet
+if (session_status() === PHP_SESSION_ACTIVE) {
+    // Ha van aktív munkamenet, lezárjuk
+    session_write_close();
 }
+
+// Most beállíthatjuk a munkamenet és sütikezelési paramétereket
+session_start();
+// Munkamenet élettartamának beállítása például 1 órára (3600 másodperc)
+ini_set('session.gc_maxlifetime', 3600);
+session_set_cookie_params(3600);
+
+include('connection.php');
 
 if(isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
     $profile_display = "<a href='profile.php' class='nav-item nav-link'>Profile</a>";
 } else {
     $profile_display = "<a href='signup.php' class='nav-item nav-link'>Register/Login</a>";
 }
-
 
 $db = new DataBase();
 
@@ -26,6 +32,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
         $row = $result->fetch_assoc();
         if (password_verify($jelszo, $row['jelszo'])) {
             $_SESSION['loggedin'] = true;
+            // Ha a bejelentkezés sikeres, átirányítjuk az index.php oldalra
             header("Location: index.php");
             echo "<p>Sikeres bejelentkezés!</p>"; 
             exit(); 
@@ -37,9 +44,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
     }
 }
 
-
 $db->closeConnection();
 ?>
+
+
 
 <!DOCTYPE html>
 <html lang="en">

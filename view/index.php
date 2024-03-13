@@ -1,11 +1,10 @@
 <?php
-if (session_status() === PHP_SESSION_NONE) {
-    session_start();
-}
+
+session_start();
 
 include 'functions.php';
 
-// Ellenőrizzük, hogy a felhasználó be van-e jelentkezve
+
 if(isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
     $profile_display = '<div class="dropdown">
                             <button class="btn btn-secondary dropdown-toggle" type="button" id="profileDropdown" data-bs-toggle="dropdown" aria-expanded="false">
@@ -20,13 +19,7 @@ if(isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
     $profile_display = "<a href='signup.php' class='nav-item nav-link'>Registration/Login</a>";
 }
 
-// Ha be van jelentkezve, adj hozzá egy query stringet az URL-hez
-if(isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
-    $current_url = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
-    if(strpos($current_url, '?') === false) {
-        $current_url .= '?loggedin=true';
-    }
-}
+
 ?>
 <!DOCTYPE html>
 <html lang="en">

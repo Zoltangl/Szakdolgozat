@@ -1,6 +1,8 @@
-<?php 
+<?php
+
+session_start();
+
 include("connection.php");
-session_start(); // Session indítása, ha még nem indult
 
 // Ellenőrizzük, hogy a felhasználó be van-e jelentkezve
 if(isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
@@ -10,7 +12,7 @@ if(isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
                             </button>
                             <ul class="dropdown-menu" aria-labelledby="profileDropdown">
                                 <li><a class="dropdown-item" href="edit_profile.php">Edit Profile</a></li>
-                                <li><a id="logout_link" class="dropdown-item" href="signup.php">Log Out</a></li>
+                                <li><a id="logout_link" class="dropdown-item" href="logout.php">Log Out</a></li> <!-- Módosítás: logout.php oldalra irányítunk -->
                             </ul>
                         </div>';
 } else {
