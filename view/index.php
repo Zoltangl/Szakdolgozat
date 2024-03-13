@@ -1,26 +1,38 @@
 <?php
-
 session_start();
+include('connection.php');
 
-include 'functions.php';
 
 
+// Alapértelmezett érték a profil megjelenítéséhez
+$profile_display = "<a href='signup.php' class='nav-item nav-link'>Registration/Login</a>";
+
+// Ellenőrizzük a felhasználó bejelentkezési állapotát
 if(isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
+    // Bejelentkezett felhasználóknak megjelenítjük a "Profile" menüpontot
     $profile_display = '<div class="dropdown">
                             <button class="btn btn-secondary dropdown-toggle" type="button" id="profileDropdown" data-bs-toggle="dropdown" aria-expanded="false">
                                 Profile
                             </button>
                             <ul class="dropdown-menu" aria-labelledby="profileDropdown">
                                 <li><a class="dropdown-item" href="edit_profile.php">Edit Profile</a></li>
-                                <li><a id="logout_link" class="dropdown-item" href="#">Log Out</a></li>
+                                <li><a id="logout_link" class="dropdown-item" href="logout.php">Log Out</a></li>
                             </ul>
                         </div>';
-} else {
-    $profile_display = "<a href='signup.php' class='nav-item nav-link'>Registration/Login</a>";
 }
 
-
+// Ellenőrizzük, hogy volt-e kijelentkezési kérés
+if (isset($_GET['logout'])) {
+    // Ha volt, csak állítsuk vissza a bejelentkezési változót false-ra
+    $_SESSION['loggedin'] = false;
+    // Átirányítás az index.php fájlra a kijelentkezés után
+    header("Location: login.php");
+    exit();
+}
 ?>
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -29,6 +41,7 @@ if(isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
     <title>HappyHotel</title>
     <link rel="icon" href="img/logo.jpg" type="image/jpg">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
 
     <!-- Favicon -->
     <link href="img/favicon.ico" rel="icon">
@@ -121,11 +134,11 @@ if(isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
         <div class="container-fluid page-header mb-5 p-0" style="background-image: url(img/fejlec2.jpg);">
             <div class="container-fluid page-header-inner py-5">
                 <div class="container text-center pb-5">
-                    <h1 class="display-3 text-white mb-3 animated slideInDown">About Us</h1>
+                    <h1 class="display-3 text-white mb-3 animated slideInDown">HOME</h1>
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb justify-content-center text-uppercase">
                             <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item text-white active" aria-current="page">About</li>
+                            
                         </ol>
                     </nav>
                 </div>
@@ -134,14 +147,7 @@ if(isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
         <!-- Page Header End -->
 
 
-      <script>
-    document.getElementById("logout_link").addEventListener("click", function() {
-        // Kijelentkezés: session változók törlése
-        <?php session_destroy(); ?> // PHP session törlése
-        // Visszatérés a regisztrációs oldalra
-        window.location.href = "signup.php";
-    });
-</script>
+     
 
         
         

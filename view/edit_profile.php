@@ -1,48 +1,37 @@
 <?php
-session_start();
 
+session_start();
 include('connection.php');
 
-// Alapértelmezett érték a profil megjelenítéséhez
-$profile_display = "<a href='signup.php' class='nav-item nav-link'>Register/Login</a>";
-
-if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
-    $email = $_POST["email"];
-    $jelszo = $_POST["pass"];
-
-    $sql = "SELECT * FROM felhasznalo WHERE email_cim = ?";
-    $stmt = $db::$conn->prepare($sql);
-    $stmt->bind_param("s", $email);
-    $stmt->execute();
-    $result = $stmt->get_result();
-
-    if ($result->num_rows > 0) {
-        $row = $result->fetch_assoc();
-        if (password_verify($jelszo, $row['jelszo'])) {
-            // Bejelentkezés sikerült
-            $_SESSION['loggedin'] = true;
-            $profile_display = '<div class="dropdown">
-                                    <button class="btn btn-secondary dropdown-toggle" type="button" id="profileDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-                                        Profile
-                                    </button>
-                                    <ul class="dropdown-menu" aria-labelledby="profileDropdown">
-                                        <li><a class="dropdown-item" href="edit_profile.php">Edit Profile</a></li>
-                                        <li><a id="logout_link" class="dropdown-item" href="logout.php">Log Out</a></li>
-                                    </ul>
-                                </div>';
-            header("Location: index.php");
-            exit();
-        } else {
-            $error_message = "Hibás jelszó!";
-        }
-    } else {
-        $error_message = "Nincs ilyen felhasználó!";
-    }
+if(!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
+    header("Location: login.php");
+    exit();
 }
 
-$db->closeConnection();
-?>
+// Ha be van jelentkezve a felhasználó, lekérjük az adatait az adatbázisból
+$user_id = $_SESSION['felhasznalo_id'];
 
+// Lekérdezés az adatbázisból a bejelentkezett felhasználó adatainak lekérésére
+$sql = "SELECT * FROM felhasznalo WHERE felhasznalo_id = ?";
+$stmt = $db::$conn->prepare($sql);
+$stmt->bind_param("i", $user_id);
+$stmt->execute();
+$result = $stmt->get_result();
+
+if ($result->num_rows > 0) {
+    $row = $result->fetch_assoc();
+    $first_name = $row['vezeteknev'];
+    $last_name = $row['keresztnev'];
+    $email = $row['email_cim'];
+    $phone = $row['telefonszam'];
+    // Itt lekérheted a többi adatot is az adatbázisból, ha szükséges
+} else {
+    // Hiba esetén a felhasználót kijelentkeztetjük és visszairányítjuk a bejelentkező oldalra
+    $_SESSION['loggedin'] = false;
+    header("Location: login.php");
+    exit();
+}
+?>
 
 
 
@@ -52,11 +41,16 @@ $db->closeConnection();
 <head>
     <meta charset="utf-8">
     <title>HappyHotel</title>
-    <link rel="icon" href="img/logo.jpg" type="image/jpg">
-    <meta content="width=device-width, initial-scale=1.0" name="viewport">
-
     <!-- Favicon -->
     <link href="img/favicon.ico" rel="icon">
+    <link rel="icon" href="img/logo.jpg" type="image/jpg">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.css" rel="stylesheet">
+
+
+    
+    <!-- Favicon -->
+    <link href="img/logo.jpg" rel="icon">
 
     <!-- Google Web Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -67,7 +61,7 @@ $db->closeConnection();
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" >
 
     <!-- Libraries Stylesheet -->
     <link href="lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
@@ -150,22 +144,26 @@ $db->closeConnection();
 </head>
 <body>
 
-<h2>A foglaláshoz előbb jelentkezzen be, vagy Regisztráljon!</h2>
+
 
 <div class="container">
-    <form id="form" method="POST">
-        <h1 id="heading">Bejelentkezés</h1>
-        <i class="fa-solid fa-envelope"></i>
-        <input type="email" id="email" name="email" placeholder="Add meg az email címed..." required><br>
+    <form id="form">
+        <h1 id="heading">Jelenlegi Adatok</h1>
+        <i class="fa-solid fa-user"></i>
+<input type="text" id="firstusername" name="firstusername" placeholder="Add meg a Vezetékneved..." value="<?php echo isset($first_name) ? $first_name : ''; ?>" required><br>
+<i class="fa-solid fa-user"></i>
+<input type="text" id="secondusername" name="secondusername" placeholder="Add meg a Keresztneved..." value="<?php echo isset($last_name) ? $last_name : ''; ?>" required><br>
+<i class="fa-solid fa-envelope"></i>
+<input type="email" id="email" name="email" placeholder="Add meg az email címed..." value="<?php echo isset($email) ? $email : ''; ?>" required><br>
+<i class="fa-solid fa-phone"></i>
+<input type="text" id="number" name="number" placeholder="Add meg a telefonszámod... (+36)" pattern="[0-9]+" value="<?php echo isset($phone) ? $phone : ''; ?>" required title="Csak szám megadása lehetséges"><br>
+
         <i class="fa-solid fa-lock"></i>
         <input type="password" id="pass" name="pass" placeholder="Add meg a jelszavad..." required><br>
-        <input type="submit" id="btn" value="Bejelentkezés" name="submit" required><br>
-
-        <!-- A "Belépés" link -->
-        <div class="signup-link">Még nincs fiókod? <a href="signup.php">Regisztráció</a></div>
+       
+        
     </form>
 </div>
-
 
     <!-- JavaScript Libraries -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>

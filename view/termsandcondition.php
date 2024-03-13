@@ -1,8 +1,33 @@
-<?php 
+<?php
+session_start();
+include('connection.php');
 
-    session_start();
+// Alapértelmezett érték a profil megjelenítéséhez
+$profile_display = "<a href='signup.php' class='nav-item nav-link'>Registration/Login</a>";
 
-include 'functions.php'; ?>
+// Ellenőrizzük a felhasználó bejelentkezési állapotát
+if(isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
+    // Bejelentkezett felhasználóknak megjelenítjük a "Profile" menüpontot
+    $profile_display = '<div class="dropdown">
+                            <button class="btn btn-secondary dropdown-toggle" type="button" id="profileDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                                Profile
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="profileDropdown">
+                                <li><a class="dropdown-item" href="edit_profile.php">Edit Profile</a></li>
+                                <li><a id="logout_link" class="dropdown-item" href="#">Log Out</a></li>
+                            </ul>
+                        </div>';
+}
+
+// Ellenőrizzük, hogy volt-e kijelentkezési kérés
+if (isset($_GET['logout'])) {
+    // Ha volt, csak állítsuk vissza a bejelentkezési változót false-ra
+    $_SESSION['loggedin'] = false;
+    // Átirányítás az index.php fájlra a kijelentkezés után
+    header("Location: login.php");
+    exit();
+}
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -82,7 +107,7 @@ include 'functions.php'; ?>
                                 <a href="kedvezmenyeink.php" class="nav-item nav-link">Kedvezményeink</a>
 
                                 <a href="booking.php" class="nav-item nav-link">Booking</a>
-                                <a href="signup.php" class="nav-item nav-link">Registration/Login</a>
+                                <?php echo $profile_display; ?>
                             </div>
                         </div>
                     </nav>
