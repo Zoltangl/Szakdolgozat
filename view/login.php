@@ -20,6 +20,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
         $row = $result->fetch_assoc();
         if (password_verify($jelszo, $row['jelszo'])) {
             // Bejelentkezés sikerült
+            
             $_SESSION['loggedin'] = true;
             $profile_display = '<div class="dropdown">
                                     <button class="btn btn-secondary dropdown-toggle" type="button" id="profileDropdown" data-bs-toggle="dropdown" aria-expanded="false">
@@ -30,6 +31,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
                                         <li><a id="logout_link" class="dropdown-item" href="logout.php">Log Out</a></li>
                                     </ul>
                                 </div>';
+                                $_SESSION['felhasznalo_id'] = $felhasznalo_id;
             header("Location: index.php");
             exit();
         } else {
@@ -118,6 +120,7 @@ $db->closeConnection();
                                 <a class="me-3" href="https://twitter.com/"><i class="fab fa-twitter"></i></a>
                                 <a class="me-3" href="https://hu.linkedin.com/"><i class="fab fa-linkedin-in"></i></a>
                                 <a class="me-3" href="https://www.instagram.com/"><i class="fab fa-instagram"></i></a>
+                                <a target=”_blank” class="me-3" href="https://youtu.be/dQw4w9WgXcQ?si=o20Z4PnRRefLHeiO"><i class="fab fa-youtube"></i></a>
                             </div>
                         </div>
                     </div>

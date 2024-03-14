@@ -14,7 +14,7 @@ if(isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
                             </button>
                             <ul class="dropdown-menu" aria-labelledby="profileDropdown">
                                 <li><a class="dropdown-item" href="edit_profile.php">Edit Profile</a></li>
-                                <li><a id="logout_link" class="dropdown-item" href="#">Log Out</a></li>
+                                <li><a id="logout_link" class="dropdown-item" href="logout.php">Log Out</a></li>
                             </ul>
                         </div>';
 }
@@ -99,6 +99,7 @@ if (isset($_GET['logout'])) {
                                 <a class="me-3" href="https://twitter.com/"><i class="fab fa-twitter"></i></a>
                                 <a class="me-3" href="https://hu.linkedin.com/"><i class="fab fa-linkedin-in"></i></a>
                                 <a class="me-3" href="https://www.instagram.com/"><i class="fab fa-instagram"></i></a>
+                                <a target=”_blank” class="me-3" href="https://youtu.be/dQw4w9WgXcQ?si=o20Z4PnRRefLHeiO"><i class="fab fa-youtube"></i></a>
                             </div>
                         </div>
                     </div>

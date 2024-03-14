@@ -62,6 +62,7 @@ session_start();
                                 <a class="me-3" href="https://twitter.com/"><i class="fab fa-twitter"></i></a>
                                 <a class="me-3" href="https://hu.linkedin.com/"><i class="fab fa-linkedin-in"></i></a>
                                 <a class="me-3" href="https://www.instagram.com/"><i class="fab fa-instagram"></i></a>
+                                <a target=”_blank” class="me-3" href="https://youtu.be/dQw4w9WgXcQ?si=o20Z4PnRRefLHeiO"><i class="fab fa-youtube"></i></a>
                             </div>
                         </div>
                     </div>
