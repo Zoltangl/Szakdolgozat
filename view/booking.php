@@ -94,65 +94,8 @@ if (isset($_GET['logout'])) {
         </div>
         <!-- Spinner End -->
 
-        <!-- Header Start -->
-        <div class="container-fluid bg-dark px-0">
-            <div class="row gx-0">
-                <div class="col-lg-3 bg-dark d-none d-lg-block">
-                    <a href="index.php" class="navbar-brand w-100 h-100 m-0 p-0 d-flex align-items-center justify-content-center">
-                        <h1 class="m-0 text-primary text-uppercase">HappyHotel</h1>
-                    </a>
-                </div>
-                <div class="col-lg-9">
-                    <div class="row gx-0 bg-white d-none d-lg-flex">
-                        <div class="col-lg-7 px-5 text-start">
-                            <div class="h-100 d-inline-flex align-items-center py-2 me-4">
-                                <i class="fa fa-envelope text-primary me-2"></i>
-                                <p class="mb-0">info@example.com</p>
-                            </div>
-                            <div class="h-100 d-inline-flex align-items-center py-2">
-                                <i class="fa fa-phone-alt text-primary me-2"></i>
-                                <p class="mb-0">+012 345 6789</p>
-                            </div>
-                        </div>
-                        <div class="col-lg-5 px-5 text-end">
-                            <div class="d-inline-flex align-items-center py-2">
-                                <a class="me-3" href="https://www.facebook.com/"><i class="fab fa-facebook-f"></i></a>
-                                <a class="me-3" href="https://twitter.com/"><i class="fab fa-twitter"></i></a>
-                                <a class="me-3" href="https://hu.linkedin.com/"><i class="fab fa-linkedin-in"></i></a>
-                                <a class="me-3" href="https://www.instagram.com/"><i class="fab fa-instagram"></i></a>
-                                <a target=”_blank” class="me-3" href="https://youtu.be/dQw4w9WgXcQ?si=o20Z4PnRRefLHeiO"><i class="fab fa-youtube"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                    <nav class="navbar navbar-expand-lg bg-dark navbar-dark p-3 p-lg-0">
-                        <a href="index.php" class="navbar-brand d-block d-lg-none">
-                            <h1 class="m-0 text-primary text-uppercase">HappyHotel</h1>
-                        </a>
-                        <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
-                            <span class="navbar-toggler-icon"></span>
-                        </button>
-                        <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
-                            <div class="navbar-nav mr-auto py-0">
-                                <a href="index.php" class="nav-item nav-link">Home</a>
-                                <a href="about.php" class="nav-item nav-link">About</a>
-                                <a href="service.php" class="nav-item nav-link">Services</a>
-                                <a href="room.php" class="nav-item nav-link">Rooms</a>
-                                <a href="kedvezmenyeink.php" class="nav-item nav-link">Kedvezményeink</a>
-                                <a href="booking.php" class="nav-item nav-link">Booking</a>
-                                <?php echo $profile_display; ?>
-                            </div>
-                        </div>
-                    </nav>
-                </div>
-            </div>
-        </div>
-        <!-- Header End -->
-
-
-      
-
+        <?php include 'header.php'; ?>
        
-
         <!-- Booking Start -->
         <div class="container-xxl py-5">
             <div class="container">
@@ -173,7 +116,7 @@ if (isset($_GET['logout'])) {
                                 <img class="img-fluid rounded w-50 wow zoomIn" data-wow-delay="0.5s" src="img/egyagyas.jpg">
                             </div>
                             <div class="col-6 text-start">
-                                <img class="img-fluid rounded w-75 wow zoomIn" data-wow-delay="0.7s" src="img/about-4.jpg">
+                                <img class="img-fluid rounded w-75 wow zoomIn" data-wow-delay="0.7s" src="img/egyszemluxus.jpg">
                             </div>
                         </div>
                     </div>
@@ -184,53 +127,42 @@ if (isset($_GET['logout'])) {
                                     <div class="col-md-6">
                                         <div class="form-floating date" id="date3" data-target-input="nearest">
                                             <input type="text" class="form-control datetimepicker-input" id="checkin" placeholder="Check In" data-target="#date3" data-toggle="datetimepicker" />
-                                            <label for="checkin">Check In</label>
+                                            <label for="checkin">Mettől</label>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-floating date" id="date4" data-target-input="nearest">
                                             <input type="text" class="form-control datetimepicker-input" id="checkout" placeholder="Check Out" data-target="#date4" data-toggle="datetimepicker" />
-                                            <label for="checkout">Check Out</label>
+                                            <label for="checkout">Meddig</label>
                                         </div>
                                     </div>
 
-                                    <select name="szoba_tipus" id="szoba_tipus" onchange="showRoomImage(this.value)">
+                                    <select name="szoba_tipus" id="szoba_tipus">
                                         <?php
                                         if (!empty($szoba_tipusok)) {
                                             foreach ($szoba_tipusok as $szoba_tipus) {
-                                                $imagePath = '';
-                                                if ($szoba_tipus['nev'] === 'Családi szoba') {
-                                                    $imagePath = 'lakosztaly.jpg'; // Kép elérési útvonala
-                                                } else {
-                                                    $imagePath = $szoba_tipus['kep']; // A többi szoba típushoz tartozó kép elérési útvonala
-                                                }
-                                                echo "<option value='{$szoba_tipus['nev']}' data-image='{$imagePath}'>{$szoba_tipus['nev']} - {$szoba_tipus['ar']} Ft</option>";
-
-                                                if ($szoba_tipus['nev'] === 'Egyágyas szoba') {
-                                                    $imagePath = 'egyagyas.jpg'; // Kép elérési útvonala
-                                                } else {
-                                                    $imagePath = $szoba_tipus['kep']; // A többi szoba típushoz tartozó kép elérési útvonala
-                                                }
-                                                echo "<option value='{$szoba_tipus['nev']}' data-image='{$imagePath}'>{$szoba_tipus['nev']} - {$szoba_tipus['ar']} Ft</option>";
-                                                
+                                                echo "<option value='{$szoba_tipus['nev']}'>{$szoba_tipus['nev']} - {$szoba_tipus['ar']} Ft</option>";
                                             }
-                                            
                                         } else {
-                                            echo "<option disabled selected data-image='default.jpg'>Nincs elérhető szoba típus</option>";
+                                            echo "<option disabled selected>Nincs elérhető szoba típus</option>";
                                         }
-                                        
                                         ?>
                                     </select>
+                                        
+                                    <select name="kedvezmeny" id="kedvezmeny">
+                                        <?php
+                                        $sql = "SELECT neve, szazalek FROM kedvezmenyek";
+                                        $result = DataBase::$conn->query($sql);
 
-                                    <script>
-                                        function showRoomImage(selectedValue) {
-                                        var selectedOption = document.querySelector('#szoba_tipus option[value="' + selectedValue + '"]');
-                                        var imagePath = selectedOption.getAttribute('data-image');
-                                        var imageElement = document.querySelector('#szoba_kepek img');
-                                        imageElement.setAttribute('src', 'img/' + imagePath); // A képek mappája (pl. img/) a webalkalmazásod mappastruktúrájától függően változhat
-                                    }
-
-                                        </script>
+                                        if ($result->num_rows > 0) {
+                                            while ($row = $result->fetch_assoc()) {
+                                                echo "<option value='{$row['neve']}'>{$row['neve']} - {$row['szazalek']}%</option>";
+                                            }
+                                        } else {
+                                            echo "<option disabled selected>Nincs elérhető kedvezmény</option>";
+                                        }
+                                        ?>
+                                    </select>
                                     <div class="col-12">
                                         <button class="btn btn-primary w-100 py-3" type="submit">Book Now</button>
                                     </div>
@@ -243,43 +175,8 @@ if (isset($_GET['logout'])) {
         </div>
         <!-- Booking End -->
 
-        <!-- Footer Start -->
-        <div class="container-fluid bg-dark text-light footer wow fadeIn" data-wow-delay="0.1s">
-            <div class="container pb-5">
-                <div class="row g-5">
-                    <div class="col-lg-5 col-md-12">
-                        <div class="row gy-5 g-4">
-                            <div class="col-md-6">
-                                <h6 class="section-title text-start text-primary text-uppercase mb-4">Company</h6>
-                                <a class="btn btn-link" href="about.php">About Us</a>
-                                <a class="btn btn-link" href="privacypolicy.php">Privacy Policy</a>
-                                <a class="btn btn-link" href="termsandcondition.php">Terms & Condition</a>
-                            <a class="btn btn-link" href="support.php">Support</a>
-                        </div>
-                        <div class="col-md-6">
-                            <h6 class="section-title text-start text-primary text-uppercase mb-4">Services</h6>
-                            <a class="btn btn-link" href="services/foodres.php">Food & Restaurant</a>
-                            <a class="btn btn-link" href="services/sport.php">Sport & Gym</a>
-                        </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="container">
-                <div class="copyright">
-                    <div class="row">
-                        <div class="col-md-6 text-center text-md-end">
-                            <div class="footer-menu">
-                                <a href="index.php">Home</a>
-                                <a href="">Cookies</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Footer End -->
-
+        <?php include('footer.php')?>
+        
         <!-- Back to Top -->
         <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
     </div>
