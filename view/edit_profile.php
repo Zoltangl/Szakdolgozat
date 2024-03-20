@@ -28,6 +28,7 @@ if(isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
 
 
 
+
 // Felhasználó azonosítójának lekérése a munkamenetből
 $felhasznalo_id = $_SESSION['felhasznalo_id'];
 
@@ -46,6 +47,22 @@ if ($result->num_rows > 0) {
     $email = $row['email_cim'];
     $phone = $row['telefonszam'];
 
+    // Az adatok betöltése az űrlap mezőibe
+    echo '<div class="container">';
+    echo '<form id="form">';
+    echo '<h1 id="heading">Jelenlegi Adatok</h1>';
+    echo '<i class="fa-solid fa-user"></i>';
+    echo '<input type="text" id="firstusername" name="firstusername" placeholder="Add meg a Vezetékneved..." value="' . $firstusername . '" readonly required><br>';
+    echo '<i class="fa-solid fa-user"></i>';
+    echo '<input type="text" id="secondusername" name="secondusername" placeholder="Add meg a Keresztneved..." value="' . $secondusername . '" readonly required><br>';
+    echo '<i class="fa-solid fa-envelope"></i>';
+    echo '<input type="email" id="email" name="email" placeholder="Add meg az email címed..." value="' . $email . '" readonly required><br>';
+    echo '<i class="fa-solid fa-phone"></i>';
+    echo '<input type="text" id="number" name="number" placeholder="Add meg a telefonszámod... (+36)" pattern="[0-9]+" value="' . $phone . '" readonly required title="Csak szám megadása lehetséges"><br>';
+    echo '</form>';
+    echo '</div>';
+} else {
+    echo "Nincsenek adatok a felhasználó számára az adatbázisban.";
 }
 ?>
 

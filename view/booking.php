@@ -1,11 +1,27 @@
 <?php
 session_start();
-include('connection.php');
+require('connection.php');
 
 if(!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
     header("Location: login.php");
     exit();
 }
+// Lekérdezzük a szoba tipusokat az adatbázisból
+$sql = "SELECT nev, ar FROM szoba_tipusok";
+$result = DataBase::$conn->query($sql);
+// Ellenőrizzük, hogy van-e eredmény
+if ($result->num_rows > 0) {
+    // Létrehozunk egy üres tömböt a szoba tipusok tárolására
+    $szoba_tipusok = array();
+    // Minden sor esetén hozzáadjuk a szoba tipust a tömbhöz
+    while ($row = $result->fetch_assoc()) {
+        $szoba_tipusok[] = $row;
+    }
+} else {
+    echo "Nincsenek adatok a szoba tipusok táblában.";
+}
+
+
 
 // Alapértelmezett érték a profil megjelenítéséhez
 $profile_display = "<a href='signup.php' class='nav-item nav-link'>Registration/Login</a>";
@@ -145,16 +161,16 @@ if (isset($_GET['logout'])) {
                     <h1 class="mb-5">Book A <span class="text-primary text-uppercase">Luxury Room</span></h1>
                 </div>
                 <div class="row g-5">
-                    <div class="col-lg-6">
+                    <div class="col-lg-6" id="szoba_kepek">
                         <div class="row g-3">
                             <div class="col-6 text-end">
-                                <img class="img-fluid rounded w-75 wow zoomIn" data-wow-delay="0.1s" src="img/about-1.jpg" style="margin-top: 25%;">
+                                <img class="img-fluid rounded w-75 wow zoomIn" data-wow-delay="0.1s" src="img/csaladi.jpg" style="margin-top: 25%;">
                             </div>
                             <div class="col-6 text-start">
-                                <img class="img-fluid rounded w-100 wow zoomIn" data-wow-delay="0.3s" src="img/about-2.jpg">
+                                <img class="img-fluid rounded w-100 wow zoomIn" data-wow-delay="0.3s" src="img/csoportroom.jpg">
                             </div>
                             <div class="col-6 text-end">
-                                <img class="img-fluid rounded w-50 wow zoomIn" data-wow-delay="0.5s" src="img/about-3.jpg">
+                                <img class="img-fluid rounded w-50 wow zoomIn" data-wow-delay="0.5s" src="img/egyagyas.jpg">
                             </div>
                             <div class="col-6 text-start">
                                 <img class="img-fluid rounded w-75 wow zoomIn" data-wow-delay="0.7s" src="img/about-4.jpg">
@@ -178,6 +194,43 @@ if (isset($_GET['logout'])) {
                                         </div>
                                     </div>
 
+                                    <select name="szoba_tipus" id="szoba_tipus" onchange="showRoomImage(this.value)">
+                                        <?php
+                                        if (!empty($szoba_tipusok)) {
+                                            foreach ($szoba_tipusok as $szoba_tipus) {
+                                                $imagePath = '';
+                                                if ($szoba_tipus['nev'] === 'Családi szoba') {
+                                                    $imagePath = 'lakosztaly.jpg'; // Kép elérési útvonala
+                                                } else {
+                                                    $imagePath = $szoba_tipus['kep']; // A többi szoba típushoz tartozó kép elérési útvonala
+                                                }
+                                                echo "<option value='{$szoba_tipus['nev']}' data-image='{$imagePath}'>{$szoba_tipus['nev']} - {$szoba_tipus['ar']} Ft</option>";
+
+                                                if ($szoba_tipus['nev'] === 'Egyágyas szoba') {
+                                                    $imagePath = 'egyagyas.jpg'; // Kép elérési útvonala
+                                                } else {
+                                                    $imagePath = $szoba_tipus['kep']; // A többi szoba típushoz tartozó kép elérési útvonala
+                                                }
+                                                echo "<option value='{$szoba_tipus['nev']}' data-image='{$imagePath}'>{$szoba_tipus['nev']} - {$szoba_tipus['ar']} Ft</option>";
+                                                
+                                            }
+                                            
+                                        } else {
+                                            echo "<option disabled selected data-image='default.jpg'>Nincs elérhető szoba típus</option>";
+                                        }
+                                        
+                                        ?>
+                                    </select>
+
+                                    <script>
+                                        function showRoomImage(selectedValue) {
+                                        var selectedOption = document.querySelector('#szoba_tipus option[value="' + selectedValue + '"]');
+                                        var imagePath = selectedOption.getAttribute('data-image');
+                                        var imageElement = document.querySelector('#szoba_kepek img');
+                                        imageElement.setAttribute('src', 'img/' + imagePath); // A képek mappája (pl. img/) a webalkalmazásod mappastruktúrájától függően változhat
+                                    }
+
+                                        </script>
                                     <div class="col-12">
                                         <button class="btn btn-primary w-100 py-3" type="submit">Book Now</button>
                                     </div>
