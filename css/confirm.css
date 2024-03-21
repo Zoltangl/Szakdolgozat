@@ -59,7 +59,4 @@ body{
   .fs-9{
         font-size: 9px;
   }
-  .modal-backdrop {
-    opacity: 0.5; /* Háttér átlátszósága (0.0 - 1.0 közötti érték) */
-    background-color: #000; /* Háttér színe */
-}
+ 
