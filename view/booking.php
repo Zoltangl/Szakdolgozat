@@ -1,7 +1,6 @@
 <?php
 session_start();
 require('connection.php');
-
 if(!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
     header("Location: login.php");
     exit();
@@ -181,30 +180,34 @@ if (isset($_GET['logout'])) {
                                                             <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
                                                         </div>
                                                         <div class="modal-body">
-                                                            Foglalási információk...
+                                                            <?php
+                                                               $email_query = "SELECT email_cim FROM felhasznalo WHERE felhasznalo_id = {$_SESSION['id']}";
+                                                               $email_result = DataBase::$conn->query($email_query);
+                                                               
+                                                               if ($email_result->num_rows > 0) {
+                                                                   $row = $email_result->fetch_assoc();
+                                                                   echo "<p>Felhasználó email címe: {$row['email_cim']}</p>";
+                                                               } else {
+                                                                   echo "<p>Nincs elérhető email cím a felhasználó számára.</p>";
+                                                               }
+                                                               
+                                                                ?>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
                                             <script>
-                                                 document.getElementById("bookNowButton").addEventListener("click", function(event) {
-                                                // Az alapértelmezett működés megakadályozása
-                                                event.preventDefault();
-                                                                                        
-                                                // Modális ablak megjelenítése
-                                                var modal = document.getElementById("exampleModal");
-                                                modal.style.display = "block";
-                                            });
-                                        
-                                            // A modális ablak inicializálása
-                                            var myModal = new bootstrap.Modal(document.getElementById('exampleModal'));
-                                        
-                                            // A bezáró gombhoz hozzá kell adni a modális ablak bezárását kezelő eseményfigyelőt
-                                            var closeButton = document.querySelector('.modal-header .btn-close');
-                                            closeButton.addEventListener('click', function () {
-                                                myModal.hide(); // A modális ablak elrejtése
-                                            });
-                                        </script>
+                                                document.getElementById("bookNowButton").addEventListener("click", function(event) {
+                                                    event.preventDefault();
+                                                    var modal = document.getElementById("exampleModal");
+                                                    modal.style.display = "block";
+                                                });
+                                                var closeButton = document.querySelector('.modal-header .btn-close');
+                                                closeButton.addEventListener('click', function () {
+                                                    var modal = document.getElementById("exampleModal");
+                                                    modal.style.display = "none"; 
+                                                });
+                                            </script>
                                         </div>
                                     </div>
                                 </div>
@@ -217,18 +220,16 @@ if (isset($_GET['logout'])) {
 
 <script>
 $(function () {
-    // Aktuális dátum lekérése
     var currentDate = new Date();
 
-    // Datetimepicker inicializálása
     $('#date3').datetimepicker({
-        minDate: currentDate, // Múltbeli dátumok megakadályozása
-        useCurrent: false // Az aktuális dátum automatikus beállításának letiltása
+        minDate: currentDate,
+        useCurrent: false 
     });
     
     $('#date4').datetimepicker({
-        minDate: currentDate, // Múltbeli dátumok megakadályozása
-        useCurrent: false // Az aktuális dátum automatikus beállításának letiltása
+        minDate: currentDate, 
+        useCurrent: false 
     });
 });
 </script>
@@ -259,11 +260,9 @@ $(function () {
 
         <?php include('footer.php')?>
         
-        <!-- Back to Top -->
         <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
     </div>
 
-    <!-- JavaScript Libraries -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="lib/wow/wow.min.js"></script>
