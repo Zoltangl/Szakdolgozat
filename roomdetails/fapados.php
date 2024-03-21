@@ -73,7 +73,7 @@ if (isset($_GET['logout'])) {
         </div>
         <!-- Spinner End -->
 
-        <?php include ('../header.php'); ?>
+        <?php include ('../mappheader.php'); ?>
 
 
         
@@ -153,7 +153,7 @@ if (isset($_GET['logout'])) {
             </div>
         </div>
         <!-- About End -->
-        <?php include('../footer.php')?>
+        <?php include('../mappfooter.php')?>
 
 
         <!-- Back to Top -->

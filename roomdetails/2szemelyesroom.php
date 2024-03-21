@@ -71,7 +71,7 @@ if (isset($_GET['logout'])) {
         </div>
         <!-- Spinner End -->
 
-        <?php include ('../header.php'); ?>
+        <?php include ('../mappheader.php'); ?>
 
         
                 <button class="carousel-control-prev" type="button" data-bs-target="#header-carousel"
@@ -147,7 +147,7 @@ if (isset($_GET['logout'])) {
             </div>
         </div>
         <!-- About End -->
-        <?php include('../footer.php')?>
+        <?php include('../mappfooter.php')?>
 
 
         <!-- Back to Top -->

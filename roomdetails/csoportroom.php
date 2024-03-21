@@ -73,7 +73,7 @@ if (isset($_GET['logout'])) {
         </div>
         <!-- Spinner End -->
 
-        <?php include ('../header.php'); ?>
+        <?php include ('../mappheader.php'); ?>
 
 
         
@@ -152,7 +152,7 @@ if (isset($_GET['logout'])) {
             </div>
         </div>
 
-        <?php include('../footer.php')?>
+        <?php include('../mappfooter.php')?>
 
         <!-- Back to Top -->
         <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
