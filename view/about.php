@@ -87,7 +87,7 @@ if (isset($_GET['logout'])) {
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb justify-content-center text-uppercase">
                             <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item text-white active" aria-current="page">About</li>
+                            <li class="breadcrumb-item text-white active" aria-current="page">About us</li>
                         </ol>
                     </nav>
                 </div>
@@ -105,8 +105,6 @@ if (isset($_GET['logout'])) {
                     <div class="col-lg-6">
                         <h6 class="section-title text-start text-primary text-uppercase">About Us</h6>
                         <h1 class="mb-4">Welcome to <span class="text-primary text-uppercase">HappyHotel</span></h1>
-                        <p class="mb-4">
-                            Üdvözöljük a HappyHotel "Rólunk" oldalán! Büszkén mutatjuk be luxus szolgáltatásainkat, melyekkel vendégeinknek emlékezetes élményt nyújtunk. HappyHotel egyedi hangulatával és kifinomult kényelmével tökéletes választás mindazok számára, akik kikapcsolódásra és pihenésre vágynak. Legyen szó üzleti útról, romantikus hétvégéről vagy családi nyaralásról, szállodánk kivételes szolgáltatásokkal és barátságos kiszolgálással várja Önt. A kifinomult design és a legmagasabb színvonalú kényelem mellett a helyi kultúra és gasztronómia is kiemelt figyelmet kap nálunk. Fedezze fel városunkat kényelmes és stílusos szállodánkból, és hagyja, hogy élményeink örökre a memóriájában maradjanak!</p>
                         <div class="row g-3 pb-4">
                             <div class="col-sm-4 wow fadeIn" data-wow-delay="0.1s">
                                 <div class="border rounded p-1">

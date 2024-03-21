@@ -70,6 +70,8 @@ if (isset($_GET['logout'])) {
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600;700&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">  
 
+
+
 <!-- Icon Font Stylesheet -->
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
@@ -82,6 +84,7 @@ if (isset($_GET['logout'])) {
 
 <!-- Template Stylesheet -->
 <link href="css/style.css" rel="stylesheet">
+<link href="css\confirm.css" rel="stylesheet">
 </head>
 
 <body>
@@ -124,19 +127,18 @@ if (isset($_GET['logout'])) {
                         <div class="wow fadeInUp" data-wow-delay="0.2s">
                             <form>
                                 <div class="row g-3">
-                                    <div class="col-md-6">
-                                        <div class="form-floating date" id="date3" data-target-input="nearest">
-                                            <input type="text" class="form-control datetimepicker-input" id="checkin" placeholder="Check In" data-target="#date3" data-toggle="datetimepicker" />
-                                            <label for="checkin">Mettől</label>
-                                        </div>
+                                <div class="col-md-6">
+                                    <div class="form-floating date" id="date3" data-target-input="nearest">
+                                        <input type="text" class="form-control datetimepicker-input" id="checkin" placeholder="Check In" data-target="#date3" data-toggle="datetimepicker" />
+                                        <label for="checkin">Mettől</label>
                                     </div>
-                                    <div class="col-md-6">
-                                        <div class="form-floating date" id="date4" data-target-input="nearest">
-                                            <input type="text" class="form-control datetimepicker-input" id="checkout" placeholder="Check Out" data-target="#date4" data-toggle="datetimepicker" />
-                                            <label for="checkout">Meddig</label>
-                                        </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-floating date" id="date4" data-target-input="nearest">
+                                        <input type="text" class="form-control datetimepicker-input" id="checkout" placeholder="Check Out" data-target="#date4" data-toggle="datetimepicker" />
+                                        <label for="checkout">Meddig</label>
                                     </div>
-
+                                </div>
                                     <select name="szoba_tipus" id="szoba_tipus">
                                         <?php
                                         if (!empty($szoba_tipusok)) {
@@ -163,8 +165,47 @@ if (isset($_GET['logout'])) {
                                         }
                                         ?>
                                     </select>
+                                    <a>Választott opciók: </a>
+                                    <input type="text" id="valasztottOpciok" value="" placeholder="" readonly />
                                     <div class="col-12">
-                                        <button class="btn btn-primary w-100 py-3" type="submit">Book Now</button>
+                                        <button class="btn btn-primary w-100 py-3" id="bookNowButton" data-toggle="modal" data-target="#exampleModal">Book Now</button>
+                        
+                                    </div>
+                                   
+                                          <!-- Modal -->
+                                            <div class="modal" id="exampleModal" tabindex="-1" style="display: none;">
+                                                <div class="modal-dialog">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title">Foglalásom</h5>
+                                                            <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            Foglalási információk...
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <script>
+                                                 document.getElementById("bookNowButton").addEventListener("click", function(event) {
+                                                // Az alapértelmezett működés megakadályozása
+                                                event.preventDefault();
+                                                                                        
+                                                // Modális ablak megjelenítése
+                                                var modal = document.getElementById("exampleModal");
+                                                modal.style.display = "block";
+                                            });
+                                        
+                                            // A modális ablak inicializálása
+                                            var myModal = new bootstrap.Modal(document.getElementById('exampleModal'));
+                                        
+                                            // A bezáró gombhoz hozzá kell adni a modális ablak bezárását kezelő eseményfigyelőt
+                                            var closeButton = document.querySelector('.modal-header .btn-close');
+                                            closeButton.addEventListener('click', function () {
+                                                myModal.hide(); // A modális ablak elrejtése
+                                            });
+                                        </script>
+                                        </div>
                                     </div>
                                 </div>
                             </form>
@@ -173,6 +214,47 @@ if (isset($_GET['logout'])) {
                 </div>
             </div>
         </div>
+
+<script>
+$(function () {
+    // Aktuális dátum lekérése
+    var currentDate = new Date();
+
+    // Datetimepicker inicializálása
+    $('#date3').datetimepicker({
+        minDate: currentDate, // Múltbeli dátumok megakadályozása
+        useCurrent: false // Az aktuális dátum automatikus beállításának letiltása
+    });
+    
+    $('#date4').datetimepicker({
+        minDate: currentDate, // Múltbeli dátumok megakadályozása
+        useCurrent: false // Az aktuális dátum automatikus beállításának letiltása
+    });
+});
+</script>
+        <script>
+
+
+
+    function copySelectedOptions() {
+        var select1 = document.getElementById("szoba_tipus");
+        var select2 = document.getElementById("kedvezmeny");
+        var emptyField = document.getElementById("valasztottOpciok");
+
+        var selectedOptions1 = select1.options[select1.selectedIndex].text;
+        var selectedOptions2 = select2.options[select2.selectedIndex].text;
+
+        emptyField.value = selectedOptions1 + " - " + selectedOptions2;
+    }
+
+    
+    document.getElementById("szoba_tipus").addEventListener("change", copySelectedOptions);
+    document.getElementById("kedvezmeny").addEventListener("change", copySelectedOptions);
+
+    
+</script>
+
+
         <!-- Booking End -->
 
         <?php include('footer.php')?>
