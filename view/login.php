@@ -16,12 +16,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
     $stmt->execute();
     $result = $stmt->get_result();
 
+    // Ellenőrizd, hogy a lekérdezés eredménye üres-e vagy sem
     if ($result->num_rows > 0) {
         $row = $result->fetch_assoc();
-        if (password_verify($jelszo, $row['jelszo'])) {
+        // Ellenőrizd, hogy a $row tömb tartalmazza-e a 'jelszo' kulcsot, mielőtt hozzáférnél hozzá
+        if (isset($row['jelszo']) && password_verify($jelszo, $row['jelszo'])) {
             // Bejelentkezés sikerült
-            
             $_SESSION['loggedin'] = true;
+            $_SESSION['email'] = $email; // Vagy $_SESSION['felhasznalo_id'] = $row['id'] ha van ilyen mező a felhasznalo táblában
             $profile_display = '<div class="dropdown">
                                     <button class="btn btn-secondary dropdown-toggle" type="button" id="profileDropdown" data-bs-toggle="dropdown" aria-expanded="false">
                                         Profile
@@ -31,7 +33,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
                                         <li><a id="logout_link" class="dropdown-item" href="logout.php">Log Out</a></li>
                                     </ul>
                                 </div>';
-                                $_SESSION['felhasznalo_id'] = $felhasznalo_id;
             header("Location: index.php");
             exit();
         } else {
@@ -40,12 +41,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
     } else {
         $error_message = "Nincs ilyen felhasználó!";
     }
-}
-
-
+}    
 
 $db->closeConnection();
 ?>
+
 
 
 
@@ -120,7 +120,7 @@ $db->closeConnection();
     </form>
 </div>
 
-<?php include('footer.php')?>
+
     <!-- JavaScript Libraries -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
