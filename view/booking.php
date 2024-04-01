@@ -5,6 +5,11 @@ if(!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
     header("Location: login.php");
     exit();
 }
+
+// Felhasználó e-mail címének lekérése a session-ből
+$user_email = $_SESSION['email'];
+
+
 // Lekérdezzük a szoba tipusokat az adatbázisból
 $sql = "SELECT nev, ar FROM szoba_tipusok";
 $result = DataBase::$conn->query($sql);
@@ -20,34 +25,48 @@ if ($result->num_rows > 0) {
     echo "Nincsenek adatok a szoba tipusok táblában.";
 }
 
+// Felhasználó e-mail címének lekérése a session-ből
+$user_email = $_SESSION['email'];
 
+// Ellenőrizzük, hogy a felhasználó megnyomta-e a "Confirm" gombot
+if (isset($_POST['confirm_booking'])) {
+    // Ellenőrizzük, hogy a szükséges adatokat megkaptuk-e a POST kéréstől
+    if (isset($_POST['checkin'], $_POST['checkout'], $_POST['szoba_tipus'], $_POST['kedvezmeny'], $_POST['payment_options'])) {
+        // Adatok begyűjtése a POST kéréstől
+        $checkin = $_POST['checkin'];
+        $checkout = $_POST['checkout'];
+        $szoba_tipus = $_POST['szoba_tipus'];
+        $kedvezmeny = $_POST['kedvezmeny'];
+        $payment_options = $_POST['payment_options'];
 
-// Alapértelmezett érték a profil megjelenítéséhez
-$profile_display = "<a href='signup.php' class='nav-item nav-link'>Registration/Login</a>";
+        // Felhasználó ID-jának lekérése az adatbázisból
+        $user_id = $_SESSION['user_id'];
 
-// Ellenőrizzük a felhasználó bejelentkezési állapotát
-if(isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
-    // Bejelentkezett felhasználóknak megjelenítjük a "Profile" menüpontot
-    $profile_display = '<div class="dropdown">
-                            <button class="btn btn-secondary dropdown-toggle" type="button" id="profileDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-                                Profile
-                            </button>
-                            <ul class="dropdown-menu" aria-labelledby="profileDropdown">
-                                <li><a class="dropdown-item" href="edit_profile.php">Edit Profile</a></li>
-                                <li><a id="logout_link" class="dropdown-item" href="logout.php">Log Out</a></li>
-                            </ul>
-                        </div>';
-}
+        // Szoba ID-jának lekérése az adatbázisból a szoba neve alapján
+        $sql_szoba = "SELECT szoba_id FROM szoba_tipusok WHERE nev = '$szoba_tipus'";
+        $result_szoba = DataBase::$conn->query($sql_szoba);
+        if ($result_szoba->num_rows > 0) {
+            $row_szoba = $result_szoba->fetch_assoc();
+            $szoba_id = $row_szoba['szoba_id'];
 
-// Ellenőrizzük, hogy volt-e kijelentkezési kérés
-if (isset($_GET['logout'])) {
-    // Ha volt, csak állítsuk vissza a bejelentkezési változót false-ra
-    $_SESSION['loggedin'] = false;
-    // Átirányítás az index.php fájlra a kijelentkezés után
-    header("Location: login.php");
-    exit();
+            // Adatok beszúrása az adatbázisba
+            $sql_insert = "INSERT INTO foglalasok (felhasznalo_id, check_in, check_out, mettol, meddig, szoba_id, fizetes_mod, fizetes_idopontja, kedvezmeny_id) 
+                           VALUES ('$user_id', '$checkin', '$checkout', '$checkin', '$checkout', '$szoba_id', '$payment_options', NOW(), '$kedvezmeny')";
+            
+            if (DataBase::$conn->query($sql_insert) === TRUE) {
+                echo "Sikeresen hozzáadva az adatbázishoz.";
+            } else {
+                echo "Hiba az adatbázisba való beszúrás során: " . DataBase::$conn->error;
+            }
+        } else {
+            echo "Nincs ilyen szoba a rendszerben.";
+        }
+    } else {
+        echo "Hiányzó adatok a foglaláshoz.";
+    }
 }
 ?>
+
 
 
 <!DOCTYPE html>
@@ -164,50 +183,78 @@ if (isset($_GET['logout'])) {
                                         }
                                         ?>
                                     </select>
-                                    <a>Választott opciók: </a>
-                                    <input type="text" id="valasztottOpciok" value="" placeholder="" readonly />
+                                    <select name="payment_options" id="payment_options">
+                                        <option value="hitelkártya">Bankkártya (hitelkártya)</option>
+                                        <option value="Átutalás">Átutalás</option>
+                                        <option value="Készpénz">Készpénz(helyben fizetés)</option>
+                                        <option value="paypal">PayPal</option>
+                                        <option value="Kriptovaluta">Kriptovaluta</option>
+                                    </select>
+
                                     <div class="col-12">
-                                        <button class="btn btn-primary w-100 py-3" id="bookNowButton" data-toggle="modal" data-target="#exampleModal">Book Now</button>
-                        
-                                    </div>
-                                   
-                                          <!-- Modal -->
-                                            <div class="modal" id="exampleModal" tabindex="-1" style="display: none;">
-                                                <div class="modal-dialog">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header">
-                                                            <h5 class="modal-title">Foglalásom</h5>
-                                                            <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
-                                                        </div>
-                                                        <div class="modal-body">
-                                                            <?php
-                                                               $email_query = "SELECT email_cim FROM felhasznalo WHERE felhasznalo_id = {$_SESSION['id']}";
-                                                               $email_result = DataBase::$conn->query($email_query);
-                                                               
-                                                               if ($email_result->num_rows > 0) {
-                                                                   $row = $email_result->fetch_assoc();
-                                                                   echo "<p>Felhasználó email címe: {$row['email_cim']}</p>";
-                                                               } else {
-                                                                   echo "<p>Nincs elérhető email cím a felhasználó számára.</p>";
-                                                               }
-                                                               
-                                                                ?>
-                                                        </div>
+                                    <button class="btn btn-primary w-100 py-3" id="bookNowButton" data-toggle="modal" data-target="#exampleModal">Book Now</button>
+                                    </div> 
+                                    <!-- Modal -->
+                                        <div class="modal" id="exampleModal" tabindex="-1" style="display: none;">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title">Foglalásom</h5>
+                                                        <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <form method="post" action="">
+                                                            <button type="submit" class="btn btn-secondary" name="confirm_booking">Confirm</button>
+                                                        </form>
                                                     </div>
                                                 </div>
                                             </div>
-                                            <script>
-                                                document.getElementById("bookNowButton").addEventListener("click", function(event) {
-                                                    event.preventDefault();
-                                                    var modal = document.getElementById("exampleModal");
-                                                    modal.style.display = "block";
-                                                });
-                                                var closeButton = document.querySelector('.modal-header .btn-close');
-                                                closeButton.addEventListener('click', function () {
-                                                    var modal = document.getElementById("exampleModal");
-                                                    modal.style.display = "none"; 
-                                                });
-                                            </script>
+                                        </div>
+                                        <script>
+                                            // Modal ablak megnyitása és a kiválasztott opciók tartalmának beállítása
+                                            document.getElementById("bookNowButton").addEventListener("click", function(event) {
+                                                event.preventDefault();
+                                                var modal = document.getElementById("exampleModal");
+                                            
+                                                var select1 = document.getElementById("szoba_tipus");
+                                                var select2 = document.getElementById("kedvezmeny");
+                                                var modalBody = modal.querySelector('.modal-body');
+                                            
+                                                var selectedOptions1 = select1.options[select1.selectedIndex].text;
+                                                var selectedOptions2 = select2.options[select2.selectedIndex].text;
+                                            
+                                                // Bejelentkezett felhasználó e-mail címe
+                                                var userEmail = "<?php echo $user_email; ?>";
+                                            
+                                                // Dátumok lekérése a datepicker-ekből
+                                                var checkinDate = document.getElementById("checkin").value;
+                                                var checkoutDate = document.getElementById("checkout").value;
+                                            
+                                                var paymentOption = document.getElementById("payment_options").value;
+                                                // Megjelenítés formázása egymás alatt
+                                                var content = "Bejelentkezett felhasználó e-mail címe: " + userEmail  + "<br>" +
+                                                                "Kiválasztott szoba típus: " + selectedOptions1 + "<br>" +
+                                                                "Kiválasztott kedvezmény: " + selectedOptions2 + "<br>" +
+                                                                "Választott fizetési mód: " + paymentOption + "<br>" +
+                                                                "Ettől: " + checkinDate + "<br>" +
+                                                                "Eddig: " + checkoutDate;
+                                            
+                                                modalBody.innerHTML = content;
+                                            
+                                                modal.style.display = "block";
+                                            });
+                                        
+                                            // Modal ablak bezárása
+                                            var closeButton = document.querySelector('.modal-header .btn-close');
+                                            closeButton.addEventListener('click', function () {
+                                                var modal = document.getElementById("exampleModal");
+                                                modal.style.display = "none"; 
+                                            });
+                                        </script>
+
                                         </div>
                                     </div>
                                 </div>
@@ -221,38 +268,18 @@ if (isset($_GET['logout'])) {
 <script>
 $(function () {
     var currentDate = new Date();
-
+    
     $('#date3').datetimepicker({
         minDate: currentDate,
-        useCurrent: false 
+        useCurrent: false
     });
     
     $('#date4').datetimepicker({
-        minDate: currentDate, 
-        useCurrent: false 
+        minDate: currentDate,
+        useCurrent: false
     });
 });
-</script>
-        <script>
 
-
-
-    function copySelectedOptions() {
-        var select1 = document.getElementById("szoba_tipus");
-        var select2 = document.getElementById("kedvezmeny");
-        var emptyField = document.getElementById("valasztottOpciok");
-
-        var selectedOptions1 = select1.options[select1.selectedIndex].text;
-        var selectedOptions2 = select2.options[select2.selectedIndex].text;
-
-        emptyField.value = selectedOptions1 + " - " + selectedOptions2;
-    }
-
-    
-    document.getElementById("szoba_tipus").addEventListener("change", copySelectedOptions);
-    document.getElementById("kedvezmeny").addEventListener("change", copySelectedOptions);
-
-    
 </script>
 
 
