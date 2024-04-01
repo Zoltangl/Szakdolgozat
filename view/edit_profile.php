@@ -1,36 +1,17 @@
 <?php
-
 session_start();
 include('connection.php');
 
-
-if(!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
+if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
     header("Location: login.php");
     exit();
 }
-// Alapértelmezett érték a profil megjelenítéséhez
-$profile_display = "<a href='signup.php' class='nav-item nav-link'>Registration/Login</a>";
 
-// Ellenőrizzük a felhasználó bejelentkezési állapotát
-if(isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
-    // Bejelentkezett felhasználóknak megjelenítjük a "Profile" menüpontot
-    $profile_display = '<div class="dropdown">
-                            <button class="btn btn-secondary dropdown-toggle" type="button" id="profileDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-                                Profile
-                            </button>
-                            <ul class="dropdown-menu" aria-labelledby="profileDropdown">
-                                <li><a class="dropdown-item" href="edit_profile.php">Edit Profile</a></li>
-                                <li><a id="logout_link" class="dropdown-item" href="logout.php">Log Out</a></li>
-                            </ul>
-                        </div>';
-}
-
-
-
-
-
-// Felhasználó azonosítójának lekérése a munkamenetből
-$felhasznalo_id = $_SESSION['felhasznalo_id'];
+$vezeteknev = isset($_SESSION["firstusername"]) ? $_SESSION["firstusername"] : '';
+$keresztnev = isset($_SESSION["secondusername"]) ? $_SESSION["secondusername"] : '';
+$email = isset($_SESSION["email"]) ? $_SESSION["email"] : '';
+$telefonszam = isset($_SESSION["number"]) ? $_SESSION["number"] : '';
+$felhasznalo_id = isset($_SESSION['felhasznalo_id']) ? $_SESSION['felhasznalo_id'] : '';
 
 // Lekérdezzük az adatokat az adatbázisból a bejelentkezett felhasználóhoz (kivéve a jelszó mezőt)
 $sql = "SELECT vezeteknev, keresztnev, email_cim, telefonszam FROM felhasznalo WHERE felhasznalo_id = ?";
@@ -46,23 +27,6 @@ if ($result->num_rows > 0) {
     $secondusername = $row['keresztnev'];
     $email = $row['email_cim'];
     $phone = $row['telefonszam'];
-
-    // Az adatok betöltése az űrlap mezőibe
-    echo '<div class="container">';
-    echo '<form id="form">';
-    echo '<h1 id="heading">Jelenlegi Adatok</h1>';
-    echo '<i class="fa-solid fa-user"></i>';
-    echo '<input type="text" id="firstusername" name="firstusername" placeholder="Add meg a Vezetékneved..." value="' . $firstusername . '" readonly required><br>';
-    echo '<i class="fa-solid fa-user"></i>';
-    echo '<input type="text" id="secondusername" name="secondusername" placeholder="Add meg a Keresztneved..." value="' . $secondusername . '" readonly required><br>';
-    echo '<i class="fa-solid fa-envelope"></i>';
-    echo '<input type="email" id="email" name="email" placeholder="Add meg az email címed..." value="' . $email . '" readonly required><br>';
-    echo '<i class="fa-solid fa-phone"></i>';
-    echo '<input type="text" id="number" name="number" placeholder="Add meg a telefonszámod... (+36)" pattern="[0-9]+" value="' . $phone . '" readonly required title="Csak szám megadása lehetséges"><br>';
-    echo '</form>';
-    echo '</div>';
-} else {
-    echo "Nincsenek adatok a felhasználó számára az adatbázisban.";
 }
 ?>
 
@@ -132,15 +96,16 @@ if ($result->num_rows > 0) {
     <form id="form">
         <h1 id="heading">Jelenlegi Adatok</h1>
         <i class="fa-solid fa-user"></i>
-        <input type="text" id="firstusername" name="firstusername" placeholder="Add meg a Vezetékneved..." value="<?php echo isset($firstusername) ? $firstusername : ''; ?>" readonly required><br>
+        <input type="text" id="firstusername" name="firstusername" placeholder="Add meg a Vezetékneved..." value="<?php echo isset($vezeteknev) ? $vezeteknev : ''; ?>" readonly required><br>
         <i class="fa-solid fa-user"></i>
-        <input type="text" id="secondusername" name="secondusername" placeholder="Add meg a Keresztneved..." value="<?php echo isset($secondusername) ? $secondusername : ''; ?>" readonly required><br>
+        <input type="text" id="secondusername" name="secondusername" placeholder="Add meg a Keresztneved..." value="<?php echo isset($keresztnev) ? $keresztnev : ''; ?>" readonly required><br>
         <i class="fa-solid fa-envelope"></i>
         <input type="email" id="email" name="email" placeholder="Add meg az email címed..." value="<?php echo isset($email) ? $email : ''; ?>" readonly required><br>
         <i class="fa-solid fa-phone"></i>
-        <input type="text" id="number" name="number" placeholder="Add meg a telefonszámod... (+36)" pattern="[0-9]+" value="<?php echo isset($phone) ? $phone : ''; ?>" readonly required title="Csak szám megadása lehetséges"><br>
+        <input type="text" id="number" name="number" placeholder="Add meg a telefonszámod... (+36)" pattern="[0-9]+" value="<?php echo isset($telefonszam) ? $telefonszam : ''; ?>" readonly required title="Csak szám megadása lehetséges"><br>
     </form>
 </div>
+
 
 
 
