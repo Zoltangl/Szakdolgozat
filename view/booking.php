@@ -6,18 +6,13 @@ if(!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
     exit();
 }
 
-// Felhasználó e-mail címének lekérése a session-ből
 $user_email = $_SESSION['email'];
 
 
-// Lekérdezzük a szoba tipusokat az adatbázisból
 $sql = "SELECT nev, ar FROM szoba_tipusok";
 $result = DataBase::$conn->query($sql);
-// Ellenőrizzük, hogy van-e eredmény
 if ($result->num_rows > 0) {
-    // Létrehozunk egy üres tömböt a szoba tipusok tárolására
     $szoba_tipusok = array();
-    // Minden sor esetén hozzáadjuk a szoba tipust a tömbhöz
     while ($row = $result->fetch_assoc()) {
         $szoba_tipusok[] = $row;
     }
@@ -25,31 +20,25 @@ if ($result->num_rows > 0) {
     echo "Nincsenek adatok a szoba tipusok táblában.";
 }
 
-// Felhasználó e-mail címének lekérése a session-ből
 $user_email = $_SESSION['email'];
 
-// Ellenőrizzük, hogy a felhasználó megnyomta-e a "Confirm" gombot
+
 if (isset($_POST['confirm_booking'])) {
-    // Ellenőrizzük, hogy a szükséges adatokat megkaptuk-e a POST kéréstől
     if (isset($_POST['checkin'], $_POST['checkout'], $_POST['szoba_tipus'], $_POST['kedvezmeny'], $_POST['payment_options'])) {
-        // Adatok begyűjtése a POST kéréstől
         $checkin = $_POST['checkin'];
         $checkout = $_POST['checkout'];
         $szoba_tipus = $_POST['szoba_tipus'];
         $kedvezmeny = $_POST['kedvezmeny'];
         $payment_options = $_POST['payment_options'];
 
-        // Felhasználó ID-jának lekérése az adatbázisból
         $user_id = $_SESSION['user_id'];
 
-        // Szoba ID-jának lekérése az adatbázisból a szoba neve alapján
         $sql_szoba = "SELECT szoba_id FROM szoba_tipusok WHERE nev = '$szoba_tipus'";
         $result_szoba = DataBase::$conn->query($sql_szoba);
         if ($result_szoba->num_rows > 0) {
             $row_szoba = $result_szoba->fetch_assoc();
             $szoba_id = $row_szoba['szoba_id'];
 
-            // Adatok beszúrása az adatbázisba
             $sql_insert = "INSERT INTO foglalasok (felhasznalo_id, check_in, check_out, mettol, meddig, szoba_id, fizetes_mod, fizetes_idopontja, kedvezmeny_id) 
                            VALUES ('$user_id', '$checkin', '$checkout', '$checkin', '$checkout', '$szoba_id', '$payment_options', NOW(), '$kedvezmeny')";
             
@@ -214,7 +203,6 @@ if (isset($_POST['confirm_booking'])) {
                                             </div>
                                         </div>
                                         <script>
-                                            // Modal ablak megnyitása és a kiválasztott opciók tartalmának beállítása
                                             document.getElementById("bookNowButton").addEventListener("click", function(event) {
                                                 event.preventDefault();
                                                 var modal = document.getElementById("exampleModal");
@@ -226,15 +214,12 @@ if (isset($_POST['confirm_booking'])) {
                                                 var selectedOptions1 = select1.options[select1.selectedIndex].text;
                                                 var selectedOptions2 = select2.options[select2.selectedIndex].text;
                                             
-                                                // Bejelentkezett felhasználó e-mail címe
                                                 var userEmail = "<?php echo $user_email; ?>";
                                             
-                                                // Dátumok lekérése a datepicker-ekből
                                                 var checkinDate = document.getElementById("checkin").value;
                                                 var checkoutDate = document.getElementById("checkout").value;
                                             
                                                 var paymentOption = document.getElementById("payment_options").value;
-                                                // Megjelenítés formázása egymás alatt
                                                 var content = "Bejelentkezett felhasználó e-mail címe: " + userEmail  + "<br>" +
                                                                 "Kiválasztott szoba típus: " + selectedOptions1 + "<br>" +
                                                                 "Kiválasztott kedvezmény: " + selectedOptions2 + "<br>" +
