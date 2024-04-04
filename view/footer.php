@@ -4,15 +4,15 @@
                     <div class="col-lg-5 col-md-12">
                         <div class="row gy-5 g-4">
                             <div class="col-md-6">
-                                <h6 class="section-title text-start text-primary text-uppercase mb-4">Company</h6>
-                                <a class="btn btn-link" href="about.php">About Us</a>
-                                <a class="btn btn-link" href="privacypolicy.php">Privacy Policy</a>
-                                <a class="btn btn-link" href="termsandcondition.php">Terms & Condition</a>
+                                <h6 class="section-title text-start text-primary text-uppercase mb-4">Cég</h6>
+                                <a class="btn btn-link" href="about.php">Rólunk</a>
+                                <a class="btn btn-link" href="privacypolicy.php">Adatvédelem és Biztonság</a>
+                                <a class="btn btn-link" href="termsandcondition.php">Felhasználási feltételek</a>
                         </div>
                         <div class="col-md-6">
-                            <h6 class="section-title text-start text-primary text-uppercase mb-4">Services</h6>
-                            <a class="btn btn-link" href="services/foodres.php">Food & Restaurant</a>
-                            <a class="btn btn-link" href="services/sport.php">Sport & Gym</a>
+                            <h6 class="section-title text-start text-primary text-uppercase mb-4">Szolgáltatásaink</h6>
+                            <a class="btn btn-link" href="services/foodres.php">Étel és Étterem</a>
+                            <a class="btn btn-link" href="services/sport.php">Sport és edzőterem</a>
                         </div>
                         </div>
                     </div>
@@ -23,7 +23,7 @@
                     <div class="row">
                         <div class="col-md-6 text-center text-md-end">
                             <div class="footer-menu">
-                                <a href="index.php">Home</a>
+                                <a href="index.php">Kezdőlap</a>
                             </div>
                         </div>
                     </div>
