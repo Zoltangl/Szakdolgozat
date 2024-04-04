@@ -96,13 +96,13 @@ if ($result->num_rows > 0) {
     <form id="form">
         <h1 id="heading">Jelenlegi Adatok</h1>
         <i class="fa-solid fa-user"></i>
-        <input type="text" id="firstusername" name="firstusername" placeholder="Add meg a Vezetékneved..." value="<?php echo isset($vezeteknev) ? $vezeteknev : ''; ?>" readonly required><br>
+        <input type="text" id="firstusername" name="firstusername"  value="<?php echo isset($vezeteknev) ? $vezeteknev : ''; ?>" readonly required><br>
         <i class="fa-solid fa-user"></i>
-        <input type="text" id="secondusername" name="secondusername" placeholder="Add meg a Keresztneved..." value="<?php echo isset($keresztnev) ? $keresztnev : ''; ?>" readonly required><br>
+        <input type="text" id="secondusername" name="secondusername"  value="<?php echo isset($keresztnev) ? $keresztnev : ''; ?>" readonly required><br>
         <i class="fa-solid fa-envelope"></i>
-        <input type="email" id="email" name="email" placeholder="Add meg az email címed..." value="<?php echo isset($email) ? $email : ''; ?>" readonly required><br>
+        <input type="email" id="email" name="email" value="<?php echo isset($email) ? $email : ''; ?>" readonly required><br>
         <i class="fa-solid fa-phone"></i>
-        <input type="text" id="number" name="number" placeholder="Add meg a telefonszámod... (+36)" pattern="[0-9]+" value="<?php echo isset($telefonszam) ? $telefonszam : ''; ?>" readonly required title="Csak szám megadása lehetséges"><br>
+        <input type="text" id="number" name="number" pattern="[0-9]+" value="<?php echo isset($phone) ? $phone : ''; ?>" readonly required title="Csak szám megadása lehetséges"><br>
     </form>
 </div>
 
