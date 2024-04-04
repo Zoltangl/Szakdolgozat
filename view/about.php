@@ -103,15 +103,15 @@ if (isset($_GET['logout'])) {
             <div class="container">
                 <div class="row g-5 align-items-center">
                     <div class="col-lg-6">
-                        <h6 class="section-title text-start text-primary text-uppercase">About Us</h6>
-                        <h1 class="mb-4">Welcome to <span class="text-primary text-uppercase">HappyHotel</span></h1>
+                        <h6 class="section-title text-start text-primary text-uppercase">Rólunk</h6>
+                        <h1 class="mb-4">Üdvözlünk a <span class="text-primary text-uppercase">HappyHotel</span></h1>
                         <div class="row g-3 pb-4">
                             <div class="col-sm-4 wow fadeIn" data-wow-delay="0.1s">
                                 <div class="border rounded p-1">
                                     <div class="border rounded text-center p-4">
                                         <i class="fa fa-hotel fa-2x text-primary mb-2"></i>
                                         <h2 class="mb-1" data-toggle="counter-up">12</h2>
-                                        <p class="mb-0">Rooms</p>
+                                        <p class="mb-0">Szobák</p>
                                     </div>
                                 </div>
                             </div>
@@ -120,7 +120,7 @@ if (isset($_GET['logout'])) {
                                     <div class="border rounded text-center p-4">
                                         <i class="fa fa-users-cog fa-2x text-primary mb-2"></i>
                                         <h2 class="mb-1" data-toggle="counter-up">80</h2>
-                                        <p class="mb-0">Staffs</p>
+                                        <p class="mb-0">Alkalmazottaink</p>
                                     </div>
                                 </div>
                             </div>
@@ -129,12 +129,11 @@ if (isset($_GET['logout'])) {
                                     <div class="border rounded text-center p-4">
                                         <i class="fa fa-users fa-2x text-primary mb-2"></i>
                                         <h2 class="mb-1" data-toggle="counter-up">70</h2>
-                                        <p class="mb-0">Clients</p>
+                                        <p class="mb-0">Kliensek</p>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <a class="btn btn-primary py-3 px-5 mt-2" href="">Explore More</a>
                     </div>
                     <div class="col-lg-6">
                         <div class="row g-3">
