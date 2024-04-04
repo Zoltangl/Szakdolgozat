@@ -74,26 +74,12 @@ if (isset($_GET['logout'])) {
         <!-- Spinner End -->
 
         <?php include ('../mappheader.php'); ?>
-
-
-        
-                <button class="carousel-control-prev" type="button" data-bs-target="#header-carousel"
-                    data-bs-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Previous</span>
-                </button>
-                <button class="carousel-control-next" type="button" data-bs-target="#header-carousel"
-                    data-bs-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Next</span>
-                </button>
-            </div>
         </div>
         <div class="container-xxl py-5">
             <div class="container">
                 <div class="row g-5 align-items-center">
                     <div class="col-lg-6">
-                        <h6 class="section-title text-start text-primary text-uppercase">rooms</h6>
+                        <h6 class="section-title text-start text-primary text-uppercase">szobák</h6>
                         <h1 class="mb-4">Üdvözöljük a <span class="text-primary text-uppercase">HappyHotel</span> családi szobájában!</h1>
                         <p class="mb-4">
                        <p> Engedje meg, hogy bemutassuk ezt a varázslatos és kényelmes szállásegységet, amely tökéletes választás családok számára, akik pihentető és emlékezetes időtöltésre vágynak.
@@ -107,7 +93,7 @@ if (isset($_GET['logout'])) {
                                     <div class="border rounded text-center p-4">
                                         <i class="fa fa-bed fa-2x text-primary mb-2"></i>
                                         <h2 class="mb-1" data-toggle="counter-up">3</h2>
-                                        <p class="mb-0">bed</p>
+                                        <p class="mb-0">ágy</p>
                                     </div>
                                 </div>
                             </div>
@@ -116,7 +102,7 @@ if (isset($_GET['logout'])) {
                                     <div class="border rounded text-center p-4">
                                         <i class="fa fa-bath fa-2x text-primary mb-2"></i>
                                         <h2 class="mb-1" data-toggle="counter-up">1</h2>
-                                        <p class="mb-0">Shower & Bath</p>
+                                        <p class="mb-0">Zuhanyzó & Kád</p>
                                     </div>
                                 </div>
                             </div>
@@ -125,12 +111,12 @@ if (isset($_GET['logout'])) {
                                     <div class="border rounded text-center p-4">
                                         <i class="fa fa-wifi fa-2x text-primary mb-2"></i>
                                         <h2 class="mb-1" data-toggle="counter-up">30</h2><h2>mb/s</h2>
-                                        <p class="mb-0">Wifi Speed</p>
+                                        <p class="mb-0">Wifi Sebessége</p>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <a class="btn btn-primary py-3 px-5 mt-2" href="../room.php">Explore More</a>
+                        <a class="btn btn-primary py-3 px-5 mt-2" href="../room.php">Fedezz fel többet</a>
                     </div>
                     <div class="col-lg-6">
                         <div class="row g-3">
