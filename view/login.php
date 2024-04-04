@@ -24,6 +24,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
             // Bejelentkezés sikerült
             $_SESSION['loggedin'] = true;
             $_SESSION['email'] = $email; // Vagy $_SESSION['felhasznalo_id'] = $row['id'] ha van ilyen mező a felhasznalo táblában
+            $user_id = $row['id']; // Az $user_id-nek a felhasználó azonosítóját kell tartalmaznia
+            $_SESSION['felhasznalo_id'] = $user_id;
             $profile_display = '<div class="dropdown">
                                     <button class="btn btn-secondary dropdown-toggle" type="button" id="profileDropdown" data-bs-toggle="dropdown" aria-expanded="false">
                                         Profile
