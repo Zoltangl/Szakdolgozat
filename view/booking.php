@@ -7,6 +7,7 @@ if(!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
 }
 
 $user_email = $_SESSION['email'];
+$user_id = $_SESSION['felhasznalo_id'];
 
 
 $sql = "SELECT nev, ar FROM szoba_tipusok";
@@ -20,40 +21,6 @@ if ($result->num_rows > 0) {
     echo "Nincsenek adatok a szoba tipusok táblában.";
 }
 
-$user_email = $_SESSION['email'];
-
-
-if (isset($_POST['confirm_booking'])) {
-    if (isset($_POST['checkin'], $_POST['checkout'], $_POST['szoba_tipus'], $_POST['kedvezmeny'], $_POST['payment_options'])) {
-        $checkin = $_POST['checkin'];
-        $checkout = $_POST['checkout'];
-        $szoba_tipus = $_POST['szoba_tipus'];
-        $kedvezmeny = $_POST['kedvezmeny'];
-        $payment_options = $_POST['payment_options'];
-
-        $user_id = $_SESSION['user_id'];
-
-        $sql_szoba = "SELECT szoba_id FROM szoba_tipusok WHERE nev = '$szoba_tipus'";
-        $result_szoba = DataBase::$conn->query($sql_szoba);
-        if ($result_szoba->num_rows > 0) {
-            $row_szoba = $result_szoba->fetch_assoc();
-            $szoba_id = $row_szoba['szoba_id'];
-
-            $sql_insert = "INSERT INTO foglalasok (felhasznalo_id, check_in, check_out, mettol, meddig, szoba_id, fizetes_mod, fizetes_idopontja, kedvezmeny_id) 
-                           VALUES ('$user_id', '$checkin', '$checkout', '$checkin', '$checkout', '$szoba_id', '$payment_options', NOW(), '$kedvezmeny')";
-            
-            if (DataBase::$conn->query($sql_insert) === TRUE) {
-                echo "Sikeresen hozzáadva az adatbázishoz.";
-            } else {
-                echo "Hiba az adatbázisba való beszúrás során: " . DataBase::$conn->error;
-            }
-        } else {
-            echo "Nincs ilyen szoba a rendszerben.";
-        }
-    } else {
-        echo "Hiányzó adatok a foglaláshoz.";
-    }
-}
 ?>
 
 
@@ -110,8 +77,8 @@ if (isset($_POST['confirm_booking'])) {
         <div class="container-xxl py-5">
             <div class="container">
                 <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
-                    <h6 class="section-title text-center text-primary text-uppercase">Room Booking</h6>
-                    <h1 class="mb-5">Book A <span class="text-primary text-uppercase">Luxury Room</span></h1>
+                    <h6 class="section-title text-center text-primary text-uppercase">Szoba foglalás</h6>
+                    <h1 class="mb-5">Foglalj le egy <span class="text-primary text-uppercase">Luxuszobát</span></h1>
                 </div>
                 <div class="row g-5">
                     <div class="col-lg-6" id="szoba_kepek">
@@ -172,13 +139,37 @@ if (isset($_POST['confirm_booking'])) {
                                         }
                                         ?>
                                     </select>
-                                    <select name="payment_options" id="payment_options">
-                                        <option value="hitelkártya">Bankkártya (hitelkártya)</option>
-                                        <option value="Átutalás">Átutalás</option>
-                                        <option value="Készpénz">Készpénz(helyben fizetés)</option>
-                                        <option value="paypal">PayPal</option>
-                                        <option value="Kriptovaluta">Kriptovaluta</option>
-                                    </select>
+                                    <?php
+
+                                        $sql = "SHOW COLUMNS FROM foglalas WHERE Field = 'fizetesi_mod'";
+                                        $result = DataBase::$conn->query($sql);
+
+                                        if ($result) {
+                                            if ($result->num_rows > 0) {
+                                                $row = $result->fetch_assoc();
+
+                                                $enum_str = $row['Type'];
+
+                                                preg_match_all("/'(.*?)'/", $enum_str, $matches);
+
+                                                $options = $matches[1];
+
+                                                echo '<select name="payment_options" id="payment_options">';
+                                                foreach ($options as $option) {
+                                                    echo "<option value='$option'>$option</option>";
+                                                }
+                                                echo '</select>';
+                                            } else {
+                                                echo "Nincs fizetési opció az adatbázisban.";
+                                            }
+                                        } else {
+                                            echo "Adatbázis hiba: " . DataBase::$conn->error; 
+                                        }
+
+                                    ?>
+
+
+
 
                                     <div class="col-12">
                                     <button class="btn btn-primary w-100 py-3" id="bookNowButton" data-toggle="modal" data-target="#exampleModal">Book Now</button>
@@ -195,7 +186,7 @@ if (isset($_POST['confirm_booking'])) {
                                                         
                                                     </div>
                                                     <div class="modal-footer">
-                                                        <form method="post" action="">
+                                                        <form method="post" action="foglalas.php">
                                                             <button type="submit" class="btn btn-secondary" name="confirm_booking">Confirm</button>
                                                         </form>
                                                     </div>
@@ -206,31 +197,38 @@ if (isset($_POST['confirm_booking'])) {
                                             document.getElementById("bookNowButton").addEventListener("click", function(event) {
                                                 event.preventDefault();
                                                 var modal = document.getElementById("exampleModal");
-                                            
+                                                                                        
                                                 var select1 = document.getElementById("szoba_tipus");
                                                 var select2 = document.getElementById("kedvezmeny");
                                                 var modalBody = modal.querySelector('.modal-body');
-                                            
+                                                                                        
                                                 var selectedOptions1 = select1.options[select1.selectedIndex].text;
                                                 var selectedOptions2 = select2.options[select2.selectedIndex].text;
-                                            
+                                                                                        
                                                 var userEmail = "<?php echo $user_email; ?>";
-                                            
+                                                                                        
                                                 var checkinDate = document.getElementById("checkin").value;
                                                 var checkoutDate = document.getElementById("checkout").value;
-                                            
+                                                                                        
                                                 var paymentOption = document.getElementById("payment_options").value;
-                                                var content = "Bejelentkezett felhasználó e-mail címe: " + userEmail  + "<br>" +
-                                                                "Kiválasztott szoba típus: " + selectedOptions1 + "<br>" +
-                                                                "Kiválasztott kedvezmény: " + selectedOptions2 + "<br>" +
-                                                                "Választott fizetési mód: " + paymentOption + "<br>" +
-                                                                "Ettől: " + checkinDate + "<br>" +
-                                                                "Eddig: " + checkoutDate;
-                                            
-                                                modalBody.innerHTML = content;
-                                            
+                                                                                        
+                                                if (checkinDate === "" || checkoutDate === "") {
+                                                    modalBody.innerHTML = "Kérjük, válasszon ki egy dátumot mind a 'Mettől', mind a 'Meddig' mezőben.";
+                                                    document.getElementById("confirm_booking").disabled = true;
+                                                } else {
+                                                    var content = "Bejelentkezett felhasználó e-mail címe: " + userEmail  + "<br>" +
+                                                                  "Kiválasztott szoba típus: " + selectedOptions1 + "<br>" +
+                                                                  "Kiválasztott kedvezmény: " + selectedOptions2 + "<br>" +
+                                                                  "Választott fizetési mód: " + paymentOption + "<br>" +
+                                                                  "Ettől: " + checkinDate + "<br>" +
+                                                                  "Eddig: " + checkoutDate;
+                                                    
+                                                    modalBody.innerHTML = content;
+                                                }
+                                                
                                                 modal.style.display = "block";
                                             });
+
                                         
                                             // Modal ablak bezárása
                                             var closeButton = document.querySelector('.modal-header .btn-close');
@@ -239,7 +237,6 @@ if (isset($_POST['confirm_booking'])) {
                                                 modal.style.display = "none"; 
                                             });
                                         </script>
-
                                         </div>
                                     </div>
                                 </div>
@@ -249,7 +246,7 @@ if (isset($_POST['confirm_booking'])) {
                 </div>
             </div>
         </div>
-
+<!-- Dátum helyes működéséhez -->
 <script>
 $(function () {
     var currentDate = new Date();
