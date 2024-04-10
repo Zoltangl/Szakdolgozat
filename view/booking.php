@@ -23,8 +23,6 @@ if ($result->num_rows > 0) {
 
 ?>
 
-
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -36,6 +34,7 @@ if ($result->num_rows > 0) {
     <meta content="" name="keywords">
     <meta content="" name="description">
 
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
   <!-- Favicon -->
   <link href="img/favicon.ico" rel="icon">
 
@@ -59,6 +58,9 @@ if ($result->num_rows > 0) {
 <!-- Template Stylesheet -->
 <link href="css/style.css" rel="stylesheet">
 <link href="css\confirm.css" rel="stylesheet">
+
+<link rel="stylesheet" type="text/css" href="css/modalPayContainer.css">
+
 </head>
 
 <body>
@@ -103,7 +105,8 @@ if ($result->num_rows > 0) {
                                 <div class="row g-3">
                                 <div class="col-md-6">
                                     <div class="form-floating date" id="date3" data-target-input="nearest">
-                                        <input type="text" class="form-control datetimepicker-input" id="checkin" placeholder="Check In" data-target="#date3" data-toggle="datetimepicker" />
+                                    <input type="text" class="form-control datetimepicker-input" id="checkin" name="checkin" placeholder="Check In" data-target="#date3" data-toggle="datetimepicker" />
+
                                         <label for="checkin">Mettől</label>
                                     </div>
                                 </div>
@@ -140,25 +143,29 @@ if ($result->num_rows > 0) {
                                         ?>
                                     </select>
                                     <?php
-
-                                        $sql = "SHOW COLUMNS FROM foglalas WHERE Field = 'fizetesi_mod'";
+                                        $sql = "SHOW COLUMNS FROM foglalas WHERE Field = 'fizetes_mod'";
                                         $result = DataBase::$conn->query($sql);
 
                                         if ($result) {
                                             if ($result->num_rows > 0) {
                                                 $row = $result->fetch_assoc();
-
-                                                $enum_str = $row['Type'];
-
-                                                preg_match_all("/'(.*?)'/", $enum_str, $matches);
-
+                                            
+                                                preg_match_all("/'(.*?)'/", $row['Type'], $matches);
                                                 $options = $matches[1];
 
-                                                echo '<select name="payment_options" id="payment_options">';
-                                                foreach ($options as $option) {
-                                                    echo "<option value='$option'>$option</option>";
+                                                $options = array_filter($options);
+
+                                                if (!empty($options)) {
+                                                    echo '<select name="payment_options" id="payment_options">';
+                                                    foreach ($options as $option) {
+                                                        echo "<option value='$option'>$option</option>";
+                                                    }
+                                                    echo '</select>';
+                                                    
+                                                    echo '<button id="redirectButton" style="display:none;" class="btn btn-primary">Kártya adatainak megadása</button>';
+                                                } else {
+                                                    echo "Nincs fizetési opció az adatbázisban.";
                                                 }
-                                                echo '</select>';
                                             } else {
                                                 echo "Nincs fizetési opció az adatbázisban.";
                                             }
@@ -166,77 +173,99 @@ if ($result->num_rows > 0) {
                                             echo "Adatbázis hiba: " . DataBase::$conn->error; 
                                         }
 
-                                    ?>
+                                        ?>
 
-
-
+                                    <!-- Modális ablak -->
+                                    <div id="modalPayContainer" class="modal">
+                                      <div class="modal-content">
+                                      <span id="closeModal" class="close">&times;</span> <!-- Bezáró gomb -->
+                                        <h3>Bankkártyás fizetés</h3>
+                                        <form id="paymentForm">
+                                          <div class="form-group">
+                                            <label for="cardNumber">Kártyaszám:</label>
+                                            <input type="text" class="form-control" id="cardNumber" placeholder="xxxx-xxxx-xxxx-xxxx" maxlength="19" required>
+                                          </div>
+                                          <div class="form-group">
+                                            <label for="cardOwner">Kártyatulajdonos neve:</label>
+                                            <input type="text" class="form-control" id="cardOwner" placeholder="Atka Attila" required>
+                                          </div>
+                                          <div class="form-group">
+                                            <label for="expiryDate">Lejárati dátum:</label>
+                                            <input type="text" class="form-control" id="expiryDate" placeholder="HH/ÉÉ" maxlength="5" required>
+                                          </div>
+                                          <div class="form-group">
+                                            <label for="securityCode">Biztonsági kód:</label>
+                                            <input type="password" class="form-control" id="securityCode" placeholder="xxx" maxlength="3" required>
+                                          </div>
+                                          <button type="submit" class="btn btn-primary">Kártya adatainak mentése</button>
+                                        </form>
+                                      </div>
+                                    </div>
 
                                     <div class="col-12">
-                                    <button class="btn btn-primary w-100 py-3" id="bookNowButton" data-toggle="modal" data-target="#exampleModal">Book Now</button>
+                                    <button class="btn btn-primary w-100 py-3" id="bookNowButton" data-toggle="modal" data-target="#exampleModal">Foglalás</button>
                                     </div> 
                                     <!-- Modal -->
-                                        <div class="modal" id="exampleModal" tabindex="-1" style="display: none;">
-                                            <div class="modal-dialog">
-                                                <div class="modal-content">
-                                                    <div class="modal-header">
-                                                        <h5 class="modal-title">Foglalásom</h5>
-                                                        <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
-                                                    </div>
-                                                    <div class="modal-body">
-                                                        
-                                                    </div>
-                                                    <div class="modal-footer">
-                                                        <form method="post" action="foglalas.php">
-                                                            <button type="submit" class="btn btn-secondary" name="confirm_booking">Confirm</button>
-                                                        </form>
-                                                    </div>
+                                    <form method="post" action="">
+                                    <div class="modal" id="exampleModal" tabindex="-1" style="display: none;">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title">Foglalásom</h5>
+                                                    <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <p id="bookingDetails"></p>
+                                                </div>
+                                                <div class="modal-footer">
+                                                <button type="submit" class="btn btn-secondary" id="confirmBookingButton" name="confirm_booking">Megerősítés</button>
+
                                                 </div>
                                             </div>
                                         </div>
+                                    </div>
+                                    </form>
                                         <script>
+
+                                            document.getElementById("confirmBookingButton").addEventListener("click", function() {
+                                            console.log("Form submission attempted");
+                                            document.getElementById("exampleModal").querySelector("form").submit();
+                                        });
+
                                             document.getElementById("bookNowButton").addEventListener("click", function(event) {
-                                                event.preventDefault();
-                                                var modal = document.getElementById("exampleModal");
-                                                                                        
-                                                var select1 = document.getElementById("szoba_tipus");
-                                                var select2 = document.getElementById("kedvezmeny");
-                                                var modalBody = modal.querySelector('.modal-body');
-                                                                                        
-                                                var selectedOptions1 = select1.options[select1.selectedIndex].text;
-                                                var selectedOptions2 = select2.options[select2.selectedIndex].text;
-                                                                                        
-                                                var userEmail = "<?php echo $user_email; ?>";
-                                                                                        
-                                                var checkinDate = document.getElementById("checkin").value;
-                                                var checkoutDate = document.getElementById("checkout").value;
-                                                                                        
-                                                var paymentOption = document.getElementById("payment_options").value;
-                                                                                        
-                                                if (checkinDate === "" || checkoutDate === "") {
-                                                    modalBody.innerHTML = "Kérjük, válasszon ki egy dátumot mind a 'Mettől', mind a 'Meddig' mezőben.";
-                                                    document.getElementById("confirm_booking").disabled = true;
-                                                } else {
-                                                    var content = "Bejelentkezett felhasználó e-mail címe: " + userEmail  + "<br>" +
-                                                                  "Kiválasztott szoba típus: " + selectedOptions1 + "<br>" +
-                                                                  "Kiválasztott kedvezmény: " + selectedOptions2 + "<br>" +
-                                                                  "Választott fizetési mód: " + paymentOption + "<br>" +
-                                                                  "Ettől: " + checkinDate + "<br>" +
-                                                                  "Eddig: " + checkoutDate;
-                                                    
-                                                    modalBody.innerHTML = content;
-                                                }
-                                                
-                                                modal.style.display = "block";
+                                            event.preventDefault();
+                                            var modal = document.getElementById("exampleModal");
+                                            var selectRoomType = document.getElementById("szoba_tipus");
+                                            var selectDiscount = document.getElementById("kedvezmeny");
+                                            var modalBody = modal.querySelector('.modal-body');
+                                            var selectedRoomTypeText = selectRoomType.options[selectRoomType.selectedIndex].text;
+                                            var selectedDiscountText = selectDiscount.options[selectDiscount.selectedIndex].text;
+                                            var userEmail = "<?php echo $user_email; ?>";
+                                            var checkinDate = document.getElementById("checkin").value;
+                                            var checkoutDate = document.getElementById("checkout").value;
+                                            var selectedPaymentOption = document.getElementById("payment_options").value;
+                                            if (checkinDate === "" || checkoutDate === "") {
+                                                modalBody.innerHTML = "Kérjük, válasszon ki egy dátumot mind a 'Mettől', mind a 'Meddig' mezőben.";
+                                                document.getElementById("confirmBookingButton").disabled = true;
+                                            } else {
+                                                var content = "Bejelentkezett felhasználó e-mail címe: " + userEmail  + "<br>" +
+                                                              "Kiválasztott szoba típus: " + selectedRoomTypeText + "<br>" +
+                                                              "Kiválasztott kedvezmény: " + selectedDiscountText + "<br>" +
+                                                              "Választott fizetési mód: " + selectedPaymentOption + "<br>" +
+                                                              "Ettől: " + checkinDate + "<br>" +
+                                                              "Eddig: " + checkoutDate;
+                                                modalBody.innerHTML = content;
+                                            }
+                                            modal.style.display = "block";
+                                        
+                                            // Az űrlap elküldése a "Megerősítés" gombra kattintáskor
+                                            document.getElementById("confirmBookingButton").addEventListener("click", function() {
+                                                document.getElementById("exampleModal").querySelector("form").submit();
+                                            });
                                             });
 
-                                        
-                                            // Modal ablak bezárása
-                                            var closeButton = document.querySelector('.modal-header .btn-close');
-                                            closeButton.addEventListener('click', function () {
-                                                var modal = document.getElementById("exampleModal");
-                                                modal.style.display = "none"; 
-                                            });
                                         </script>
+
                                         </div>
                                     </div>
                                 </div>
@@ -281,7 +310,9 @@ $(function () {
     <script src="lib/tempusdominus/js/moment.min.js"></script>
     <script src="lib/tempusdominus/js/moment-timezone.min.js"></script>
     <script src="lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
-
+    <script src="js\modal\modalPayContainer.js"></script>
+    <script src="js\modal\bookingModal.js"></script>
+   
     <!-- Template Javascript -->
     <script src="js/main.js"></script>
 </body>
