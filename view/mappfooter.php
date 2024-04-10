@@ -3,14 +3,15 @@
                 <div class="row g-5">
                     <div class="col-lg-5 col-md-12">
                         <div class="row gy-5 g-4">
-                            <div class="col-md-6">Rólunk</a>
+                            <div class="col-md-6">
+                            <h6 class="section-title text-start text-primary text-uppercase mb-4">Rólunk</h6>
                                 <a class="btn btn-link" href="../privacypolicy.php">Adatvédelem és Biztonság</a>
                                 <a class="btn btn-link" href="../termsandcondition.php">Felhasználási feltételek</a>
                         </div>
                         <div class="col-md-6">
                             <h6 class="section-title text-start text-primary text-uppercase mb-4">Szolgáltatásaink</h6>
-                            <a class="btn btn-link" href="services/foodres.php">Étel és étterem</a>
-                            <a class="btn btn-link" href="services/sport.php">Sport és edzőterem</a>
+                            <a class="btn btn-link" href="../services/foodres.php">Étel és étterem</a>
+                            <a class="btn btn-link" href="../services/sport.php">Sport és edzőterem</a>
                         </div>
                         </div>
                     </div>
