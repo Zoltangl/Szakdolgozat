@@ -1,0 +1,70 @@
+#modalPayContainer.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    max-width: 400px; /* Állítsa be a kívánt maximális szélességet */
+    width: 100%;
+    max-height: 80vh; /* Állítsa be a kívánt maximális magasságot (például 80% a viewport magasságának) */
+    overflow: auto;
+    background-color: rgba(255, 255, 255, 0.9);
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+  
+#modalPayContainer .modal-content {
+    padding: 20px;
+}
+  
+#modalPayContainer .close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+  
+#modalPayContainer .close:hover,
+#modalPayContainer .close:focus {
+    color: black;
+    text-decoration: none;
+}
+  
+#modalPayContainer .form-group {
+    margin-bottom: 20px;
+}
+  
+#modalPayContainer .form-control {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+  
+#modalPayContainer .btn-primary {
+    background-color: #FEA116;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+  
+#modalPayContainer .btn-primary:hover {
+    background-color: #FEA116;
+}
+#modalPayContainer .close {
+    color: #FEA116;
+    position: absolute;
+    top: 0;
+    right: 0; /* helyezze át a bezáró gombot a jobb felső sarokba */
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
