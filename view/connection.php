@@ -1,5 +1,4 @@
 <?php
-
 class DataBase
 {
     private $servername = "localhost";
@@ -35,5 +34,4 @@ $db = new DataBase();
 
 // Adatbáziskapcsolat bezárása (opcionális)
 // $db->closeConnection();
-
 ?>
