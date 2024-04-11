@@ -96,21 +96,24 @@ if ($result->num_rows > 0) {
     <form id="form">
         <h1 id="heading">Jelenlegi Adatok</h1>
         <i class="fa-solid fa-user"></i>
-        <input type="text" id="firstusername" name="firstusername"  value="<?php echo isset($vezeteknev) ? $vezeteknev : ''; ?>" readonly required><br>
+        <input type="text" id="firstusername" name="firstusername" readonly required><br>
         <i class="fa-solid fa-user"></i>
-        <input type="text" id="secondusername" name="secondusername"  value="<?php echo isset($keresztnev) ? $keresztnev : ''; ?>" readonly required><br>
+        <input type="text" id="secondusername" name="secondusername" readonly required><br>
         <i class="fa-solid fa-envelope"></i>
-        <input type="email" id="email" name="email" value="<?php echo isset($email) ? $email : ''; ?>" readonly required><br>
+        <input type="email" id="email" name="email" readonly required><br>
         <i class="fa-solid fa-phone"></i>
-        <input type="text" id="number" name="number" pattern="[0-9]+" value="<?php echo isset($phone) ? $phone : ''; ?>" readonly required title="Csak szám megadása lehetséges"><br>
+        <input type="text" id="number" name="number" pattern="[0-9]+" readonly required title="Csak szám megadása lehetséges"><br>
     </form>
 </div>
 
-
-
-
-
-
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        document.getElementById('firstusername').value = "<?php echo isset($vezeteknev) ? $vezeteknev : ''; ?>";
+        document.getElementById('secondusername').value = "<?php echo isset($keresztnev) ? $keresztnev : ''; ?>";
+        document.getElementById('email').value = "<?php echo isset($email) ? $email : ''; ?>";
+        document.getElementById('number').value = "<?php echo isset($telefonszam) ? $telefonszam : ''; ?>";
+    });
+</script>
 
     <!-- JavaScript Libraries -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>

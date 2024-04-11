@@ -18,18 +18,34 @@ if (isset($_POST['confirm_booking'])) {
         $selectedDiscountText = $_POST['kedvezmeny'];
         $paymentOption = $_POST['payment_options'];
 
-        // Ellenőrizd, hogy az adott szoba típus létezik-e
         $sql_szoba = "SELECT szoba_id FROM szoba_tipusok WHERE nev = '$selectedRoomTypeText'";
         $result_szoba = DataBase::$conn->query($sql_szoba);
-
+        
         if ($result_szoba && $result_szoba->num_rows > 0) {
             $row_szoba = $result_szoba->fetch_assoc();
             $szoba_id = $row_szoba['szoba_id'];
 
-            // Beszúrás az adatbázisba
-            $sql_insert = "INSERT INTO foglalas (felhasznalo_id, mettol, meddig, szoba_id, fizetes_mod, fizetes_idopontja, kedvezmeny_id) 
-                           VALUES ('$user_id', '$checkinDate', '$checkoutDate', '$szoba_id', '$paymentOption', NOW(), '$selectedDiscountText')";
-            
+            $sql_kedvezmeny = "SELECT id FROM kedvezmenyek WHERE nev = '$selectedDiscountText'";
+            $result_kedvezmeny = DataBase::$conn->query($sql_kedvezmeny);
+            if ($result_kedvezmeny && $result_kedvezmeny->num_rows > 0) {
+                $row_kedvezmeny = $result_kedvezmeny->fetch_assoc();
+                $kedvezmeny_id = $row_kedvezmeny['id'];
+            } else {
+                echo "Nincs ilyen kedvezmény a rendszerben.";
+            }
+
+            $now = date('Y-m-d H:i:s');
+                $sql_insert = "INSERT INTO foglalas (felhasznalo_id, check_in, check_out, mettol, meddig, szoba_id, fizetes_mod, fizetes_idopontja, kedvezmeny_id) 
+               VALUES ('$user_id', NULL, NULL, '$chechkinDate', '$checkoutDate', '$szoba_id', '$fizetes_mod', '$now', '$kedvezmeny_id')";
+
+            echo $sql_insert; ?>
+
+            <script>
+            var msg = "<?php echo $sql_insert; ?>"; 
+            alert(msg);
+            </script>
+
+            <?php
             if (DataBase::$conn->query($sql_insert) === TRUE) {
                 echo "Sikeresen hozzáadva az adatbázishoz.";
             } else {
