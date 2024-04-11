@@ -5,7 +5,6 @@ include('connection.php');
 
 // Alapértelmezett érték a profil megjelenítéséhez
 $profile_display = "<a href='signup.php' class='nav-item nav-link'>Register/Login</a>";
-
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
     $email = $_POST["email"];
     $jelszo = $_POST["pass"];
@@ -25,6 +24,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
             $_SESSION['loggedin'] = true;
             $_SESSION['email'] = $email; // Vagy $_SESSION['felhasznalo_id'] = $row['id'] ha van ilyen mező a felhasznalo táblában
             $user_id = $row['id']; // Az $user_id-nek a felhasználó azonosítóját kell tartalmaznia
+            
+            // Echo utasítások a hibakereséshez
+            echo "Email: $email<br>";
+            echo "User ID: $user_id<br>";
+            
             $_SESSION['felhasznalo_id'] = $user_id;
             $profile_display = '<div class="dropdown">
                                     <button class="btn btn-secondary dropdown-toggle" type="button" id="profileDropdown" data-bs-toggle="dropdown" aria-expanded="false">
@@ -54,7 +58,7 @@ $db->closeConnection();
 
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="hu">
 
 <head>
     <meta charset="utf-8">
@@ -82,12 +86,11 @@ $db->closeConnection();
     <!-- Customized Bootstrap Stylesheet -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
 
- 
-
     <!-- Template Stylesheet -->
     <link href="css/style.css" rel="stylesheet">
     <link href="css/register.css" rel="stylesheet">
 </head>
+
 
 <body>
     <div class="container-xxl bg-white p-0">
