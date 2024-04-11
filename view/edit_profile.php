@@ -8,6 +8,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
 }
 $vezeteknev = "";
 $keresztnev = "";
+$email = "";
 $telefonszam = "";
 
 // Alapértelmezett értékek beállítása a session-ben tárolt adatok alapján
