@@ -87,7 +87,4 @@ document.addEventListener("DOMContentLoaded", function() {
             document.getElementById("modalPayContainer").style.display = "none";
         });
     }
-
-    loadSavedData();
-    saveData();
 });
