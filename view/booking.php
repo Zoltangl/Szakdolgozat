@@ -1,15 +1,33 @@
 <?php
 session_start();
 require('connection.php');
+
 if(!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
     header("Location: login.php");
     exit();
 }
 
-$user_email = $_SESSION['email'];
-$user_id = $_SESSION['felhasznalo_id'];
+// Felhasználó azonosítójának lekérdezése a bejelentkezési munkamenetből
+if(isset($_SESSION['email'])) {
+    $email = $_SESSION['email'];
 
+    $sql = "SELECT felhasznalo_id FROM felhasznalo WHERE email_cim = ?";
+    $stmt = DataBase::$conn->prepare($sql);
+    $stmt->bind_param("s", $email);
+    $stmt->execute();
+    $result = $stmt->get_result();
 
+    if ($result->num_rows > 0) {
+        $row = $result->fetch_assoc();
+        $user_id = $row['felhasznalo_id'];
+    } else {
+        exit("Nem sikerült megszerezni a felhasználó ID-ját.");
+    }
+} else {
+    exit("Nem sikerült megszerezni a felhasználó email címét.");
+}
+
+// Szoba tipusok lekérdezése
 $sql = "SELECT nev, ar FROM szoba_tipusok";
 $result = DataBase::$conn->query($sql);
 if ($result->num_rows > 0) {
@@ -21,7 +39,32 @@ if ($result->num_rows > 0) {
     echo "Nincsenek adatok a szoba tipusok táblában.";
 }
 
+// Foglalás feldolgozása
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['bookNow'])) {
+    $checkin = date('Y-m-d', strtotime($_POST['checkin'])); // Formátum: 'YYYY-MM-DD'
+    $checkout = date('Y-m-d', strtotime($_POST['checkout'])); // Formátum: 'YYYY-MM-DD'
+    $szoba_id = $_POST['szoba_tipus']; // Ez csak egy példa, itt meg kell határoznod, hogy hogyan kapod meg a szoba azonosítóját
+    $fizetes_mod = $_POST['payment_options']; // Ez csak egy példa, itt meg kell határoznod, hogy hogyan kapod meg a fizetési módot
+    $kedvezmeny_id = $_POST['kedvezmeny']; // Ez csak egy példa, itt meg kell határoznod, hogy hogyan kapod meg a kedvezmény azonosítóját
+
+    $sql = "INSERT INTO foglalas (felhasznalo_id, mettol, meddig, szoba_id, fizetes_mod, kedvezmeny_id)
+        VALUES (?, ?, ?, ?, ?, ?)";
+
+$stmt = DataBase::$conn->prepare($sql);
+$stmt->bind_param("ssssss", $user_id, $checkin, $checkout, $szoba_id, $fizetes_mod, $kedvezmeny_id);
+
+    
+    if ($stmt->execute()) {
+        // Sikeres beszúrás esetén visszairányítás vagy más utasítások
+        header("Location: index.php");
+        exit();
+    } else {
+        echo "Hiba a foglalás feldolgozása során: " . $stmt->error;
+    }
+}
+
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -35,31 +78,29 @@ if ($result->num_rows > 0) {
     <meta content="" name="description">
 
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-  <!-- Favicon -->
-  <link href="img/favicon.ico" rel="icon">
+    <!-- Favicon -->
+    <link href="img/favicon.ico" rel="icon">
 
-<!-- Google Web Fonts -->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600;700&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">  
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600;700&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
 
+    <!-- Icon Font Stylesheet -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
 
+    <!-- Libraries Stylesheet -->
+    <link href="lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
 
-<!-- Icon Font Stylesheet -->
-<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
-<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
 
-<!-- Libraries Stylesheet -->
-<link href="lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
+    <!-- Template Stylesheet -->
+    <link href="css/style.css" rel="stylesheet">
+    <link href="css\confirm.css" rel="stylesheet">
 
-<!-- Customized Bootstrap Stylesheet -->
-<link href="css/bootstrap.min.css" rel="stylesheet">
-
-<!-- Template Stylesheet -->
-<link href="css/style.css" rel="stylesheet">
-<link href="css\confirm.css" rel="stylesheet">
-
-<link rel="stylesheet" type="text/css" href="css/modalPayContainer.css">
+    <link rel="stylesheet" type="text/css" href="css/modalPayContainer.css">
 
 </head>
 
@@ -74,7 +115,7 @@ if ($result->num_rows > 0) {
         <!-- Spinner End -->
 
         <?php include 'header.php'; ?>
-       
+
         <!-- Booking Start -->
         <div class="container-xxl py-5">
             <div class="container">
@@ -101,172 +142,133 @@ if ($result->num_rows > 0) {
                     </div>
                     <div class="col-lg-6">
                         <div class="wow fadeInUp" data-wow-delay="0.2s">
-                            <form>
+                            <form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
                                 <div class="row g-3">
-                                <div class="col-md-6">
-                                    <div class="form-floating date" id="date3" data-target-input="nearest">
-                                    <input type="text" class="form-control datetimepicker-input" id="checkin" name="checkin" placeholder="Check In" data-target="#date3" data-toggle="datetimepicker" />
-
-                                        <label for="checkin">Mettől</label>
+                                    <div class="col-md-6">
+                                        <div class="form-floating date" id="date3" data-target-input="nearest">
+                                            <input type="text" class="form-control datetimepicker-input" id="checkin" name="checkin" placeholder="Check In" data-target="#date3" data-toggle="datetimepicker" />
+                                            <label for="checkin">Mettől</label>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-floating date" id="date4" data-target-input="nearest">
-                                        <input type="text" class="form-control datetimepicker-input" id="checkout" placeholder="Check Out" data-target="#date4" data-toggle="datetimepicker" />
-                                        <label for="checkout">Meddig</label>
-                                    </div>
-                                </div>
-                                    <select name="szoba_tipus" id="szoba_tipus">
-                                        <?php
-                                        if (!empty($szoba_tipusok)) {
-                                            foreach ($szoba_tipusok as $szoba_tipus) {
-                                                echo "<option value='{$szoba_tipus['nev']}'>{$szoba_tipus['nev']} - {$szoba_tipus['ar']} Ft</option>";
-                                            }
-                                        } else {
-                                            echo "<option disabled selected>Nincs elérhető szoba típus</option>";
-                                        }
-                                        ?>
-                                    </select>
-                                        
-                                    <select name="kedvezmeny" id="kedvezmeny">
-                                        <?php
-                                        $sql = "SELECT neve, szazalek FROM kedvezmenyek";
-                                        $result = DataBase::$conn->query($sql);
 
-                                        if ($result->num_rows > 0) {
-                                            while ($row = $result->fetch_assoc()) {
-                                                echo "<option value='{$row['neve']}'>{$row['neve']} - {$row['szazalek']}%</option>";
-                                            }
-                                        } else {
-                                            echo "<option disabled selected>Nincs elérhető kedvezmény</option>";
-                                        }
-                                        ?>
-                                    </select>
+                                    <script>
+                                        $(function() {
+                                            var currentDate = new Date();
+                                            $('#date3').datetimepicker({
+                                                format: 'YYYY-MM-DD',
+                                                minDate: currentDate,
+                                                useCurrent: false
+                                            });
+                                            $('#date4').datetimepicker({
+                                                format: 'YYYY-MM-DD',
+                                                minDate: currentDate,
+                                                useCurrent: false
+                                            });
+                                        });
+                                    </script>
+                                    <div class="col-md-6">
+                                        <div class="form-floating date" id="date4" data-target-input="nearest">
+                                            <input type="text" class="form-control datetimepicker-input" id="checkout" name="checkout" placeholder="Check Out" data-target="#date4" data-toggle="datetimepicker" />
+                                            <label for="checkout">Meddig</label>
+                                        </div>
+                                    </div>
+                                    
                                     <?php
-                                        $sql = "SHOW COLUMNS FROM foglalas WHERE Field = 'fizetes_mod'";
+                                        // SQL lekérdezés a szoba_tipusok táblából
+                                        $sql = "SELECT szobatipus_id, nev, ar FROM szoba_tipusok";
                                         $result = DataBase::$conn->query($sql);
 
-                                        if ($result) {
-                                            if ($result->num_rows > 0) {
-                                                $row = $result->fetch_assoc();
-                                            
-                                                preg_match_all("/'(.*?)'/", $row['Type'], $matches);
-                                                $options = $matches[1];
+                                        // Ellenőrizze, hogy a lekérdezés eredménye nem üres-e
+                                        if ($result->num_rows > 0) {
+                                            // Ha vannak eredmények, kezdjük a lenyíló lista létrehozását
+                                            $select = '<select name="szoba_tipus" id="szoba_tipus">';
+                                            $select .= '<option value="" disabled selected>Válasszon egy szoba típust</option>';
 
-                                                $options = array_filter($options);
+                                            // Az eredmények feldolgozása és a lenyíló lista kitöltése
+                                            while ($row = $result->fetch_assoc()) {
+                                                $nev = $row['nev'];
+                                                $ar = $row['ar'];
 
-                                                if (!empty($options)) {
-                                                    echo '<select name="payment_options" id="payment_options">';
-                                                    foreach ($options as $option) {
-                                                        echo "<option value='$option'>$option</option>";
-                                                    }
-                                                    echo '</select>';
-                                                    
-                                                    echo '<button id="redirectButton" style="display:none;" class="btn btn-primary">Kártya adatainak megadása</button>';
-                                                } else {
-                                                    echo "Nincs fizetési opció az adatbázisban.";
+                                                // Az option elemek hozzáadása a lenyíló listahez
+                                                $select .= "<option value='{$row['szobatipus_id']}'>$nev ($ar Ft)</option>";
+                                            }
+
+                                            $select .= '</select>';
+
+                                            echo $select;
+                                        } else {
+                                            // Ha nincsenek eredmények, kiírjuk a megfelelő üzenetet
+                                            echo "<p>Nincsenek elérhető szoba típusok.</p>";
+                                        }
+                                        ?>
+                                    </select>
+
+                                    <?php
+                                        // SQL lekérdezés a kedvezmenyek táblából
+                                        $sql = "SELECT kedvezmeny_id, neve, szazalek FROM kedvezmenyek";
+                                        $result = DataBase::$conn->query($sql);
+
+                                        // Ellenőrizze, hogy a lekérdezés eredménye nem üres-e
+                                        if ($result->num_rows > 0) {
+                                            // Ha vannak eredmények, kezdjük a lenyíló lista létrehozását
+                                            $select = '<select name="kedvezmeny" id="kedvezmeny">';
+                                            $select .= '<option value="" disabled selected>Válasszon egy kedvezményt</option>';
+
+                                            // Az eredmények feldolgozása és a lenyíló lista kitöltése
+                                            while ($row = $result->fetch_assoc()) {
+                                                $neve = $row['neve'];
+                                                $szazalek = $row['szazalek'];
+
+                                                // Az option elemek hozzáadása a lenyíló listahez
+                                                $select .= "<option value='{$row['kedvezmeny_id']}'>$neve ($szazalek%)</option>";
+                                            }
+
+                                            $select .= '</select>';
+
+                                            echo $select;
+                                        } else {
+                                            // Ha nincsenek eredmények, kiírjuk a megfelelő üzenetet
+                                            echo "<p>Nincsenek elérhető kedvezmények.</p>";
+                                        }
+                                        ?>
+     
+
+
+                                    <?php
+                                    $sql = "SHOW COLUMNS FROM foglalas WHERE Field = 'fizetes_mod'";
+                                    $result = DataBase::$conn->query($sql);
+
+                                    if ($result) {
+                                        if ($result->num_rows > 0) {
+                                            $row = $result->fetch_assoc();
+
+                                            preg_match_all("/'(.*?)'/", $row['Type'], $matches);
+                                            $options = $matches[1];
+
+                                            $options = array_filter($options);
+
+                                            if (!empty($options)) {
+                                                echo '<select name="payment_options" id="payment_options">';
+                                                foreach ($options as $option) {
+                                                    echo "<option value='$option'>$option</option>";
                                                 }
+                                                echo '</select>';
+
+                                                echo '<button id="redirectButton" style="display:none;" class="btn btn-primary">Kártya adatainak megadása</button>';
                                             } else {
                                                 echo "Nincs fizetési opció az adatbázisban.";
                                             }
                                         } else {
-                                            echo "Adatbázis hiba: " . DataBase::$conn->error; 
+                                            echo "Nincs fizetési opció az adatbázisban.";
                                         }
+                                    } else {
+                                        echo "Adatbázis hiba: " . DataBase::$conn->error;
+                                    }
 
-                                        ?>
-
-                                    <!-- Modális ablak -->
-                                    <div id="modalPayContainer" class="modal">
-                                      <div class="modal-content">
-                                      <span id="closeModal" class="close">&times;</span> <!-- Bezáró gomb -->
-                                        <h3>Bankkártyás fizetés</h3>
-                                        <form id="paymentForm">
-                                          <div class="form-group">
-                                            <label for="cardNumber">Kártyaszám:</label>
-                                            <input type="text" class="form-control" id="cardNumber" placeholder="xxxx-xxxx-xxxx-xxxx" maxlength="19" required>
-                                          </div>
-                                          <div class="form-group">
-                                            <label for="cardOwner">Kártyatulajdonos neve:</label>
-                                            <input type="text" class="form-control" id="cardOwner" placeholder="Atka Attila" required>
-                                          </div>
-                                          <div class="form-group">
-                                            <label for="expiryDate">Lejárati dátum:</label>
-                                            <input type="text" class="form-control" id="expiryDate" placeholder="HH/ÉÉ" maxlength="5" required>
-                                          </div>
-                                          <div class="form-group">
-                                            <label for="securityCode">Biztonsági kód:</label>
-                                            <input type="password" class="form-control" id="securityCode" placeholder="xxx" maxlength="3" required>
-                                          </div>
-                                          <button type="submit" class="btn btn-primary">Kártya adatainak mentése</button>
-                                        </form>
-                                      </div>
-                                    </div>
+                                    ?>
 
                                     <div class="col-12">
-                                    <button class="btn btn-primary w-100 py-3" id="bookNowButton" data-toggle="modal" data-target="#exampleModal">Foglalás</button>
-                                    </div> 
-                                    <!-- Modal -->
-                                    <form method="post" action="">
-                                    <div class="modal" id="exampleModal" tabindex="-1" style="display: none;">
-                                        <div class="modal-dialog">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h5 class="modal-title">Foglalásom</h5>
-                                                    <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
-                                                </div>
-                                                <div class="modal-body">
-                                                    <p id="bookingDetails"></p>
-                                                </div>
-                                                <div class="modal-footer">
-                                                <button type="submit" class="btn btn-secondary" id="confirmBookingButton" name="confirm_booking">Megerősítés</button>
-
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    </form>
-                                        <script>
-
-                                            document.getElementById("confirmBookingButton").addEventListener("click", function() {
-                                            console.log("Form submission attempted");
-                                            document.getElementById("exampleModal").querySelector("form").submit();
-                                        });
-
-                                            document.getElementById("bookNowButton").addEventListener("click", function(event) {
-                                            event.preventDefault();
-                                            var modal = document.getElementById("exampleModal");
-                                            var selectRoomType = document.getElementById("szoba_tipus");
-                                            var selectDiscount = document.getElementById("kedvezmeny");
-                                            var modalBody = modal.querySelector('.modal-body');
-                                            var selectedRoomTypeText = selectRoomType.options[selectRoomType.selectedIndex].text;
-                                            var selectedDiscountText = selectDiscount.options[selectDiscount.selectedIndex].text;
-                                            var userEmail = "<?php echo $user_email; ?>";
-                                            var checkinDate = document.getElementById("checkin").value;
-                                            var checkoutDate = document.getElementById("checkout").value;
-                                            var selectedPaymentOption = document.getElementById("payment_options").value;
-                                            if (checkinDate === "" || checkoutDate === "") {
-                                                modalBody.innerHTML = "Kérjük, válasszon ki egy dátumot mind a 'Mettől', mind a 'Meddig' mezőben.";
-                                                document.getElementById("confirmBookingButton").disabled = true;
-                                            } else {
-                                                var content = "Bejelentkezett felhasználó e-mail címe: " + userEmail  + "<br>" +
-                                                              "Kiválasztott szoba típus: " + selectedRoomTypeText + "<br>" +
-                                                              "Kiválasztott kedvezmény: " + selectedDiscountText + "<br>" +
-                                                              "Választott fizetési mód: " + selectedPaymentOption + "<br>" +
-                                                              "Ettől: " + checkinDate + "<br>" +
-                                                              "Eddig: " + checkoutDate;
-                                                modalBody.innerHTML = content;
-                                            }
-                                            modal.style.display = "block";
-                                        
-                                            // Az űrlap elküldése a "Megerősítés" gombra kattintáskor
-                                            document.getElementById("confirmBookingButton").addEventListener("click", function() {
-                                                document.getElementById("exampleModal").querySelector("form").submit();
-                                            });
-                                            });
-
-                                        </script>
-
-                                        </div>
+                                        <button type="submit" class="btn btn-primary w-100 py-3" id="bookNowButton" name="bookNow">Foglalás</button>
                                     </div>
                                 </div>
                             </form>
@@ -275,29 +277,72 @@ if ($result->num_rows > 0) {
                 </div>
             </div>
         </div>
-<!-- Dátum helyes működéséhez -->
-<script>
-$(function () {
-    var currentDate = new Date();
-    
-    $('#date3').datetimepicker({
-        minDate: currentDate,
-        useCurrent: false
+        <!-- A mettől dátumnál ne lehessen korábbi a meddig dátum -->
+        <script>
+    $(document).ready(function() {
+        $('#date4').datetimepicker({
+            format: 'YYYY-MM-DD',
+            minDate: moment().startOf('day') // Korábbi dátumok tiltása
+        });
     });
-    
-    $('#date4').datetimepicker({
-        minDate: currentDate,
-        useCurrent: false
-    });
-});
-
 </script>
+
+
+<script>
+    $(document).ready(function() {
+        $("#bookNowButton").click(function() {
+            // Előzően beszúrt üzenetek törlése
+            $(".error-message").remove();
+
+            var checkin = $("#checkin").val();
+            var checkout = $("#checkout").val();
+            var selectedRoomType = $("#szoba_tipus").val();
+            var selectedDiscount = $("#kedvezmeny").val();
+
+            if (checkin === '' || checkout === '') {
+                $("<p class='error-message' style='color: red;'>Válasszon ki egy dátumot a 'Mettől' és 'Meddig' mezőben!</p>").insertAfter("#bookNowButton");
+                return false; // Megakadályozza az űrlap elküldését
+            }
+
+            if (selectedRoomType === null && selectedDiscount === null) {
+                $("<p class='error-message' style='color: red;'>Válasszon ki egy szobatípust és egy kedvezményt!</p>").insertAfter("#bookNowButton");
+                return false; // Megakadályozza az űrlap elküldését
+            } else if (selectedRoomType === null) {
+                $("<p class='error-message' style='color: red;'>Válasszon ki egy szobatípust!</p>").insertAfter("#bookNowButton");
+                return false; // Megakadályozza az űrlap elküldését
+            } else if (selectedDiscount === null) {
+                $("<p class='error-message' style='color: red;'>Válasszon ki egy kedvezményt!</p>").insertAfter("#bookNowButton");
+                return false; // Megakadályozza az űrlap elküldését
+            }
+        });
+    });
+</script>
+
+
+        <!-- Dátum helyes működéséhez -->
+        <script>
+            $(function() {
+                var currentDate = new Date();
+
+                $('#date3').datetimepicker({
+                    minDate: currentDate,
+                    useCurrent: false
+                });
+
+                $('#date4').datetimepicker({
+                    minDate: currentDate,
+                    useCurrent: false
+                });
+            });
+        </script>
+     
+
 
 
         <!-- Booking End -->
 
-        <?php include('footer.php')?>
-        
+        <?php include('footer.php') ?>
+
         <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
     </div>
 
@@ -311,8 +356,7 @@ $(function () {
     <script src="lib/tempusdominus/js/moment-timezone.min.js"></script>
     <script src="lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
     <script src="js\modal\modalPayContainer.js"></script>
-    <script src="js\modal\bookingModal.js"></script>
-   
+
     <!-- Template Javascript -->
     <script src="js/main.js"></script>
 </body>
