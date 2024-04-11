@@ -14,11 +14,11 @@ if (isset($_POST['confirm_booking'])) {
     if(isset($_POST['checkin'], $_POST['checkout'], $_POST['szoba_tipus'], $_POST['kedvezmeny'], $_POST['payment_options'])) {
         $checkinDate = $_POST['checkin'];
         $checkoutDate = $_POST['checkout'];
-        $selectedRoomTypeText = $_POST['szoba_tipus'];
+        $selectedRoomTypeId = $_POST['szoba_tipus']; // Módosítás: az id-t kapjuk meg a szoba típus helyett
         $selectedDiscountText = $_POST['kedvezmeny'];
         $paymentOption = $_POST['payment_options'];
 
-        $sql_szoba = "SELECT szoba_id FROM szoba_tipusok WHERE nev = '$selectedRoomTypeText'";
+        $sql_szoba = "SELECT szoba_id FROM szoba_tipusok WHERE nev = '$selectedRoomTypeId'"; // Módosítás: az id-t kérjük le
         $result_szoba = DataBase::$conn->query($sql_szoba);
         
         if ($result_szoba && $result_szoba->num_rows > 0) {
@@ -35,17 +35,9 @@ if (isset($_POST['confirm_booking'])) {
             }
 
             $now = date('Y-m-d H:i:s');
-                $sql_insert = "INSERT INTO foglalas (felhasznalo_id, check_in, check_out, mettol, meddig, szoba_id, fizetes_mod, fizetes_idopontja, kedvezmeny_id) 
-               VALUES ('$user_id', NULL, NULL, '$chechkinDate', '$checkoutDate', '$szoba_id', '$fizetes_mod', '$now', '$kedvezmeny_id')";
+            $sql_insert = "INSERT INTO foglalas (felhasznalo_id, check_in, check_out, mettol, meddig, szoba_id, fizetes_mod, fizetes_idopontja, kedvezmeny_id) 
+                           VALUES ('$user_id', NULL, NULL, '$checkinDate', '$checkoutDate', '$szoba_id', '$paymentOption', NULL, '$kedvezmeny_id')";
 
-            echo $sql_insert; ?>
-
-            <script>
-            var msg = "<?php echo $sql_insert; ?>"; 
-            alert(msg);
-            </script>
-
-            <?php
             if (DataBase::$conn->query($sql_insert) === TRUE) {
                 echo "Sikeresen hozzáadva az adatbázishoz.";
             } else {
