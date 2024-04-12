@@ -10,7 +10,7 @@ if(isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
                                 Profil
                             </button>
                             <ul class="dropdown-menu" aria-labelledby="profileDropdown">
-                                <li><a class="dropdown-item" href="edit_profile.php">Profil módosítása</a></li>
+                                <li><a class="dropdown-item" href="foglalasaim.php">Foglalásaim megtekintése</a></li>
                                 <li><a id="logout_link" class="dropdown-item" href="logout.php">Kijelentkezés</a></li>
                             </ul>
                         </div>';
