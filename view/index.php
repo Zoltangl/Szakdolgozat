@@ -56,10 +56,10 @@ include('connection.php');
         <div class="container-fluid page-header mb-5 p-0" style="background-image: url(img/fejlec2.jpg);">
             <div class="container-fluid page-header-inner py-5">
                 <div class="container text-center pb-5">
-                    <h1 class="display-3 text-white mb-3 animated slideInDown">HOME</h1>
+                    <h1 class="display-3 text-white mb-3 animated slideInDown">KEZDŐLAP</h1>
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb justify-content-center text-uppercase">
-                            <li class="breadcrumb-item"><a href="#">Home</a></li>
+                            <li class="breadcrumb-item"><a href="#">Kezdőlap</a></li>
                             
                         </ol>
                     </nav>
@@ -78,40 +78,12 @@ include('connection.php');
             <div class="container">
                 <div class="row g-5 align-items-center">
                     <div class="col-lg-6">
-                        <h6 class="section-title text-start text-primary text-uppercase">About Us</h6>
-                        <h1 class="mb-4">Welcome to <span class="text-primary text-uppercase">HappyHotel</span></h1>
+                        <h6 class="section-title text-start text-primary text-uppercase">Kezdőlap</h6>
+                        <h1 class="mb-4">Üdvözöljük a <span class="text-primary text-uppercase">HappyHotelben</span></h1>
                         <p class="mb-4">
-                            Üdvözöljük "Rólunk" oldalán! Büszkén mutatjuk be luxus szolgáltatásainkat, melyekkel vendégeinknek emlékezetes élményt nyújtunk. HappyHotel egyedi hangulatával és kifinomult kényelmével tökéletes választás mindazok számára, akik kikapcsolódásra és pihenésre vágynak. Legyen szó üzleti útról, romantikus hétvégéről vagy családi nyaralásról, szállodánk kivételes szolgáltatásokkal és barátságos kiszolgálással várja Önt. A kifinomult design és a legmagasabb színvonalú kényelem mellett a helyi kultúra és gasztronómia is kiemelt figyelmet kap nálunk. Fedezze fel városunkat kényelmes és stílusos szállodánkból, és hagyja, hogy élményeink örökre a memóriájában maradjanak!</p>
-                        <div class="row g-3 pb-4">
-                            <div class="col-sm-4 wow fadeIn" data-wow-delay="0.1s">
-                                <div class="border rounded p-1">
-                                    <div class="border rounded text-center p-4">
-                                        <i class="fa fa-hotel fa-2x text-primary mb-2"></i>
-                                        <h2 class="mb-1" data-toggle="counter-up">12</h2>
-                                        <p class="mb-0">Rooms</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-4 wow fadeIn" data-wow-delay="0.3s">
-                                <div class="border rounded p-1">
-                                    <div class="border rounded text-center p-4">
-                                        <i class="fa fa-users-cog fa-2x text-primary mb-2"></i>
-                                        <h2 class="mb-1" data-toggle="counter-up">40</h2>
-                                        <p class="mb-0">Staffs</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-4 wow fadeIn" data-wow-delay="0.5s">
-                                <div class="border rounded p-1">
-                                    <div class="border rounded text-center p-4">
-                                        <i class="fa fa-users fa-2x text-primary mb-2"></i>
-                                        <h2 class="mb-1" data-toggle="counter-up">231</h2>
-                                        <p class="mb-0">Clients</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <a class="btn btn-primary py-3 px-5 mt-2" href="">Explore More</a>
+                            Üdvözöljük a HappyHotel kezdőlapján! Büszkén mutatjuk be luxus szolgáltatásainkat, melyekkel vendégeinknek emlékezetes élményt nyújtunk. HappyHotel egyedi hangulatával és kifinomult kényelmével tökéletes választás mindazok számára, akik kikapcsolódásra és pihenésre vágynak. Legyen szó üzleti útról, romantikus hétvégéről vagy családi nyaralásról, szállodánk kivételes szolgáltatásokkal és barátságos kiszolgálással várja Önt. A kifinomult design és a legmagasabb színvonalú kényelem mellett a helyi kultúra és gasztronómia is kiemelt figyelmet kap nálunk. Fedezze fel városunkat kényelmes és stílusos szállodánkból, és hagyja, hogy élményeink örökre a memóriájában maradjanak!</p>
+                        
+                        <a class="btn btn-primary py-3 px-5 mt-2" href="about.php">Explore More</a>
                     </div>
                     <div class="col-lg-6">
     <div class="row g-2">
@@ -148,15 +120,15 @@ include('connection.php');
         <div class="container-xxl py-5">
             <div class="container">
                 <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
-                    <h6 class="section-title text-center text-primary text-uppercase">Our Rooms</h6>
-                    <h1 class="mb-5">Explore Our <span class="text-primary text-uppercase">Rooms</span></h1>
+                    <h6 class="section-title text-center text-primary text-uppercase">Szobáink</h6>
+                    <h1 class="mb-5">Fedezze fel <span class="text-primary text-uppercase">Szobáinkat</span></h1>
                 </div>
                 <div class="row g-4">
                     <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
                         <div class="room-item shadow rounded overflow-hidden">
                             <div class="position-relative">
                                 <img class="img-fluid" src="img/csaladi.jpg" alt="">
-                                <small class="position-absolute start-0 top-100 translate-middle-y bg-primary text-white rounded py-1 px-3 ms-4">21.000 Ft/Night</small>
+                                <small class="position-absolute start-0 top-100 translate-middle-y bg-primary text-white rounded py-1 px-3 ms-4">21.000 Ft/Éjszaka</small>
                             </div>
                             <div class="p-4 mt-2">
                                 <div class="d-flex justify-content-between mb-3">
@@ -170,14 +142,14 @@ include('connection.php');
                                     </div>
                                 </div>
                                 <div class="d-flex mb-3">
-                                    <small class="border-end me-3 pe-3"><i class="fa fa-bed text-primary me-2"></i>3 Bed</small>
-                                    <small class="border-end me-3 pe-3"><i class="fa fa-bath text-primary me-2"></i>2 Bath</small>
+                                    <small class="border-end me-3 pe-3"><i class="fa fa-ágy text-primary me-2"></i>3 ágy</small>
+                                    <small class="border-end me-3 pe-3"><i class="fa fa-zuhanyzó text-primary me-2"></i>2 zuhanyzó</small>
                                     <small><i class="fa fa-wifi text-primary me-2"></i>Wifi</small>
                                 </div>
                                 <p class="text-body mb-3">Fedezze fel kényelmes és praktikus családi szobáinkat! Ideális választás családok számára, akik együtt szeretnék élvezni a kényelmet és a kikapcsolódást. A családi szoba tágas teret kínál a szülőknek és a gyerekeknek egyaránt.</p>
                                 <div class="d-flex justify-content-between">
-                                    <a class="btn btn-sm btn-primary rounded py-2 px-4" href="roomdetails/csaladi.php">View Detail</a>
-                                    <a class="btn btn-sm btn-dark rounded py-2 px-4" href="">Book Now</a>
+                                    <a class="btn btn-sm btn-primary rounded py-2 px-4" href="roomdetails/csaladi.php">Megtekintés</a>
+                                    
                                 </div>
                             </div>
                         </div>
@@ -186,7 +158,7 @@ include('connection.php');
                         <div class="room-item shadow rounded overflow-hidden">
                             <div class="position-relative">
                                 <img class="img-fluid" src="img/lakosztaly.jpg" alt="">
-                                <small class="position-absolute start-0 top-100 translate-middle-y bg-primary text-white rounded py-1 px-3 ms-4">52.000 Ft/Night</small>
+                                <small class="position-absolute start-0 top-100 translate-middle-y bg-primary text-white rounded py-1 px-3 ms-4">52.000 Ft/éjszaka</small>
                             </div>
                             <div class="p-4 mt-2">
                                 <div class="d-flex justify-content-between mb-3">
@@ -200,14 +172,14 @@ include('connection.php');
                                     </div>
                                 </div>
                                 <div class="d-flex mb-3">
-                                    <small class="border-end me-3 pe-3"><i class="fa fa-bed text-primary me-2"></i>1 Bed</small>
-                                    <small class="border-end me-3 pe-3"><i class="fa fa-bath text-primary me-2"></i>1 Bath</small>
+                                    <small class="border-end me-3 pe-3"><i class="fa fa-ágy text-primary me-2"></i>1 ágy</small>
+                                    <small class="border-end me-3 pe-3"><i class="fa fa-zuhanyzó text-primary me-2"></i>1 zuhanyzó</small>
                                     <small><i class="fa fa-wifi text-primary me-2"></i>Wifi</small>
                                 </div>
                                 <p class="text-body mb-3">Fedezze fel luxus és kényelem csúcsát a hotel lakosztályában! Ez a kifinomult és tágas szállásegység tökéletes választás azoknak, akik különleges élményre vágynak. A lakosztály kényelmes hálószobát, tágas nappalit és exkluzív fürdőszobát kínál, amely minden igényt kielégít.</p>
                                 <div class="d-flex justify-content-between">
-                                    <a class="btn btn-sm btn-primary rounded py-2 px-4" href="roomdetails/lakosztaly.php">View Detail</a>
-                                    <a class="btn btn-sm btn-dark rounded py-2 px-4" href="">Book Now</a>
+                                    <a class="btn btn-sm btn-primary rounded py-2 px-4" href="roomdetails/lakosztaly.php">Megtekintés</a>
+                                    
                                 </div>
                             </div>
                         </div>
@@ -216,7 +188,7 @@ include('connection.php');
                         <div class="room-item shadow rounded overflow-hidden">
                             <div class="position-relative">
                                 <img class="img-fluid" src="img/fapados.jpg" alt="">
-                                <small class="position-absolute start-0 top-100 translate-middle-y bg-primary text-white rounded py-1 px-3 ms-4">6.500 Ft/Night</small>
+                                <small class="position-absolute start-0 top-100 translate-middle-y bg-primary text-white rounded py-1 px-3 ms-4">6.500 Ft/éjszaka</small>
                             </div>
                             <div class="p-4 mt-2">
                                 <div class="d-flex justify-content-between mb-3">
@@ -228,14 +200,14 @@ include('connection.php');
                                     </div>
                                 </div>
                                 <div class="d-flex mb-3">
-                                    <small class="border-end me-3 pe-3"><i class="fa fa-bed text-primary me-2"></i>1 Bed</small>
-                                    <small class="border-end me-3 pe-3"><i class="fa fa-bath text-primary me-2"></i>1 Bath</small>
+                                    <small class="border-end me-3 pe-3"><i class="fa fa-ágy text-primary me-2"></i>1 ágy</small>
+                                    <small class="border-end me-3 pe-3"><i class="fa fa-zuhanyzó text-primary me-2"></i>1 zuhanyzó</small>
                                     <small><i class="fa fa-wifi text-primary me-2"></i>Wifi</small>
                                 </div>
                                 <p class="text-body mb-3">Fedezze fel a kényelmes és megfizethető fapados hotelszobát! Ez a praktikus szállásegység ideális választás azoknak, akik egy egyszerű és kényelmes tartózkodást keresnek megfizethető áron.</p>
                                 <div class="d-flex justify-content-between">
-                                    <a class="btn btn-sm btn-primary rounded py-2 px-4" href="roomdetails/fapados.php">View Detail</a>
-                                    <a class="btn btn-sm btn-dark rounded py-2 px-4" href="">Book Now</a>
+                                    <a class="btn btn-sm btn-primary rounded py-2 px-4" href="roomdetails/fapados.php">Megtekintés</a>
+                                    
                                 </div>
                             </div>
                         </div>
