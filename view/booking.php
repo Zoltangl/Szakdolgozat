@@ -335,9 +335,7 @@ $stmt->bind_param("ssssss", $user_id, $checkin, $checkout, $szoba_id, $fizetes_m
                 });
             });
         </script>
-     
-
-
+          
 
         <!-- Booking End -->
 
