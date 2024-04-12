@@ -16,7 +16,7 @@ class DataBase
         if (self::$conn->connect_error) {
             die("Hiba az adatbázishoz való kapcsolódás közben: " . self::$conn->connect_error);
         } else {
-            echo "Sikeresen csatlakozva az adatbázishoz.<br>";
+            echo "";
         }
     }
 
