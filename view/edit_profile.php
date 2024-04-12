@@ -6,34 +6,55 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
     header("Location: login.php");
     exit();
 }
-$vezeteknev = "";
-$keresztnev = "";
-$email = "";
-$telefonszam = "";
 
-// Alapértelmezett értékek beállítása a session-ben tárolt adatok alapján
-$vezeteknev = isset($_SESSION["firstusername"]) ? $_SESSION["firstusername"] : $vezeteknev;
-$keresztnev = isset($_SESSION["secondusername"]) ? $_SESSION["secondusername"] : $keresztnev;
-$email = isset($_SESSION["email"]) ? $_SESSION["email"] : $email;
-$telefonszam = isset($_SESSION["number"]) ? $_SESSION["number"] : $telefonszam;
 
-// Felhasználó adatainak lekérése az adatbázisból
-$sql = "SELECT vezeteknev, keresztnev, email_cim, telefonszam FROM felhasznalo WHERE felhasznalo_id = ?";
-$stmt = $db::$conn->prepare($sql);
-$stmt->bind_param("i", $_SESSION['felhasznalo_id']);
-$stmt->execute();
-$result = $stmt->get_result();
 
-// Ellenőrzés, hogy sikerült-e a lekérdezés és ha igen, beállítjuk a változókat
-if ($result !== false && $result->num_rows > 0) {
-    $row = $result->fetch_assoc();
-    $vezeteknev = isset($row['vezeteknev']) ? $row['vezeteknev'] : $vezeteknev;
-    $keresztnev = isset($row['keresztnev']) ? $row['keresztnev'] : $keresztnev;
-    $email = isset($row['email_cim']) ? $row['email_cim'] : $email;
-    $telefonszam = isset($row['telefonszam']) ? $row['telefonszam'] : $telefonszam;
+// Az aktuális felhasználó azonosítója
+$current_user_id = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : null;
+
+if (!$current_user_id) {
+    echo "Hiba: Felhasználói azonosító nem található.";
+    exit();
 }
 
+// SQL lekérdezés a foglalások lekéréséhez
+$sql = "SELECT foglalas_id, mettol, meddig, szoba_id, fizetes_mod, kedvezmeny_id 
+        FROM foglalas 
+        WHERE felhasznalo_id = $current_user_id";
+
+$result = $conn->query($sql);
+
+if (!$result) {
+    echo "Hiba a lekérdezés során: " . $conn->error;
+    exit();
+}
+
+if ($result->num_rows > 0) {
+    // Táblázat fejléc
+    echo "<table border='1'>";
+    echo "<tr><th>Foglalás ID</th><th>Mettől</th><th>Meddig</th><th>Szoba ID</th><th>Fizetés módja</th><th>Kedvezmény ID</th></tr>";
+    
+    // Adatok megjelenítése
+    while($row = $result->fetch_assoc()) {
+        echo "<tr>";
+        echo "<td>" . $row["foglalas_id"] . "</td>";
+        echo "<td>" . $row["mettol"] . "</td>";
+        echo "<td>" . $row["meddig"] . "</td>";
+        echo "<td>" . $row["szoba_id"] . "</td>";
+        echo "<td>" . $row["fizetes_mod"] . "</td>";
+        echo "<td>" . $row["kedvezmeny_id"] . "</td>";
+        echo "</tr>";
+    }
+    echo "</table>";
+} else {
+    echo "Nincs foglalás.";
+}
+
+$conn->close();
 ?>
+
+
+    
 
 <!DOCTYPE html>
 <html lang="en">
