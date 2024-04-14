@@ -2,11 +2,13 @@
 
 include('connection.php');
 
-// Adatbáziskapcsolat létrehozása
-$conn = new mysqli("localhost", "c31gulcsikZ", "zqd73iNH#Q", "c31gulcsikZ_db");
-
 // Változók inicializálása
 $pass_error = '';
+$tel_error = '';
+$vezeteknev = '';
+$keresztnev = '';
+$email = '';
+$telefonszam = '';
 
 // Ellenőrizze, hogy az űrlap elküldésekor POST-ot használnak-e
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -18,12 +20,23 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $jelszo = $_POST["pass"];
     $jelszo_megerositese = $_POST["cpass"];
 
-    // Ellenőrizze a jelszó és a jelszó megerősítése egyezőségét
-    if ($jelszo !== $jelszo_megerositese) {
+    // Ellenőrizze a jelszó hosszát, kisbetűtartalmát és nagybetűtartalmát
+    if (strlen($jelszo) < 4 || !preg_match('/[a-z]/', $jelszo) || !preg_match('/[A-Z]/', $jelszo)) {
+        $pass_error = 'A jelszónak legalább 4 karakter hosszúnak kell lennie, tartalmaznia kell legalább egy kisbetűt és egy nagybetűt!';
+    } elseif ($jelszo !== $jelszo_megerositese) { // Ellenőrizze a jelszó és a jelszó megerősítése egyezőségét
         $pass_error = 'A jelszó és a jelszó megerősítése nem egyezik!';
-        $_POST['pass'] = ''; // Törli a jelszó mező tartalmát
-        $_POST['cpass'] = ''; // Törli a jelszó megerősítése mező tartalmát
-    } else {
+    }
+
+    // Ellenőrizze a telefonszám hosszát
+    if (strlen($telefonszam) !== 9) {
+        $tel_error = 'A telefonszám 9 karakterből kell álljon!';
+    }
+
+    // Ellenőrzések után folytatjuk csak a mentéssel, ha nincs hiba
+    if (empty($pass_error) && empty($tel_error)) {
+        // Adatbáziskapcsolat létrehozása
+        $conn = new mysqli("localhost", "c31gulcsikZ", "zqd73iNH#Q", "c31gulcsikZ_db");
+
         // Jelszó hashelése
         $jelszo_hashelt = password_hash($jelszo, PASSWORD_DEFAULT);
 
@@ -38,11 +51,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         } else {
             echo "<p>Hiba az adatok felvétele közben: " . $conn->error . "</p>";
         }
+        
+        // Adatbáziskapcsolat bezárása
+        $conn->close();
     }
 }
 
-// Adatbáziskapcsolat bezárása
-$conn->close();
 ?>
 
 <!DOCTYPE html>
@@ -105,27 +119,28 @@ $conn->close();
 <body>
 
 <div class="container">
-    <form id="form"  method="POST">
-        <h1 id="heading">Regisztráció</h1>
-        <i class="fa-solid fa-user"></i>
-        <input type="text" id="firstusername" name="firstusername" placeholder="Add meg a Vezetékneved..." required><br>
-        <i class="fa-solid fa-user"></i>
-        <input type="text" id="secondusername" name="secondusername" placeholder="Add meg a Keresztneved..." required><br>
-        <i class="fa-solid fa-envelope"></i>
-        <input type="email" id="email" name="email" placeholder="Add meg az email címed..." required><br>
-        <i class="fa-solid fa-phone"></i>
-        <input type="text" id="number" name="number" placeholder="Add meg a telefonszámod... (+36)" pattern="[0-9]+" required title="Csak szám megadása lehetséges"><br>
-        <i class="fa-solid fa-lock"></i>
-        <input type="password" id="pass" name="pass" placeholder="Add meg a jelszavad..." required><br>
-        <i class="fa-solid fa-lock"></i>
-        <input type="password" id="cpass" name="cpass" placeholder="Jelszó megerősítése..." required><br>
-        <span style="color:red;"><?php echo $pass_error; ?></span><br>
-        <input type="submit" id="btn" value="Regisztráció" name="Submit" required><br>
+            <form id="form" method="POST">
+                <h1 id="heading">Regisztráció</h1>
+                <i class="fa-solid fa-user"></i>
+                <input type="text" id="firstusername" name="firstusername" placeholder="Add meg a Vezetékneved..." value="<?php echo $vezeteknev; ?>" required><br>
+                <i class="fa-solid fa-user"></i>
+                <input type="text" id="secondusername" name="secondusername" placeholder="Add meg a Keresztneved..." value="<?php echo $keresztnev; ?>" required><br>
+                <i class="fa-solid fa-envelope"></i>
+                <input type="email" id="email" name="email" placeholder="Add meg az email címed..." value="<?php echo $email; ?>" required><br>
+                <i class="fa-solid fa-phone"></i>
+                <input type="text" id="number" name="number" placeholder="Add meg a telefonszámod... (+36)" pattern="[0-9]+" value="<?php echo $telefonszam; ?>" required title="Csak szám megadása lehetséges"><br>
+                <span style="color:red;"><?php echo $tel_error; ?></span><br>
+                <i class="fa-solid fa-lock"></i>
+                <input type="password" id="pass" name="pass" placeholder="Add meg a jelszavad..." required><br>
+                <i class="fa-solid fa-lock"></i>
+                <input type="password" id="cpass" name="cpass" placeholder="Jelszó megerősítése..." required><br>
+                <span style="color:red;"><?php echo $pass_error; ?></span><br>
+                <input type="submit" id="btn" value="Regisztráció" name="Submit" onclick="return validateForm()"><br>
 
-        <!-- A "Belépés" link -->
-        <div class="signup-link">Már van fiókod? <a href="login.php">Belépés</a></div>
-    </form>
-</div>
+                <!-- A "Belépés" link -->
+                <div class="signup-link">Már van fiókod? <a href="login.php">Belépés</a></div>
+            </form>
+        </div>
     <!-- JavaScript Libraries -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
@@ -139,6 +154,30 @@ $conn->close();
 
     <!-- Template Javascript -->
     <script src="js/main.js"></script>
+
+    <script>
+        function validateForm() {
+            var pass = document.getElementById('pass').value;
+            var cpass = document.getElementById('cpass').value;
+            var tel = document.getElementById('number').value;
+
+            var passError = "<?php echo $pass_error; ?>";
+            var telError = "<?php echo $tel_error; ?>";
+
+            if (passError !== '' || telError !== '') {
+                document.getElementById('pass_error').innerHTML = passError;
+                document.getElementById('tel_error').innerHTML = telError;
+                return false;
+            }
+
+            if (pass !== cpass) {
+                document.getElementById('pass_error').innerHTML = 'A jelszó és a jelszó megerősítése nem egyezik!';
+                return false;
+            }
+
+            return true;
+        }
+    </script>
 </body>
 
 </html>
