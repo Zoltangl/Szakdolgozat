@@ -39,31 +39,52 @@ if ($result->num_rows > 0) {
     echo "Nincsenek adatok a szoba tipusok táblában.";
 }
 
-// Foglalás feldolgozása
-if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['bookNow'])) {
-    $checkin = date('Y-m-d', strtotime($_POST['checkin'])); // Formátum: 'YYYY-MM-DD'
-    $checkout = date('Y-m-d', strtotime($_POST['checkout'])); // Formátum: 'YYYY-MM-DD'
-    $szoba_id = $_POST['szoba_tipus']; // Ez csak egy példa, itt meg kell határoznod, hogy hogyan kapod meg a szoba azonosítóját
-    $fizetes_mod = $_POST['payment_options']; // Ez csak egy példa, itt meg kell határoznod, hogy hogyan kapod meg a fizetési módot
-    $kedvezmeny_id = $_POST['kedvezmeny']; // Ez csak egy példa, itt meg kell határoznod, hogy hogyan kapod meg a kedvezmény azonosítóját
+// Foglalás ellenőrzése
+function checkRoomAvailability($checkin, $checkout, $szoba_id) {
+    $sql = "SELECT COUNT(*) as count FROM foglalas WHERE szoba_id = ? AND ((? BETWEEN mettol AND meddig) OR (? BETWEEN mettol AND meddig))";
+    $stmt = DataBase::$conn->prepare($sql);
+    $stmt->bind_param("iss", $szoba_id, $checkin, $checkout);
+    $stmt->execute();
+    $result = $stmt->get_result();
 
-    $sql = "INSERT INTO foglalas (felhasznalo_id, mettol, meddig, szoba_id, fizetes_mod, kedvezmeny_id)
-        VALUES (?, ?, ?, ?, ?, ?)";
-
-$stmt = DataBase::$conn->prepare($sql);
-$stmt->bind_param("ssssss", $user_id, $checkin, $checkout, $szoba_id, $fizetes_mod, $kedvezmeny_id);
-
-    
-    if ($stmt->execute()) {
-        // Sikeres beszúrás esetén visszairányítás vagy más utasítások
-        header("Location: index.php");
-        exit();
+    if ($result->num_rows > 0) {
+        $row = $result->fetch_assoc();
+        $count = $row['count'];
+        return $count > 0;
     } else {
-        echo "Hiba a foglalás feldolgozása során: " . $stmt->error;
+        return false;
     }
 }
 
+$foglalt_szoba = ''; // Alapértelmezett érték az üzenetnek
+
+// Foglalás feldolgozása
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['bookNow'])) {
+    $checkin = date('Y-m-d', strtotime($_POST['checkin']));
+    $checkout = date('Y-m-d', strtotime($_POST['checkout']));
+    $szoba_id = $_POST['szoba_tipus'];
+    $fizetes_mod = $_POST['payment_options'];
+    $kedvezmeny_id = $_POST['kedvezmeny'];
+
+    if (checkRoomAvailability($checkin, $checkout, $szoba_id)) {
+        $foglalt_szoba = "<p style='color: red;'>Sajnos ezt a szobát már lefoglalták.</p>";
+    } else {
+        $sql = "INSERT INTO foglalas (felhasznalo_id, mettol, meddig, szoba_id, fizetes_mod, kedvezmeny_id)
+            VALUES (?, ?, ?, ?, ?, ?)";
+        $stmt = DataBase::$conn->prepare($sql);
+        $stmt->bind_param("ssssss", $user_id, $checkin, $checkout, $szoba_id, $fizetes_mod, $kedvezmeny_id);
+        
+        if ($stmt->execute()) {
+            header("Location: index.php");
+            exit();
+        } else {
+            echo "Hiba a foglalás feldolgozása során: " . $stmt->error;
+        }
+    }
+}
 ?>
+
+
 
 
 <!DOCTYPE html>
