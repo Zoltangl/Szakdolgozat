@@ -83,7 +83,7 @@ include('connection.php');
                         <p class="mb-4">
                             Üdvözöljük a HappyHotel kezdőlapján! Büszkén mutatjuk be luxus szolgáltatásainkat, melyekkel vendégeinknek emlékezetes élményt nyújtunk. HappyHotel egyedi hangulatával és kifinomult kényelmével tökéletes választás mindazok számára, akik kikapcsolódásra és pihenésre vágynak. Legyen szó üzleti útról, romantikus hétvégéről vagy családi nyaralásról, szállodánk kivételes szolgáltatásokkal és barátságos kiszolgálással várja Önt. A kifinomult design és a legmagasabb színvonalú kényelem mellett a helyi kultúra és gasztronómia is kiemelt figyelmet kap nálunk. Fedezze fel városunkat kényelmes és stílusos szállodánkból, és hagyja, hogy élményeink örökre a memóriájában maradjanak!</p>
                         
-                        <a class="btn btn-primary py-3 px-5 mt-2" href="about.php">Explore More</a>
+                        <a class="btn btn-primary py-3 px-5 mt-2" href="about.php">Tudj meg többet</a>
                     </div>
                     <div class="col-lg-6">
     <div class="row g-2">
