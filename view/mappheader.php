@@ -1,3 +1,30 @@
+<?php
+// Alapértelmezett érték a profil megjelenítéséhez
+$profile_display = "<a href='signup.php' class='nav-item nav-link'>Regisztráció/Bejelentkezés</a>";
+
+// Ellenőrizzük a felhasználó bejelentkezési állapotát
+if(isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
+    // Bejelentkezett felhasználóknak megjelenítjük a "Profile" menüpontot
+    $profile_display = '<div class="dropdown">
+                            <button class="btn btn-secondary dropdown-toggle" type="button" id="profileDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                                Profil
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="profileDropdown">
+                                <li><a class="dropdown-item" href="../foglalasaim.php">Foglalásaim megtekintése</a></li>
+                                <li><a id="logout_link" class="dropdown-item" href="../logout.php">Kijelentkezés</a></li>
+                            </ul>
+                        </div>';
+}
+
+// Ellenőrizzük, hogy volt-e kijelentkezési kérés
+if (isset($_GET['logout'])) {
+    // Ha volt, csak állítsuk vissza a bejelentkezési változót false-ra
+    $_SESSION['loggedin'] = false;
+    // Átirányítás az index.php fájlra a kijelentkezés után
+    header("Location: login.php");
+    exit();
+}
+?>
 <div class="container-fluid bg-dark px-0">
     <div class="row gx-0">
         <div class="col-lg-3 bg-dark d-none d-lg-block">
@@ -37,7 +64,7 @@
                 <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                     <div class="navbar-nav mr-auto py-0">
                         <a href="../index.php" class="nav-item nav-link">Kezdőlap</a>
-                        <a href="../about.php" class="nav-item nav-link">Rólnuk</a>
+                        <a href="../about.php" class="nav-item nav-link">Rólunk</a>
                         <a href="../service.php" class="nav-item nav-link">Szolgáltatásaink</a>
                         <a href="../room.php" class="nav-item nav-link">Szobák</a>
                         <a href="../booking.php" class="nav-item nav-link">Foglalás</a>
