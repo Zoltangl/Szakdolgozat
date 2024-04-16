@@ -4,22 +4,7 @@ include('../connection.php');
 
 
 
-// Alapértelmezett érték a profil megjelenítéséhez
-$profile_display = "<a href='signup.php' class='nav-item nav-link'>Registration/Login</a>";
 
-// Ellenőrizzük a felhasználó bejelentkezési állapotát
-if(isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
-    // Bejelentkezett felhasználóknak megjelenítjük a "Profile" menüpontot
-    $profile_display = '<div class="dropdown">
-                            <button class="btn btn-secondary dropdown-toggle" type="button" id="profileDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-                                Profile
-                            </button>
-                            <ul class="dropdown-menu" aria-labelledby="profileDropdown">
-                                <li><a class="dropdown-item" href="edit_profile.php">Edit Profile</a></li>
-                                <li><a id="logout_link" class="dropdown-item" href="logout.php">Log Out</a></li>
-                            </ul>
-                        </div>';
-}
 
 // Ellenőrizzük, hogy volt-e kijelentkezési kérés
 if (isset($_GET['logout'])) {
@@ -92,7 +77,7 @@ if (isset($_GET['logout'])) {
             <div class="container">
                 <div class="row g-5 align-items-center">
                     <div class="col-lg-6">
-                        <h6 class="section-title text-start text-primary text-uppercase">rooms</h6>
+                        <h6 class="section-title text-start text-primary text-uppercase">Szobák</h6>
                         <h1 class="mb-4">Üdvözöljük a <span class="text-primary text-uppercase">HappyHotel</span> Egyszemélyes Luxus szobájában!</h1>
                         <p class="mb-4">
                        <p> 
@@ -111,7 +96,7 @@ if (isset($_GET['logout'])) {
                                     <div class="border rounded text-center p-4">
                                         <i class="fa fa-bed fa-2x text-primary mb-2"></i>
                                         <h2 class="mb-1" data-toggle="counter-up">1</h2>
-                                        <p class="mb-0">bed</p>
+                                        <p class="mb-0">Ágy</p>
                                     </div>
                                 </div>
                             </div>
@@ -120,7 +105,7 @@ if (isset($_GET['logout'])) {
                                     <div class="border rounded text-center p-4">
                                         <i class="fa fa-bath fa-2x text-primary mb-2"></i>
                                         <h2 class="mb-1" data-toggle="counter-up">1</h2>
-                                        <p class="mb-0">Shower & Bath</p>
+                                        <p class="mb-0">Kád & Zuhanyzó</p>
                                     </div>
                                 </div>
                             </div>
@@ -129,12 +114,12 @@ if (isset($_GET['logout'])) {
                                     <div class="border rounded text-center p-4">
                                         <i class="fa fa-wifi fa-2x text-primary mb-2"></i>
                                         <h2 class="mb-1" data-toggle="counter-up">150</h2><h2>mb/s</h2>
-                                        <p class="mb-0">Wifi Speed</p>
+                                        <p class="mb-0">Wifi</p>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <a class="btn btn-primary py-3 px-5 mt-2" href="../room.php">Explore More</a>
+                        <a class="btn btn-primary py-3 px-5 mt-2" href="../room.php">Felfedezés</a>
                     </div>
                     <div class="col-lg-6">
                         <div class="row g-3">
