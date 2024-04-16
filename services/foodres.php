@@ -4,28 +4,22 @@ include('../connection.php');
 
 
 
-// Alapértelmezett érték a profil megjelenítéséhez
-$profile_display = "<a href='signup.php' class='nav-item nav-link'>Registration/Login</a>";
+$profile_display = "<a href='signup.php' class='nav-item nav-link'>Regisztráció/Bejelentkezés</a>";
 
-// Ellenőrizzük a felhasználó bejelentkezési állapotát
 if(isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
-    // Bejelentkezett felhasználóknak megjelenítjük a "Profile" menüpontot
     $profile_display = '<div class="dropdown">
                             <button class="btn btn-secondary dropdown-toggle" type="button" id="profileDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-                                Profile
+                                Profil
                             </button>
                             <ul class="dropdown-menu" aria-labelledby="profileDropdown">
-                                <li><a class="dropdown-item" href="edit_profile.php">Edit Profile</a></li>
-                                <li><a id="logout_link" class="dropdown-item" href="logout.php">Log Out</a></li>
+                                <li><a class="dropdown-item" href="../foglalasaim.php">Foglalásaim megtekintése</a></li>
+                                <li><a id="logout_link" class="dropdown-item" href="../logout.php">Kijelentkezés</a></li>
                             </ul>
                         </div>';
 }
 
-// Ellenőrizzük, hogy volt-e kijelentkezési kérés
 if (isset($_GET['logout'])) {
-    // Ha volt, csak állítsuk vissza a bejelentkezési változót false-ra
     $_SESSION['loggedin'] = false;
-    // Átirányítás az index.php fájlra a kijelentkezés után
     header("Location: login.php");
     exit();
 }
@@ -89,7 +83,7 @@ if (isset($_GET['logout'])) {
                 <div class="row g-5 align-items-center">
                     <div class="col-lg-6">
                         <h6 class="section-title text-start text-primary text-uppercase">HappyHotel</h6>
-                        <h1 class="mb-4">Food & Restaurant</h1>
+                        <h1 class="mb-4">Étel & Étterem</h1>
                         <p class="mb-4">
                         Üdvözöljük a HappyHotel éttermében! A szálloda étterme egy elegáns és kifinomult környezetben várja vendégeit, ahol az ízletes ételek és a kifogástalan kiszolgálás garantált. Az étterem modern belső tere kifinomult stílusban van berendezve, melyet az elegáns bútorok, a hangulatos világítás és a részletek iránti figyelem tesz még exkluzívabbá.</p>
                         <p class = "mb4">A HappyHotel étterme híres a helyi és nemzetközi konyha remekeire, melyeket a szakácsaink a legfrissebb helyi alapanyagokból készítenek el. Az étlap változatos és gazdag választékot kínál, beleértve a friss tenger gyümölcseit, a hagyományos helyi fogásokat és a világ különböző tájairól származó ínyencségeket is. Minden étel kifogástalanul készül, és a legmagasabb minőségi szabványoknak felel meg, hogy a vendégeink egy igazi gasztronómiai élményben részesüljenek.
@@ -101,7 +95,7 @@ if (isset($_GET['logout'])) {
                                     <div class="border rounded text-center p-4">
                                         <i class="fa fa-clock fa-2x text-primary mb-2"></i>
                                         <h2 class="mb-1">06:00  19:00</h2>
-                                        <p class="mb-0">Open</p>
+                                        <p class="mb-0">nyitvatartás</p>
                                     </div>
                                 </div>
                             </div>
@@ -109,7 +103,7 @@ if (isset($_GET['logout'])) {
                                 <div class="border rounded p-1">
                                     <div class="border rounded text-center p-4">
                                         <i class="fa fa-music fa-2x text-primary mb-2"></i>
-                                        <p class="mb-0">Light Music</p>
+                                        <p class="mb-0">Csendes zene</p>
                                     </div>
                                 </div>
                             </div>
@@ -118,7 +112,7 @@ if (isset($_GET['logout'])) {
                                     <div class="border rounded text-center p-4">
                                         <i class="fa fa-users fa-2x text-primary mb-2"></i>
                                         <h2 class="mb-1" data-toggle="counter-up">60</h2>
-                                        <p class="mb-0">Space</p>
+                                        <p class="mb-0">Férőhely</p>
                                     </div>
                                 </div>
                             </div>

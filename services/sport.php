@@ -4,28 +4,22 @@ include('../connection.php');
 
 
 
-// Alapértelmezett érték a profil megjelenítéséhez
 $profile_display = "<a href='signup.php' class='nav-item nav-link'>Registration/Login</a>";
 
-// Ellenőrizzük a felhasználó bejelentkezési állapotát
 if(isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
-    // Bejelentkezett felhasználóknak megjelenítjük a "Profile" menüpontot
     $profile_display = '<div class="dropdown">
                             <button class="btn btn-secondary dropdown-toggle" type="button" id="profileDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-                                Profile
+                                Profil
                             </button>
                             <ul class="dropdown-menu" aria-labelledby="profileDropdown">
-                                <li><a class="dropdown-item" href="edit_profile.php">Edit Profile</a></li>
-                                <li><a id="logout_link" class="dropdown-item" href="logout.php">Log Out</a></li>
+                                <li><a class="dropdown-item" href="../foglalasaim.php">Foglalásaim megtekintése</a></li>
+                                <li><a id="logout_link" class="dropdown-item" href="../logout.php">Kijelentkezés</a></li>
                             </ul>
                         </div>';
 }
 
-// Ellenőrizzük, hogy volt-e kijelentkezési kérés
 if (isset($_GET['logout'])) {
-    // Ha volt, csak állítsuk vissza a bejelentkezési változót false-ra
     $_SESSION['loggedin'] = false;
-    // Átirányítás az index.php fájlra a kijelentkezés után
     header("Location: login.php");
     exit();
 }
@@ -90,7 +84,7 @@ if (isset($_GET['logout'])) {
                 <div class="row g-5 align-items-center">
                     <div class="col-lg-6">
                         <h6 class="section-title text-start text-primary text-uppercase">HappyHotel</h6>
-                        <h1 class="mb-4">Sport & Gym</h1>
+                        <h1 class="mb-4">Sport & Edzőterem</h1>
                         <p class="mb-4">
                         Üdvözöljük a hotelünk sportrészlegén, ahol kivételes lehetőségeket kínálunk az aktív pihenésre és a fitnesz életmód élvezetére. Élvezze a sport és a rekreáció széles skáláját, amelyet kínálunk, hogy minden vendégünk megtalálja a neki legmegfelelőbb tevékenységet.</p>
                         <p class = "mb4">
@@ -109,7 +103,7 @@ if (isset($_GET['logout'])) {
                                     <div class="border rounded text-center p-4">
                                         <i class="fa fa-dumbbell fa-2x text-primary mb-2"></i>
                                         <h2 class="mb-1">06:00  22:00</h2>
-                                        <p class="mb-0">Gym Open</p>
+                                        <p class="mb-0">Edzőterem nyitvatartás</p>
                                     </div>
                                 </div>
                             </div>
@@ -117,7 +111,7 @@ if (isset($_GET['logout'])) {
                                 <div class="border rounded p-1">
                                     <div class="border rounded text-center p-4">
                                         <i class="fa fa-music fa-2x text-primary mb-2"></i>
-                                        <p class="mb-0">Music</p>
+                                        <p class="mb-0">Zene</p>
                                     </div>
                                 </div>
                             </div>
@@ -126,7 +120,7 @@ if (isset($_GET['logout'])) {
                                     <div class="border rounded text-center p-4">
                                         <i class="fa fa-users fa-2x text-primary mb-2"></i>
                                         <h2 class="mb-1" data-toggle="counter-up">35</h2>
-                                        <p class="mb-0">Space</p>
+                                        <p class="mb-0">Férőhely</p>
                                     </div>
                                 </div>
                             </div>
