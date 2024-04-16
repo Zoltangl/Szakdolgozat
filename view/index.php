@@ -213,7 +213,7 @@ include('connection.php');
                         </div>
                     </div>
                 </div>
-                <a class="btn btn-primary py-3 px-5 mt-2" href="room.php">Explore More</a>
+                <a class="btn btn-primary py-3 px-5 mt-2" href="room.php">Felfedezés</a>
             </div>
         </div>
         <!-- Room End -->

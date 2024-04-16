@@ -98,7 +98,7 @@ include('connection.php');
                                     <i class="fa fa-utensils fa-2x text-primary"></i>
                                 </div>
                             </div>
-                            <h5 class="mb-3">Food & Restaurant</h5>
+                            <h5 class="mb-3">Étel & Étterem</h5>
                             <p class="text-body mb-0">
                                 Fedezze fel a hotelünk éttermét, ahol az ízletes ételek és a kényelmes környezet egyedülálló gasztronómiai élményt nyújtanak!</p>
                         </a>
@@ -110,7 +110,7 @@ include('connection.php');
                                     <i class="fa fa-dumbbell fa-2x text-primary"></i>
                                 </div>
                             </div>
-                            <h5 class="mb-3">Sport & Gym</h5>
+                            <h5 class="mb-3">Sport & Edzés</h5>
                             <p class="text-body mb-0">Fedezze fel a hotelünk sportrészlegét, ahol a fitnesz és a szórakozás találkozik! Legyen szó edzésről, kosárlabdáról vagy egyszerűen csak aktív pihenésről.</p>
                         </a>
                     </div>

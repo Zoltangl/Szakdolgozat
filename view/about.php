@@ -98,59 +98,52 @@ if (isset($_GET['logout'])) {
 
         
 
-        <!-- About Start -->
-        <div class="container-xxl py-5">
+       <!-- About Start -->
+       <div class="container-xxl py-5">
             <div class="container">
                 <div class="row g-5 align-items-center">
                     <div class="col-lg-6">
                         <h6 class="section-title text-start text-primary text-uppercase">Rólunk</h6>
-                        <h1 class="mb-4">Üdvözlünk a <span class="text-primary text-uppercase">HappyHotel</span></h1>
-                        <div class="row g-3 pb-4">
-                            <div class="col-sm-4 wow fadeIn" data-wow-delay="0.1s">
-                                <div class="border rounded p-1">
-                                    <div class="border rounded text-center p-4">
-                                        <i class="fa fa-hotel fa-2x text-primary mb-2"></i>
-                                        <h2 class="mb-1" data-toggle="counter-up">12</h2>
-                                        <p class="mb-0">Szobák</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-4 wow fadeIn" data-wow-delay="0.3s">
-                                <div class="border rounded p-1">
-                                    <div class="border rounded text-center p-4">
-                                        <i class="fa fa-users-cog fa-2x text-primary mb-2"></i>
-                                        <h2 class="mb-1" data-toggle="counter-up">80</h2>
-                                        <p class="mb-0">Alkalmazottaink</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-4 wow fadeIn" data-wow-delay="0.5s">
-                                <div class="border rounded p-1">
-                                    <div class="border rounded text-center p-4">
-                                        <i class="fa fa-users fa-2x text-primary mb-2"></i>
-                                        <h2 class="mb-1" data-toggle="counter-up">70</h2>
-                                        <p class="mb-0">Kliensek</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        <h1 class="mb-4">Üdvözöljük a <span class="text-primary text-uppercase">HappyHotelben</span></h1>
+                        <p class="mb-4">
+                        Üdvözöljük a HappyHotel exkluzív világában, ahol a luxus és kényelem harmóniája megteremti az ideális pihenés és kikapcsolódás légkörét. Engedje meg, hogy büszkén bemutassuk Önnek szállodánk páratlan szolgáltatásait és felejthetetlen élményeit.
+
+A HappyHotel egyedülálló hangulatú benti bárjában exkluzív koktélokat és ínycsiklandó falatokat kínálunk, ahol Ön kellemes légkörben pihenhet és élvezheti a kiváló minőségű italokat.
+
+Emellett szállodánk büszkélkedhet egy lenyűgöző benti és kinti medencével, ahol az egész évben garantáltan kellemes időt tölthet. Fedezze fel a medencék nyugtató vízének örömét, és élvezze a napsütést a szabad ég alatt vagy a luxus kényelemét a fedett medence mellett.
+
+Ha aktív pihenésre vágyik, látogasson el edzőtermünkbe, ahol modern felszerelésekkel és személyi edzőkkel várjuk Önt. Itt lehetősége van frissítő edzésekre vagy éppen intenzív edzéssorozatokra, hogy megőrizze vitalitását és formáját még utazása alatt is.
+
+A HappyHotel nem csupán egy szálláshely, hanem egy élmény, amelyet az egyedülálló helyi kultúra és gasztronómia is kiegészít. Fedezze fel városunk lenyűgöző látnivalóit és programlehetőségeit, majd térjen vissza szállodánkba, ahol mindig otthon érezheti magát a barátságos és professzionális kiszolgálásunkkal.
+
+Tegye felejthetetlenné az idei nyaralást vagy üzleti útját a HappyHotelben, és hagyja, hogy élményeink örökre az emlékezetében éljenek tovább. Várjuk Önt szeretettel, hogy megoszthassuk Önnel a luxus és kényelem varázsát, amely a HappyHotel szívében rejlik.
+                        
                     </div>
                     <div class="col-lg-6">
-                        <div class="row g-3">
-                            <div class="col-6 text-end">
-                                <img class="img-fluid rounded w-75 wow zoomIn" data-wow-delay="0.1s" src="img/aboutswimmingpool.jpg" style="margin-top: 25%;">
-                            </div>
-                            <div class="col-6 text-start">
-                                <img class="img-fluid rounded w-100 wow zoomIn" data-wow-delay="0.3s" src="img/abouthotel.jpg">
-                            </div>
-                            <div class="col-6 text-end">
-                                <img class="img-fluid rounded w-50 wow zoomIn" data-wow-delay="0.5s" src="img/aboutbar.jpg">
-                            </div>
-                            <div class="col-6 text-start">
-                                <img class="img-fluid rounded w-75 wow zoomIn" data-wow-delay="0.7s" src="img/aboutmedence.jpg">
-                            </div>
-                        </div>
-                    </div>
+    <div class="row g-2">
+        <div class="col-6">
+            <div class="d-flex justify-content-start align-items-center h-100">
+                <img class="img-fluid rounded w-75 wow zoomIn" data-wow-delay="0.1s" src="img/aboutswimmingpool.jpg" style="margin-top: 25%;">
+            </div>
+        </div>
+        <div class="col-6">
+            <div class="d-flex justify-content-start align-items-center h-100">
+                <img class="img-fluid rounded w-75 wow zoomIn" data-wow-delay="0.3s"  src="img/abouthotel.jpg">
+            </div>
+        </div>
+        <div class="col-6">
+            <div class="d-flex justify-content-start align-items-center h-100">
+                <img class="img-fluid rounded w-75 wow zoomIn" data-wow-delay="0.7s" src="img/aboutbar.jpg">
+            </div>
+        </div>
+        <div class="col-6">
+            <div class="d-flex justify-content-start align-items-center h-100">
+                <img class="img-fluid rounded w-75 wow zoomIn" data-wow-delay="0.7s" src="img/aboutmedence.jpg">
+            </div>
+        </div>
+    </div>
+</div>
+</div>
                 </div>
             </div>
         </div>

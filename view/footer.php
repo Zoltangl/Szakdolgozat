@@ -11,8 +11,8 @@
                         </div>
                         <div class="col-md-6">
                             <h6 class="section-title text-start text-primary text-uppercase mb-4">Szolgáltatásaink</h6>
-                            <a class="btn btn-link" href="services/foodres.php">Étel és Étterem</a>
-                            <a class="btn btn-link" href="services/sport.php">Sport és edzőterem</a>
+                            <a class="btn btn-link" href="services/foodres.php">Étel & Étterem</a>
+                            <a class="btn btn-link" href="services/sport.php">Sport & edzőterem</a>
                         </div>
                         </div>
                     </div>

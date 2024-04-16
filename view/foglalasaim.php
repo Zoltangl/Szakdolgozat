@@ -87,7 +87,7 @@ $result = $stmt->get_result();
             echo '<tr>';
             echo '<th scope="col">Mettől</th>';
             echo '<th scope="col">Meddig</th>';
-            echo '<th scope="col">Szoba ID</th>';
+            echo '<th scope="col">Szobaszám</th>';
             echo '<th scope="col">Fizetés módja</th>';
             echo '<th scope="col">Kedvezmény neve</th>';
             echo '</tr>';
@@ -95,11 +95,9 @@ $result = $stmt->get_result();
             echo '<tbody>';
 
             while($row = $result->fetch_assoc()) {
-                // Kedvezmény nevének lekérdezése
                 $kedvezmeny_id = $row["kedvezmeny_id"];
                 $kedvezmeny_nev = "";
 
-                // Ellenőrizzük, hogy van-e kedvezmény azonosító
                 if($kedvezmeny_id !== null) {
                     $kedvezmeny_sql = "SELECT neve FROM kedvezmenyek WHERE kedvezmeny_id = ?";
                     $stmt = DataBase::$conn->prepare($kedvezmeny_sql);
@@ -107,7 +105,6 @@ $result = $stmt->get_result();
                     $stmt->execute();
                     $kedvezmeny_result = $stmt->get_result();
 
-                    // Ellenőrizzük, hogy van-e eredmény a lekérdezésben
                     if($kedvezmeny_result->num_rows > 0) {
                         $kedvezmeny_row = $kedvezmeny_result->fetch_assoc();
                         $kedvezmeny_nev = $kedvezmeny_row['neve'];
