@@ -5,6 +5,8 @@ include('connection.php');
 
 // Alapértelmezett érték a profil megjelenítéséhez
 $profile_display = "<a href='signup.php' class='nav-item nav-link'>Register/Login</a>";
+$email_error = $password_error = ""; // Initialize error variables
+
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
     $email = $_POST["email"];
     $jelszo = $_POST["pass"];
@@ -35,17 +37,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
                                         Profile
                                     </button>
                                     <ul class="dropdown-menu" aria-labelledby="profileDropdown">
-                                        <li><a class="dropdown-item" href="edit_profile.php">Edit Profile</a></li>
+                                        <li><a class="dropdown-item" href="foglalasaim.php.php">Edit Profile</a></li>
                                         <li><a id="logout_link" class="dropdown-item" href="logout.php">Log Out</a></li>
                                     </ul>
                                 </div>';
             header("Location: index.php");
             exit();
         } else {
-            $error_message = "Hibás jelszó!";
+            $password_error = "Hibás jelszó!";
         }
     } else {
-        $error_message = "Nincs ilyen felhasználó!";
+        $email_error = "Nincs ilyen email címmel rendelkező fiók!";
     }
 }    
 
@@ -89,6 +91,14 @@ $db->closeConnection();
     <!-- Template Stylesheet -->
     <link href="css/style.css" rel="stylesheet">
     <link href="css/register.css" rel="stylesheet">
+    
+    <!-- Custom CSS for error messages -->
+    <style>
+        .error-message {
+            color: red;
+            margin-top: 5px;
+        }
+    </style>
 </head>
 
 
@@ -117,8 +127,10 @@ $db->closeConnection();
         <h1 id="heading">Bejelentkezés</h1>
         <i class="fa-solid fa-envelope"></i>
         <input type="email" id="email" name="email" placeholder="Add meg az email címed..." required><br>
+        <div class="error-message"><?php echo $email_error; ?></div> <!-- Display email error message -->
         <i class="fa-solid fa-lock"></i>
         <input type="password" id="pass" name="pass" placeholder="Add meg a jelszavad..." required><br>
+        <div class="error-message"><?php echo $password_error; ?></div> <!-- Display password error message -->
         <input type="submit" id="btn" value="Bejelentkezés" name="submit" required><br>
 
         <!-- A "Belépés" link -->
