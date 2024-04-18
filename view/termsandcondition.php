@@ -30,7 +30,7 @@ if (isset($_GET['logout'])) {
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="hu">
 
 <head>
     <meta charset="utf-8">

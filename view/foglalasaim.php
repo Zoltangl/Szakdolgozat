@@ -38,7 +38,7 @@ $result = $stmt->get_result();
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="hu">
 
 <head>
     <meta charset="utf-8">
@@ -163,7 +163,7 @@ $(document).ready(function(){
                 data: { foglalas_id: foglalas_id },
                 success: function(response){
                     alert(response);
-                    location.reload(); // Oldal frissítése a foglalások listájának frissítéséhez
+                    location.reload();
                 }
             });
         }

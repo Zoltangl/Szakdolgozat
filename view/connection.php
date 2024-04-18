@@ -20,7 +20,6 @@ class DataBase
     public function closeConnection() {
         if (self::$conn) {
             self::$conn->close();
-            echo "Adatbáziskapcsolat lezárva.<br>";
         }
     }
 }

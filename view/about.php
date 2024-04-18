@@ -12,7 +12,7 @@ if (isset($_GET['logout'])) {
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="hu">
 
 <head>
     <meta charset="utf-8">
@@ -82,15 +82,15 @@ if (isset($_GET['logout'])) {
                         <p class="mb-4">
                         Üdvözöljük a HappyHotel exkluzív világában, ahol a luxus és kényelem harmóniája megteremti az ideális pihenés és kikapcsolódás légkörét. Engedje meg, hogy büszkén bemutassuk Önnek szállodánk páratlan szolgáltatásait és felejthetetlen élményeit.
 
-A HappyHotel egyedülálló hangulatú benti bárjában exkluzív koktélokat és ínycsiklandó falatokat kínálunk, ahol Ön kellemes légkörben pihenhet és élvezheti a kiváló minőségű italokat.
+                        A HappyHotel egyedülálló hangulatú benti bárjában exkluzív koktélokat és ínycsiklandó falatokat kínálunk, ahol Ön kellemes légkörben pihenhet és élvezheti a kiváló minőségű italokat.
 
-Emellett szállodánk büszkélkedhet egy lenyűgöző benti és kinti medencével, ahol az egész évben garantáltan kellemes időt tölthet. Fedezze fel a medencék nyugtató vízének örömét, és élvezze a napsütést a szabad ég alatt vagy a luxus kényelemét a fedett medence mellett.
+                        Emellett szállodánk büszkélkedhet egy lenyűgöző benti és kinti medencével, ahol az egész évben garantáltan kellemes időt tölthet. Fedezze fel a medencék nyugtató vízének örömét, és élvezze a napsütést a szabad ég alatt vagy a luxus kényelemét a fedett medence mellett.
 
-Ha aktív pihenésre vágyik, látogasson el edzőtermünkbe, ahol modern felszerelésekkel és személyi edzőkkel várjuk Önt. Itt lehetősége van frissítő edzésekre vagy éppen intenzív edzéssorozatokra, hogy megőrizze vitalitását és formáját még utazása alatt is.
+                        Ha aktív pihenésre vágyik, látogasson el edzőtermünkbe, ahol modern felszerelésekkel és személyi edzőkkel várjuk Önt. Itt lehetősége van frissítő edzésekre vagy éppen intenzív edzéssorozatokra, hogy megőrizze vitalitását és formáját még utazása alatt is.
 
-A HappyHotel nem csupán egy szálláshely, hanem egy élmény, amelyet az egyedülálló helyi kultúra és gasztronómia is kiegészít. Fedezze fel városunk lenyűgöző látnivalóit és programlehetőségeit, majd térjen vissza szállodánkba, ahol mindig otthon érezheti magát a barátságos és professzionális kiszolgálásunkkal.
+                        A HappyHotel nem csupán egy szálláshely, hanem egy élmény, amelyet az egyedülálló helyi kultúra és gasztronómia is kiegészít. Fedezze fel városunk lenyűgöző látnivalóit és programlehetőségeit, majd térjen vissza szállodánkba, ahol mindig otthon érezheti magát a barátságos és professzionális kiszolgálásunkkal.
 
-Tegye felejthetetlenné az idei nyaralást vagy üzleti útját a HappyHotelben, és hagyja, hogy élményeink örökre az emlékezetében éljenek tovább. Várjuk Önt szeretettel, hogy megoszthassuk Önnel a luxus és kényelem varázsát, amely a HappyHotel szívében rejlik.
+                        Tegye felejthetetlenné az idei nyaralást vagy üzleti útját a HappyHotelben, és hagyja, hogy élményeink örökre az emlékezetében éljenek tovább. Várjuk Önt szeretettel, hogy megoszthassuk Önnel a luxus és kényelem varázsát, amely a HappyHotel szívében rejlik.
                         
                     </div>
                     <div class="col-lg-6">
