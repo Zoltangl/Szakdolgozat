@@ -5,7 +5,6 @@
                         <div class="row gy-5 g-4">
                             <div class="col-md-6">
                                 <h6 class="section-title text-start text-primary text-uppercase mb-4">Cég</h6>
-                                <a class="btn btn-link" href="about.php">Rólunk</a>
                                 <a class="btn btn-link" href="privacypolicy.php">Adatvédelem és Biztonság</a>
                                 <a class="btn btn-link" href="termsandcondition.php">Felhasználási feltételek</a>
                         </div>

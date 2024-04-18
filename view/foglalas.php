@@ -10,15 +10,14 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
 $user_id = $_SESSION['felhasznalo_id'];
 
 if (isset($_POST['confirm_booking'])) {
-    // Ellenőrizd, hogy a POST adatok léteznek-e
     if(isset($_POST['checkin'], $_POST['checkout'], $_POST['szoba_tipus'], $_POST['kedvezmeny'], $_POST['payment_options'])) {
         $checkinDate = $_POST['checkin'];
         $checkoutDate = $_POST['checkout'];
-        $selectedRoomTypeId = $_POST['szoba_tipus']; // Módosítás: az id-t kapjuk meg a szoba típus helyett
+        $selectedRoomTypeId = $_POST['szoba_tipus'];
         $selectedDiscountText = $_POST['kedvezmeny'];
         $paymentOption = $_POST['payment_options'];
 
-        $sql_szoba = "SELECT szoba_id FROM szoba_tipusok WHERE nev = '$selectedRoomTypeId'"; // Módosítás: az id-t kérjük le
+        $sql_szoba = "SELECT szoba_id FROM szoba_tipusok WHERE nev = '$selectedRoomTypeId'";
         $result_szoba = DataBase::$conn->query($sql_szoba);
         
         if ($result_szoba && $result_szoba->num_rows > 0) {

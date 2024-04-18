@@ -7,12 +7,9 @@ class DataBase
     private $dbname = "c31gulcsikZ_db";
     public static $conn;
 
-    // Konstruktor létrehozása
     public function __construct() {
-        // Adatbáziskapcsolat létrehozása
         self::$conn = new mysqli($this->servername, $this->username, $this->password, $this->dbname);
 
-        // Kapcsolat ellenőrzése
         if (self::$conn->connect_error) {
             die("Hiba az adatbázishoz való kapcsolódás közben: " . self::$conn->connect_error);
         } else {
@@ -20,7 +17,6 @@ class DataBase
         }
     }
 
-    // Kapcsolat bezárása
     public function closeConnection() {
         if (self::$conn) {
             self::$conn->close();
@@ -29,7 +25,6 @@ class DataBase
     }
 }
 
-// Kapcsolódás az adatbázishoz
 $db = new DataBase();
 
 // Adatbáziskapcsolat bezárása (opcionális)
