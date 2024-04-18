@@ -142,8 +142,8 @@ include('connection.php');
                                     </div>
                                 </div>
                                 <div class="d-flex mb-3">
-                                    <small class="border-end me-3 pe-3"><i class="fa fa-ágy text-primary me-2"></i>3 ágy</small>
-                                    <small class="border-end me-3 pe-3"><i class="fa fa-zuhanyzó text-primary me-2"></i>2 zuhanyzó</small>
+                                    <small class="border-end me-3 pe-3"><i class="fa fa-bed text-primary me-2"></i>3 ágy</small>
+                                    <small class="border-end me-3 pe-3"><i class="fa fa-bath text-primary me-2"></i>2 zuhanyzó</small>
                                     <small><i class="fa fa-wifi text-primary me-2"></i>Wifi</small>
                                 </div>
                                 <p class="text-body mb-3">Fedezze fel kényelmes és praktikus családi szobáinkat! Ideális választás családok számára, akik együtt szeretnék élvezni a kényelmet és a kikapcsolódást. A családi szoba tágas teret kínál a szülőknek és a gyerekeknek egyaránt.</p>
@@ -172,8 +172,8 @@ include('connection.php');
                                     </div>
                                 </div>
                                 <div class="d-flex mb-3">
-                                    <small class="border-end me-3 pe-3"><i class="fa fa-ágy text-primary me-2"></i>1 ágy</small>
-                                    <small class="border-end me-3 pe-3"><i class="fa fa-zuhanyzó text-primary me-2"></i>1 zuhanyzó</small>
+                                    <small class="border-end me-3 pe-3"><i class="fa fa-bed text-primary me-2"></i>1 ágy</small>
+                                    <small class="border-end me-3 pe-3"><i class="fa fa-bath text-primary me-2"></i>1 zuhanyzó</small>
                                     <small><i class="fa fa-wifi text-primary me-2"></i>Wifi</small>
                                 </div>
                                 <p class="text-body mb-3">Fedezze fel luxus és kényelem csúcsát a hotel lakosztályában! Ez a kifinomult és tágas szállásegység tökéletes választás azoknak, akik különleges élményre vágynak. A lakosztály kényelmes hálószobát, tágas nappalit és exkluzív fürdőszobát kínál, amely minden igényt kielégít.</p>
@@ -200,8 +200,8 @@ include('connection.php');
                                     </div>
                                 </div>
                                 <div class="d-flex mb-3">
-                                    <small class="border-end me-3 pe-3"><i class="fa fa-ágy text-primary me-2"></i>1 ágy</small>
-                                    <small class="border-end me-3 pe-3"><i class="fa fa-zuhanyzó text-primary me-2"></i>1 zuhanyzó</small>
+                                    <small class="border-end me-3 pe-3"><i class="fa fa-bed text-primary me-2"></i>1 ágy</small>
+                                    <small class="border-end me-3 pe-3"><i class="fa fa-bath text-primary me-2"></i>1 zuhanyzó</small>
                                     <small><i class="fa fa-wifi text-primary me-2"></i>Wifi</small>
                                 </div>
                                 <p class="text-body mb-3">Fedezze fel a kényelmes és megfizethető fapados hotelszobát! Ez a praktikus szállásegység ideális választás azoknak, akik egy egyszerű és kényelmes tartózkodást keresnek megfizethető áron.</p>
@@ -216,12 +216,9 @@ include('connection.php');
                 <a class="btn btn-primary py-3 px-5 mt-2" href="room.php">Felfedezés</a>
             </div>
         </div>
-        <!-- Room End -->
         
 
-        <!-- Footer Start -->
         <?php include('footer.php')?>
-        <!-- Footer End -->
 
 
         <!-- Back to Top -->
