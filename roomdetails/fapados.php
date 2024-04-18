@@ -86,7 +86,7 @@ if (isset($_GET['logout'])) {
                         Az egyágyas szoba modern és letisztult kialakítással rendelkezik, amely lehetővé teszi, hogy a vendégek otthonosan érezzék magukat. A szoba kényelmes ággyal rendelkezik, amely garantálja a jó pihenést és a revitalizáló alvást. A kellemes pihenés érdekében minden ágyat kényelmes matraccal és puha ágyneművel szerelünk fel.
                         A szoba berendezése ergonomikus és funkcionális, hogy megfeleljen az üzleti utazók és az egyéni utazók igényeinek. Az íróasztal és a kényelmes irodai szék lehetőséget kínál az üzleti tevékenységek hatékony elvégzésére vagy az élmények rögzítésére. A szoba felszereltségéhez tartozik egy televízió is, hogy a vendégek lazíthassanak és szórakozhassanak a szabadidejükben.
                         A kényelmes fürdőszoba magában foglalja a zuhanyzót, a mosdót és a WC-t, valamint a szükséges törölközőket és személyes higiéniai termékeket a vendégek kényelmének biztosítása érdekében.
-                        Az egyágyas szoba ideális választás azoknak, akik egyedül utaznak, és kényelmes, praktikus és megfizethető szálláshelyet keresnek. Fedezze fel az [Hotel neve] egyágyas szobáját, és élvezze a kényelmes és emlékezetes tartózkodást!</p>
+                        Az egyágyas szoba ideális választás azoknak, akik egyedül utaznak, és kényelmes, praktikus és megfizethető szálláshelyet keresnek. Fedezze fel az HappyHotel egyágyas szobáját, és élvezze a kényelmes és emlékezetes tartózkodást!</p>
                         <div class="row g-3 pb-4">
                             <div class="col-sm-4 wow fadeIn" data-wow-delay="0.1s">
                                 <div class="border rounded p-1">
